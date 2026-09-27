@@ -7,6 +7,6 @@ const base = process.env.ASTRO_BASE || "/veia-landing/";
 
 export default defineConfig({
   output: "static",
-  site: "https://celaya51.github.io/veia-landing/",
+  site: "https://cubasmx.github.io/veia-landing/",
   base,
 });
