@@ -8,6 +8,8 @@ import Paquetes from "../components/Paquetes.astro";
 import Clientes from "../components/Clientes.astro";
 import CTA from "../components/CTA.astro";
 import Footer from "../components/Footer.astro";
+
+const raiz = import.meta.env.BASE_URL;
 ---
 
 <Base>
@@ -18,6 +20,26 @@ import Footer from "../components/Footer.astro";
     <Promesa />
     <Paquetes />
     <Clientes />
+
+    <!-- Plantillas y soporte -->
+    <section class="seccion">
+      <div class="contenedor">
+        <div class="revelar">
+          <span class="antetitulo">Plantillas y soporte</span>
+          <h2>Tu sitio no tiene que quedarse viejo</h2>
+          <p class="destacado" style="margin-top:0.8rem">
+            Trabajamos con plantillas base por giro: eliges la que se parece a tu negocio, la ajustamos a tu manera
+            y de ahí sale tu sitio. Después entra un plan de soporte que arranca con 3 meses, para que cambiar un
+            precio, subir una promoción o reemplazar una foto no dependa de ti. Tú mandas el texto y las fotos; el
+            resto lo hacemos nosotros.
+          </p>
+          <div class="v-hero__acciones">
+            <a class="boton boton--degradado" href={`${raiz}plantillas/`}>Ver cómo funcionan las plantillas</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <CTA />
   </main>
   <Footer />

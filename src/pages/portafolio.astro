@@ -13,15 +13,6 @@ const clientes = [
   { nombre: "Tocomadera", logo: `${raiz}images/logo-tocomadera.png`, href: "https://tocomadera.mx/" },
   { nombre: "Ascendia", logo: `${raiz}img/ascendia-logo.png`, href: "https://ascendia.mx/", oscuro: true },
 ];
-
-const plantillas = [
-  { nombre: "Estética/Belleza", slug: "belleza", icono: "💅" },
-  { nombre: "Taller/Servicios", slug: "taller", icono: "🔧" },
-  { nombre: "Tienda/Comercio", slug: "tienda", icono: "🛍️" },
-  { nombre: "Salud/Consultorio", slug: "salud", icono: "🩺" },
-  { nombre: "Profesional/Servicios", slug: "profesional", icono: "💼" },
-  { nombre: "Parroquia/Comunidad", slug: "parroquia", icono: "⛪" },
-];
 ---
 
 <Base titulo='Portafolio · VEIA'>
@@ -55,23 +46,19 @@ const plantillas = [
       </div>
     </section>
 
-    <!-- Plantillas demo -->
+    <!-- Plantillas -->
     <section class="seccion">
       <div class="contenedor">
         <div class="revelar">
-          <span class="antetitulo">Plantillas demo</span>
-          <h2>Demos listos para personalizar</h2>
+          <span class="antetitulo">Plantillas</span>
+          <h2>Así parten nuestros sitios</h2>
           <p class="destacado" style="margin-top:0.8rem">
-            Explora plantillas base que adaptamos al giro y la identidad de cada negocio.
+            Trabajamos sobre plantillas base por giro y las ajustamos a cada negocio. Puedes verlas y entender cómo
+            funciona el soporte en su propia página.
           </p>
-        </div>
-        <div class="v-rejilla v-rejilla--3 revelar" style="margin-top:2.4rem">
-          {plantillas.map((p) => (
-            <a class="v-tarjeta" href={`${raiz}plantillas/${p.slug}/`} style="text-decoration:none;color:inherit">
-              <span class="v-tarjeta__ico">{p.icono}</span>
-              <h3>{p.nombre}</h3>
-            </a>
-          ))}
+          <div class="v-hero__acciones">
+            <a class="boton boton--degradado" href={`${raiz}plantillas/`}>Ver plantillas y soporte</a>
+          </div>
         </div>
       </div>
     </section>

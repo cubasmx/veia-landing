@@ -1,0 +1,206 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const raiz = import.meta.env.BASE_URL;
+
+const whatsappPlantillas = "https://wa.me/525659898908?text=Hola%20VEIA%2C%20quiero%20ver%20las%20plantillas";
+const whatsappPlantillaConviene = "https://wa.me/525659898908?text=Hola%20VEIA%2C%20quiero%20saber%20qu%C3%A9%20plantilla%20me%20conviene";
+
+const plantillas = [
+  { nombre: "Estética/Belleza", slug: "belleza", icono: "💅" },
+  { nombre: "Taller/Servicios", slug: "taller", icono: "🔧" },
+  { nombre: "Tienda/Comercio", slug: "tienda", icono: "🛍️" },
+  { nombre: "Salud/Consultorio", slug: "salud", icono: "🩺" },
+  { nombre: "Profesional/Servicios", slug: "profesional", icono: "💼" },
+  { nombre: "Parroquia/Comunidad", slug: "parroquia", icono: "⛪" },
+];
+
+const pasos = [
+  {
+    num: "01",
+    titulo: "Elige el punto de partida",
+    texto:
+      "Revisas las plantillas de tu giro y eliges la que más se parece a lo que haces. Es un punto de partida, no el sitio final: ninguna plantilla sale igual a otra.",
+  },
+  {
+    num: "02",
+    titulo: "La ajustamos a tu negocio",
+    texto:
+      "Sobre esa base hacemos las modificaciones: textos, fotos, secciones, promociones, lo que haga falta para que se sienta tu negocio y no una plantilla más.",
+  },
+  {
+    num: "03",
+    titulo: "La mantenemos al día",
+    texto:
+      "El sitio entra a un plan de soporte, que arranca con 3 meses. Ahí caben los cambios del día a día: un precio nuevo, un menú, una promo que ya terminó, una foto que ya no aplica. Tú mandas el texto y las imágenes; nosotros lo subimos.",
+  },
+];
+
+const esencial = [
+  "Cambios de texto, precios y menús.",
+  "Sustitución de fotos.",
+  "Altas y retiro de promociones.",
+  "Revisión de formularios y enlaces, para que sigan funcionando.",
+  "Mantenimiento técnico menor y respaldos del sitio.",
+  "Un resumen mensual de lo que se hizo.",
+];
+
+const activo = [
+  "Altas de productos y catálogos, usando los componentes que ya tiene tu sitio.",
+  "Cambios de contenido más frecuentes en el mismo mes.",
+  "Las secciones y ajustes que vayan saliendo dentro de la bolsa de tiempo del mes.",
+];
+
+const aparte = [
+  "Páginas o secciones nuevas.",
+  "Rediseños.",
+  "Funcionalidades nuevas.",
+  "Tienda en línea e integraciones (pagos, sistemas o herramientas que ya uses).",
+  "Redacción extensa de contenido.",
+  "Diseño publicitario y fotografía.",
+  "Campañas.",
+  "Hosting, dominio y licencias.",
+];
+---
+
+<Base titulo='Plantillas y soporte · VEIA'>
+  <Header raiz={raiz} />
+  <main>
+    <!-- Hero compacto -->
+    <section class="v-hero" style="padding-block:clamp(2.6rem,6vw,4.5rem);padding-inline:0">
+      <div class="contenedor">
+        <div class="v-hero__texto revelar">
+          <span class="antetitulo">Plantillas y soporte</span>
+          <h1 style="font-size:clamp(2.1rem,5vw,3.6rem)">
+            Una plantilla hecha, para empezar. Alguien que la mantenga, para que no se quede vieja.
+          </h1>
+          <p class="destacado">
+            Tenemos plantillas base por giro: belleza, taller, tienda, salud, despacho profesional y parroquia.
+            Eliges la que se parece a tu negocio, la ajustamos con tus textos y tus fotos, y seguimos ahí: el sitio
+            se mantiene al día sin que tengas que aprender a editarlo. La base sale a un costo mínimo; lo que pagas
+            es el trabajo de ajustarla y mantenerla.
+          </p>
+          <div class="v-hero__acciones">
+            <a class="boton boton--degradado" href={whatsappPlantillas} target="_blank" rel="noopener">
+              Elegir mi plantilla por WhatsApp
+            </a>
+            <a class="boton boton--contorno" href="#demos">Ver las plantillas</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Demos -->
+    <section class="seccion" id="demos">
+      <div class="contenedor">
+        <div class="revelar">
+          <span class="antetitulo">Demos</span>
+          <h2>Elige un punto de partida</h2>
+          <p class="destacado" style="margin-top:0.8rem">
+            Explora las plantillas base y mira la que más se parece a tu negocio.
+          </p>
+        </div>
+        <div class="v-rejilla v-rejilla--3 revelar" style="margin-top:2.4rem">
+          {plantillas.map((p) => (
+            <a class="v-tarjeta" href={`${raiz}plantillas/${p.slug}/`} style="text-decoration:none;color:inherit">
+              <span class="v-tarjeta__ico">{p.icono}</span>
+              <h3>{p.nombre}</h3>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Cómo funciona -->
+    <section class="seccion seccion--gris">
+      <div class="contenedor">
+        <div class="revelar">
+          <h2>Cómo funciona</h2>
+        </div>
+        <div class="v-pasos revelar" style="margin-top:2.4rem">
+          {pasos.map((p) => (
+            <div class="v-paso">
+              <span class="v-paso__num">{p.num}</span>
+              <h3>{p.titulo}</h3>
+              <p style="max-width:52em">{p.texto}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Qué incluye el soporte -->
+    <section class="seccion">
+      <div class="contenedor">
+        <div class="revelar">
+          <h2>Qué incluye el soporte</h2>
+          <p class="destacado" style="margin-top:0.8rem">
+            El soporte tiene dos niveles, Esencial y Activo. Los dos cubren cambios de contenido y mantenimiento
+            técnico; la diferencia está en cuánto cabe al mes. El Activo es para negocios que mueven su sitio
+            seguido: promociones, catálogo, cambios cada quince días.
+          </p>
+        </div>
+
+        <div class="v-rejilla v-rejilla--2 revelar" style="margin-top:2.4rem">
+          <article class="v-tarjeta v-tarjeta--paquete">
+            <h3>Esencial</h3>
+            <ul class="v-mini">
+              {esencial.map((i) => <li>{i}</li>)}
+            </ul>
+          </article>
+          <article class="v-tarjeta v-tarjeta--paquete">
+            <h3>Activo</h3>
+            <p>Todo lo de Esencial, con más margen al mes para:</p>
+            <ul class="v-mini">
+              {activo.map((i) => <li>{i}</li>)}
+            </ul>
+          </article>
+        </div>
+
+        <p class="destacado revelar" style="margin-top:2.4rem">
+          Cada nivel trae una bolsa de tiempo mensual para cambios de contenido. No es trabajo ilimitado: dentro de
+          esa bolsa hacemos lo que nos pidas, y lo que se salga se cotiza aparte. De tu lado necesitamos los textos
+          y las fotos listos; de este lado queda armarlos y publicarlos.
+        </p>
+      </div>
+    </section>
+
+    <!-- Qué se cotiza aparte -->
+    <section class="seccion seccion--gris">
+      <div class="contenedor">
+        <div class="revelar">
+          <h2>Qué se cotiza aparte</h2>
+          <p class="destacado" style="margin-top:0.8rem">
+            El soporte cubre lo que ya existe. Cuando se trata de algo nuevo, se cotiza aparte y con gusto lo
+            armamos:
+          </p>
+          <ul class="v-mini" style="margin-top:1.8rem;max-width:54em">
+            {aparte.map((i) => <li>{i}</li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cierre -->
+    <section class="seccion">
+      <div class="contenedor">
+        <div class="v-cta revelar">
+          <h2>¿Cuál plantilla se parece a tu negocio?</h2>
+          <p class="destacado" style="color:inherit;margin-inline:auto">
+            Dinos a qué te dedicas y en qué zona de Guadalajara o Zapopan atiendes. Te decimos qué plantilla
+            conviene, qué habría que modificar y cómo quedaría el soporte. Sin compromiso y sin tecnicismos.
+          </p>
+          <div class="v-cta__acciones">
+            <a class="boton boton--claro" href={whatsappPlantillaConviene} target="_blank" rel="noopener">
+              Escríbenos por WhatsApp
+            </a>
+            <a class="boton boton--contorno-claro" href={`${raiz}portafolio/`}>Ver el portafolio</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer raiz={raiz} />
+</Base>
