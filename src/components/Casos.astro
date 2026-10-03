@@ -1,0 +1,100 @@
+---
+// Prueba social contada: problema → solución → resultado.
+//
+// IMPORTANTE: no inventamos métricas. Todo dato que no está confirmado se
+// marca con el badge visible "TODO". El "resultado" de cada caso queda
+// explícitamente pendiente hasta que el cliente lo confirme.
+//
+// TODO(validar): la redacción del reto y de la solución está basada en el
+// proyecto entregado y en lo que el sitio muestra hoy. Falta que cada cliente
+// confirme su versión antes de publicar.
+const base = import.meta.env.BASE_URL;
+
+const casos = [
+  {
+    cliente: "SANHER Bienes Raíces",
+    giro: "Bienes raíces · Guadalajara",
+    logo: `${base}images/logo-sanher.svg`,
+    href: "https://sanherbienesraices.com/",
+    problema:
+      "Sus propiedades se movían por portales y recomendación de boca en boca. No tenían un sitio propio donde concentrar inventario y contacto.",
+    solucion:
+      "Landing con propiedades destacadas, información de la inmobiliaria, formulario y WhatsApp directo. Trabajo de SEO básico y presencia en Google para búsquedas locales.",
+    resultado:
+      "[TODO: confirmar con SANHER el resultado medible — visitas, prospectos recibidos o propiedades publicadas.]",
+  },
+  {
+    cliente: "Tocomadera",
+    giro: "Diseño de muebles y espacios",
+    logo: `${base}images/logo-tocomadera.png`,
+    href: "https://tocomadera.mx/",
+    problema:
+      "Su portafolio visual vivía disperso y era difícil mostrarlo a clientes residenciales, comerciales y corporativos.",
+    solucion:
+      "Sitio con portafolio organizado por tipo de proyecto (residencial, comercial, corporativo), galería de piezas y contacto directo para cotizar.",
+    resultado:
+      "[TODO: confirmar con Tocomadera el resultado medible — proyectos contactados, cotizaciones o alcance del portafolio.]",
+  },
+  {
+    cliente: "Uditore",
+    giro: "Despacho contable y fiscal",
+    logo: `${base}images/logo-uditore-full.png`,
+    href: "https://uditore.mx/",
+    problema:
+      "Tienen muchos servicios y paquetes (SAT, contabilidad, impuestos, capacitación) y no había un lugar claro donde el cliente entendiera el alcance.",
+    solucion:
+      "Sitio con servicios explicados, paquetes por tipo de contribuyente, testimonios y canales de contacto visibles para reducir dudas repetidas.",
+    resultado:
+      "[TODO: confirmar con Uditore el resultado medible — solicitudes de cotización, llamadas o consultas atendidas.]",
+  },
+];
+---
+
+<section class="seccion" id="casos">
+  <div class="contenedor">
+    <div class="revelar">
+      <span class="antetitulo">Casos</span>
+      <h2>Trabajos reales, contados sin adornos</h2>
+      <p class="destacado" style="margin-top:0.8rem">
+        Qué necesitaba cada negocio, qué hicimos y qué falta por medir. Los
+        datos que todavía no podemos afirmar van marcados como pendientes.
+      </p>
+    </div>
+
+    <div class="v-casos revelar" style="margin-top:2.6rem">
+      {casos.map((c) => (
+        <article class="v-caso">
+          <header class="v-caso__cabeza">
+            <img class="v-caso__logo" src={c.logo} alt={c.cliente} loading="lazy" decoding="async" />
+            <span class="v-caso__giro">{c.giro}</span>
+          </header>
+
+          <div class="v-caso__bloque">
+            <span class="v-caso__etiqueta">El reto</span>
+            <p>{c.problema}</p>
+          </div>
+
+          <div class="v-caso__bloque">
+            <span class="v-caso__etiqueta">Qué hicimos</span>
+            <p>{c.solucion}</p>
+          </div>
+
+          <div class="v-caso__bloque">
+            <span class="v-caso__etiqueta">El resultado</span>
+            <p>
+              <span class="v-todo">TODO</span> {c.resultado}
+            </p>
+          </div>
+
+          <a class="v-caso__enlace" href={c.href} target="_blank" rel="noopener">
+            Ver el sitio de {c.cliente} ↗
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <div class="revelar" style="margin-top:2.2rem;text-align:center">
+      <a class="boton boton--contorno" href={`${base}portafolio/`}>Ver más proyectos</a>
+    </div>
+  </div>
+</section>

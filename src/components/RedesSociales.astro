@@ -1,0 +1,52 @@
+---
+// Redes sociales de VEIA.
+//
+// TODO(handles reales): Julio todavía no nos dio las cuentas oficiales.
+// Los `href` están como "#" a propósito y cada enlace queda marcado con
+// `data-pendiente`. Cuando existan, reemplazar aquí el href y borrar el
+// `data-pendiente` y el comentario. Ver README del proyecto.
+const redes = [
+  { nombre: "Instagram", href: "#", icono: "instagram" },
+  { nombre: "Facebook", href: "#", icono: "facebook" },
+  { nombre: "TikTok", href: "#", icono: "tiktok" },
+];
+
+const { variante = "footer" } = Astro.props;
+const pendiente = (r) => r.href === "#";
+const etiqueta = (r) =>
+  pendiente(r) ? `${r.nombre} de VEIA (enlace pendiente)` : `${r.nombre} de VEIA`;
+---
+
+<ul class:list={["v-redes", `v-redes--${variante}`]}>
+  {
+    redes.map((r) => (
+      <li>
+        {/* TODO: handle real */}
+        <a
+          href={r.href}
+          aria-label={etiqueta(r)}
+          title={pendiente(r) ? `${r.nombre}: enlace pendiente de confirmar` : `${r.nombre} de VEIA`}
+          target={pendiente(r) ? undefined : "_blank"}
+          rel={pendiente(r) ? undefined : "noopener"}
+          data-pendiente={pendiente(r) ? "handle-real" : undefined}
+        >
+          {r.icono === "instagram" && (
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1.1-1.7.2-2.1.4-.5.2-.9.4-1.2.7-.3.3-.6.7-.7 1.2-.2.4-.3 1-.4 2.1-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c.1 1.1.2 1.7.4 2.1.2.5.4.9.7 1.2.3.3.7.6 1.2.7.4.2 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.7-.2 2.1-.4.5-.2.9-.4 1.2-.7.3-.3.6-.7.7-1.2.2-.4.3-1 .4-2.1.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c-.1-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.7-1.2-.3-.3-.7-.6-1.2-.7-.4-.2-1-.3-2.1-.4-1.2-.1-1.6-.1-4.7-.1Zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8Zm0 8.1a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4Zm6.2-8.3a1.1 1.1 0 1 1-2.3 0 1.1 1.1 0 0 1 2.3 0Z" />
+            </svg>
+          )}
+          {r.icono === "facebook" && (
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.7l-.4 2.9h-2.3v7A10 10 0 0 0 22 12Z" />
+            </svg>
+          )}
+          {r.icono === "tiktok" && (
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M16.5 3c.3 2.1 1.5 3.6 3.6 3.9v2.5c-1.3.1-2.5-.3-3.6-.9v5.9c0 3.7-3 6.6-6.6 6.6-3.4 0-6.1-2.7-6.1-6.1 0-3.3 2.6-6 5.9-6.1.3 0 .6 0 .9.1v2.6c-.3-.1-.6-.1-.9-.1-1.9 0-3.4 1.6-3.4 3.5s1.5 3.5 3.4 3.5c2 0 3.6-1.6 3.6-3.6V3h3.2Z" />
+            </svg>
+          )}
+        </a>
+      </li>
+    ))
+  }
+</ul>

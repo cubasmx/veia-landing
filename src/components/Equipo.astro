@@ -1,0 +1,75 @@
+---
+// Sección "Quiénes somos / El equipo".
+//
+// TODO(textos reales): Julio y Ana Paula todavía no nos dieron su rol exacto
+// ni la línea humana de cada quien. Todo lo que va entre corchetes es
+// placeholder editable, visible a propósito para no inventar información.
+//
+// TODO(fotos reales): ahora se usan placeholders generados en
+// `public/images/equipo/`. Requisitos exactos en el README de esa carpeta.
+const base = import.meta.env.BASE_URL;
+
+const equipo = [
+  {
+    nombre: "Julio",
+    rol: "[Rol por confirmar: dirección y trato con clientes]",
+    linea:
+      "[Una línea humana de Julio: qué le gusta resolver, cómo trabaja con los negocios locales, qué se le puede preguntar.]",
+    foto: `${base}images/equipo/julio.jpg`,
+    alt: "Julio, del equipo de VEIA (foto provisional, pendiente de reemplazar)",
+    pendiente: true,
+  },
+  {
+    nombre: "Ana Paula",
+    rol: "[Rol por confirmar: diseño y contenido]",
+    linea:
+      "[Una línea humana de Ana Paula: qué parte del proyecto lleva, cómo cuida el detalle, cómo trabaja con los clientes.]",
+    foto: `${base}images/equipo/ana-paula.jpg`,
+    alt: "Ana Paula, del equipo de VEIA (foto provisional, pendiente de reemplazar)",
+    pendiente: true,
+  },
+];
+---
+
+<section class="seccion" id="equipo">
+  <div class="contenedor">
+    <div class="revelar">
+      <span class="antetitulo">Quiénes somos</span>
+      <h2>Detrás de VEIA hay dos personas, no un call center</h2>
+      <p class="destacado" style="margin-top:0.8rem">
+        Somos un equipo pequeño de Guadalajara. La misma gente que te contesta
+        por WhatsApp es la que arma tu sitio: sin intermediarios, sin cuentas
+        que no sabes con quién caen.
+      </p>
+    </div>
+
+    <div class="v-equipo revelar">
+      {equipo.map((p) => (
+        <article class="v-persona">
+          <img
+            class="v-persona__foto"
+            src={p.foto}
+            alt={p.alt}
+            width="800"
+            height="1000"
+            decoding="async"
+          />
+          <div class="v-persona__cuerpo">
+            <h3>{p.nombre}</h3>
+            <p class="v-persona__rol">
+              {p.pendiente ? <span class="v-pendiente">{p.rol}</span> : p.rol}
+            </p>
+            <p>{p.pendiente ? <span class="v-pendiente">{p.linea}</span> : p.linea}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <p class="v-nota-pendiente revelar">
+      <span class="v-todo">TODO</span>
+      Fotos y presentaciones provisionales. Falta que Julio y Ana Paula manden
+      sus fotos reales (4:5, ver <code>public/images/equipo/README.md</code>) y
+      sus textos finales.
+    </p>
+  </div>
+</section>
