@@ -1,10 +1,20 @@
 ---
+import RedesSociales from "./RedesSociales.astro";
+
 const { raiz = "" } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const contacto = [
   { texto: "WhatsApp: 56 5989 8908", href: "https://wa.me/525659898908" },
   { texto: "contacto@veia.com.mx", href: "mailto:contacto@veia.com.mx" },
   { texto: "Guadalajara · Zapopan, Jal.", href: null },
+];
+const explorar = [
+  { texto: "Servicios", href: `${raiz}#piezas` },
+  { texto: "Casos", href: `${raiz}#casos` },
+  { texto: "Precios", href: `${raiz}#precio` },
+  { texto: "Equipo", href: `${raiz}#equipo` },
+  { texto: "Plantillas y soporte", href: `${raiz}plantillas/` },
+  { texto: "Portafolio", href: `${raiz}portafolio/` },
 ];
 ---
 
@@ -16,13 +26,15 @@ const contacto = [
           <img class="v-marca__logo" src={`${base}img/veia-logo-blanco.png`} alt="VEIA" width="97" height="30" />
         </a>
         <p style="max-width:30em">Digitalizamos negocios locales: sitio web, presencia en Google y WhatsApp listos para vender.</p>
+        <div class="v-footer__redes">
+          <h4>Síguenos</h4>
+          <RedesSociales variante="footer" />
+        </div>
       </div>
       <div>
         <h4>Explorar</h4>
         <ul>
-          <li><a href={`${raiz}#piezas`}>Servicios</a></li>
-          <li><a href={`${raiz}#precio`}>Precios</a></li>
-          <li><a href={`${raiz}#clientes`}>Portafolio</a></li>
+          {explorar.map((e) => <li><a href={e.href}>{e.texto}</a></li>)}
         </ul>
       </div>
       <div>

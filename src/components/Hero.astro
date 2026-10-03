@@ -1,21 +1,36 @@
 ---
 const base = import.meta.env.BASE_URL;
 const whatsapp = "https://wa.me/525659898908?text=Hola%20VEIA,%20quiero%20cotizar%20mi%20presencia%20digital";
+
+// Sellos concretos: sin promesas infladas, solo lo que ya se cumple.
+const confianza = [
+  "Negocios de Guadalajara y Zapopan",
+  "Entregas desde 5 días hábiles",
+  "Pago 50% al inicio y 50% al entregar",
+  "Trato directo con el equipo",
+];
 ---
 
 <section class="v-hero" data-hero>
   <div class="contenedor v-hero__grid">
     <div class="v-hero__texto revelar">
-      <span class="antetitulo">Sitios web y catálogos para tu negocio</span>
+      <span class="antetitulo">Sitios web, catálogos y Google para negocios locales</span>
       <h1>Tu negocio listo para <span class="acento-serif">vender</span> en internet.</h1>
       <p class="destacado">
-        Digitalizamos negocios: sitio web, catálogo de productos, presencia en Google y WhatsApp
-        listos para vender. Sin soluciones gigantes ni procesos enredados.
+        Digitalizamos negocios de Guadalajara y Zapopan: sitio web, catálogo de
+        productos, presencia en Google y WhatsApp listos para vender. Sin
+        soluciones gigantes ni procesos enredados.
       </p>
       <div class="v-hero__acciones">
         <a class="boton boton--degradado" href={whatsapp} target="_blank" rel="noopener">Cotizar por WhatsApp</a>
-        <a class="boton boton--contorno" href="#precio">Ver precio y alcance</a>
+        <a class="boton boton--contorno" href="#precio">Ver precios y alcance</a>
       </div>
+      <ul class="v-confianza" aria-label="Por qué trabajar con VEIA">
+        {confianza.map((c) => <li>{c}</li>)}
+      </ul>
+      <p class="v-hero__nota">
+        ¿Prefieres ver primero? <a href="#casos">Revisa tres casos reales</a>.
+      </p>
     </div>
 
     <div class="v-hero__mockup revelar">

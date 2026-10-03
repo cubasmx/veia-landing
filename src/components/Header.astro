@@ -1,12 +1,15 @@
 ---
+import RedesSociales from "./RedesSociales.astro";
+
 const { raiz = "" } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const enlaces = [
   { href: "#inicio", texto: "Inicio" },
   { href: "#piezas", texto: "Servicios" },
-  { href: "plantillas/", texto: "Plantillas" },
+  { href: "#casos", texto: "Casos" },
   { href: "#precio", texto: "Precios" },
-  { href: "#clientes", texto: "Portafolio" },
+  { href: "plantillas/", texto: "Plantillas" },
+  { href: "#equipo", texto: "Equipo" },
   { href: "#contacto", texto: "Contacto" },
 ];
 ---
@@ -22,19 +25,24 @@ const enlaces = [
     </nav>
 
     <div class="v-header__acciones">
+      <RedesSociales variante="header" />
       <a class="boton boton--oscuro" href="https://wa.me/525659898908?text=Hola%20VEIA,%20quiero%20digitalizar%20mi%20negocio" target="_blank" rel="noopener">
         Cotizar
       </a>
-      <button class="v-menu-btn" data-menu-btn aria-label="Abrir menú" aria-expanded="false">
+      <button class="v-menu-btn" data-menu-btn aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </header>
 
-<div class="v-menu-movil" data-menu-movil>
+<div class="v-menu-movil" id="menu-movil" data-menu-movil>
   {enlaces.map((e) => <a href={`${raiz}${e.href}`}>{e.texto}</a>)}
   <a class="boton boton--degradado" style="margin-top:1.2rem;width:100%" href="https://wa.me/525659898908?text=Hola%20VEIA,%20quiero%20digitalizar%20mi%20negocio" target="_blank" rel="noopener">
-    Cotizar
+    Cotizar por WhatsApp
   </a>
+  <div class="v-menu-movil__redes">
+    <span class="antetitulo" style="margin-bottom:0.5rem">Síguenos</span>
+    <RedesSociales variante="menu" />
+  </div>
 </div>
