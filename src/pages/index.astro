@@ -7,7 +7,7 @@ import Promesa from "../components/Promesa.astro";
 import Casos from "../components/Casos.astro";
 import Clientes from "../components/Clientes.astro";
 import Paquetes from "../components/Paquetes.astro";
-import Equipo from "../components/Equipo.astro";
+import FAQ from "../components/FAQ.astro";
 import CTA from "../components/CTA.astro";
 import Footer from "../components/Footer.astro";
 
@@ -23,9 +23,10 @@ const raiz = import.meta.env.BASE_URL;
     <Casos />
     <Clientes />
     <Paquetes />
+    <FAQ />
 
     <!-- Plantillas y soporte -->
-    <section class="seccion seccion--gris">
+    <section class="seccion">
       <div class="contenedor">
         <div class="revelar">
           <span class="antetitulo">Plantillas y soporte</span>
@@ -43,7 +44,6 @@ const raiz = import.meta.env.BASE_URL;
       </div>
     </section>
 
-    <Equipo />
     <CTA />
   </main>
   <Footer />

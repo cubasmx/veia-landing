@@ -1,13 +1,13 @@
 ---
-// Prueba social contada: problema → solución → resultado.
+// Prueba social contada: necesidad → qué hicimos → cómo se ve hoy.
 //
-// IMPORTANTE: no inventamos métricas. Todo dato que no está confirmado se
-// marca con el badge visible "TODO". El "resultado" de cada caso queda
-// explícitamente pendiente hasta que el cliente lo confirme.
+// IMPORTANTE: aquí NO van cifras inventadas. Los resultados medibles
+// (visitas, prospectos, ventas) quedan fuera hasta que cada cliente los
+// confirme por escrito. Si se añaden, van con su fuente y su fecha.
 //
-// TODO(validar): la redacción del reto y de la solución está basada en el
-// proyecto entregado y en lo que el sitio muestra hoy. Falta que cada cliente
-// confirme su versión antes de publicar.
+// La redacción del reto y de la solución está basada en el proyecto
+// entregado y en lo que el sitio muestra hoy; pendiente que cada cliente
+// valide su versión antes de publicar.
 const base = import.meta.env.BASE_URL;
 
 const casos = [
@@ -20,8 +20,7 @@ const casos = [
       "Sus propiedades se movían por portales y recomendación de boca en boca. No tenían un sitio propio donde concentrar inventario y contacto.",
     solucion:
       "Landing con propiedades destacadas, información de la inmobiliaria, formulario y WhatsApp directo. Trabajo de SEO básico y presencia en Google para búsquedas locales.",
-    resultado:
-      "[TODO: confirmar con SANHER el resultado medible — visitas, prospectos recibidos o propiedades publicadas.]",
+    hoy: "El sitio está en línea en su propio dominio, con las propiedades, el formulario y el WhatsApp a la mano del cliente.",
   },
   {
     cliente: "Tocomadera",
@@ -32,8 +31,7 @@ const casos = [
       "Su portafolio visual vivía disperso y era difícil mostrarlo a clientes residenciales, comerciales y corporativos.",
     solucion:
       "Sitio con portafolio organizado por tipo de proyecto (residencial, comercial, corporativo), galería de piezas y contacto directo para cotizar.",
-    resultado:
-      "[TODO: confirmar con Tocomadera el resultado medible — proyectos contactados, cotizaciones o alcance del portafolio.]",
+    hoy: "El portafolio vive en tocomadera.mx, ordenado por tipo de proyecto y con contacto directo para cotizar.",
   },
   {
     cliente: "Uditore",
@@ -44,8 +42,7 @@ const casos = [
       "Tienen muchos servicios y paquetes (SAT, contabilidad, impuestos, capacitación) y no había un lugar claro donde el cliente entendiera el alcance.",
     solucion:
       "Sitio con servicios explicados, paquetes por tipo de contribuyente, testimonios y canales de contacto visibles para reducir dudas repetidas.",
-    resultado:
-      "[TODO: confirmar con Uditore el resultado medible — solicitudes de cotización, llamadas o consultas atendidas.]",
+    hoy: "En uditore.mx los servicios y paquetes se explican por tipo de contribuyente, con los canales de contacto siempre visibles.",
   },
 ];
 ---
@@ -56,8 +53,8 @@ const casos = [
       <span class="antetitulo">Casos</span>
       <h2>Trabajos reales, contados sin adornos</h2>
       <p class="destacado" style="margin-top:0.8rem">
-        Qué necesitaba cada negocio, qué hicimos y qué falta por medir. Los
-        datos que todavía no podemos afirmar van marcados como pendientes.
+        Qué necesitaba cada negocio, qué hicimos y cómo se ve hoy. Los sitios
+        están en línea: puedes abrirlos y juzgar por ti mismo.
       </p>
     </div>
 
@@ -80,10 +77,8 @@ const casos = [
           </div>
 
           <div class="v-caso__bloque">
-            <span class="v-caso__etiqueta">El resultado</span>
-            <p>
-              <span class="v-todo">TODO</span> {c.resultado}
-            </p>
+            <span class="v-caso__etiqueta">Hoy</span>
+            <p>{c.hoy}</p>
           </div>
 
           <a class="v-caso__enlace" href={c.href} target="_blank" rel="noopener">

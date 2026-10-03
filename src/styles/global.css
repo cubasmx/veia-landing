@@ -1023,6 +1023,54 @@ p {
   border-radius: 6px;
 }
 
+/* ---- Preguntas frecuentes (FAQ) ---- */
+.v-faq {
+  display: grid;
+  gap: 0.8rem;
+  max-width: 820px;
+  margin-inline: auto;
+}
+.v-faq__item {
+  background: var(--blanco);
+  border: 1px solid var(--gris-borde);
+  border-radius: var(--radio-tarjeta);
+  padding: 0 1.4rem;
+  box-shadow: 0 10px 24px rgb(30 32 36 / 0.05);
+}
+.v-faq__item summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.2rem 0;
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--oscuro);
+  letter-spacing: -0.02em;
+}
+.v-faq__item summary::-webkit-details-marker {
+  display: none;
+}
+.v-faq__item summary::after {
+  content: "+";
+  flex: none;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--magenta);
+  transition: transform 0.2s ease;
+}
+.v-faq__item[open] summary::after {
+  transform: rotate(45deg);
+}
+.v-faq__item p {
+  padding: 0 0 1.3rem;
+  font-size: 0.98rem;
+}
+
 /* ---- WhatsApp flotante ---- */
 .ws-flotante {
   position: fixed;

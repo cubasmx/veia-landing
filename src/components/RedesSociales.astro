@@ -2,9 +2,10 @@
 // Redes sociales de VEIA.
 //
 // TODO(handles reales): Julio todavía no nos dio las cuentas oficiales.
-// Los `href` están como "#" a propósito y cada enlace queda marcado con
-// `data-pendiente`. Cuando existan, reemplazar aquí el href y borrar el
-// `data-pendiente` y el comentario. Ver README del proyecto.
+// Mientras no existan, este componente NO renderiza nada: es preferible no
+// mostrar iconos que mostrar enlaces muertos (`href="#"`), que restan
+// credibilidad. Cuando haya handles, reemplazar el href de cada red y
+// borrar su comentario; el bloque aparecerá solo.
 const redes = [
   { nombre: "Instagram", href: "#", icono: "instagram" },
   { nombre: "Facebook", href: "#", icono: "facebook" },
@@ -13,22 +14,20 @@ const redes = [
 
 const { variante = "footer" } = Astro.props;
 const pendiente = (r) => r.href === "#";
-const etiqueta = (r) =>
-  pendiente(r) ? `${r.nombre} de VEIA (enlace pendiente)` : `${r.nombre} de VEIA`;
+const reales = redes.filter((r) => !pendiente(r));
+const etiqueta = (r) => `${r.nombre} de VEIA`;
 ---
 
-<ul class:list={["v-redes", `v-redes--${variante}`]}>
-  {
-    redes.map((r) => (
+{reales.length > 0 && (
+  <ul class:list={["v-redes", `v-redes--${variante}`]}>
+    {reales.map((r) => (
       <li>
-        {/* TODO: handle real */}
         <a
           href={r.href}
           aria-label={etiqueta(r)}
-          title={pendiente(r) ? `${r.nombre}: enlace pendiente de confirmar` : `${r.nombre} de VEIA`}
-          target={pendiente(r) ? undefined : "_blank"}
-          rel={pendiente(r) ? undefined : "noopener"}
-          data-pendiente={pendiente(r) ? "handle-real" : undefined}
+          title={etiqueta(r)}
+          target="_blank"
+          rel="noopener"
         >
           {r.icono === "instagram" && (
             <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -47,6 +46,6 @@ const etiqueta = (r) =>
           )}
         </a>
       </li>
-    ))
-  }
-</ul>
+    ))}
+  </ul>
+)}

@@ -1,0 +1,69 @@
+---
+// Preguntas frecuentes: responde las objeciones que frenan la decisión
+// (dominio, plazos, pago, soporte, cobertura). Usa <details>/<summary>
+// nativo: accesible con teclado y sin JavaScript.
+//
+// Regla: nada de cifras ni promesas que no estén sostenidas por lo que el
+// sitio ya ofrece (precios de Paquetes, plazos y el plan de soporte).
+const preguntas = [
+  {
+    q: "¿El sitio y el dominio son míos?",
+    a: "Tu sitio vive en tu propio dominio (.com o .mx). No te atamos a un subdominio nuestro tipo “tu-negocio.veia.com.mx”: si mañana quieres moverlo o cambiar de proveedor, se va contigo.",
+  },
+  {
+    q: "¿Cuánto tardan en entregarlo?",
+    a: "Depende del paquete: desde 5 días hábiles en el más sencillo hasta 20 a 30 días en una tienda en línea. El plazo empieza a contar cuando ya tenemos tus textos y tus fotos.",
+  },
+  {
+    q: "¿Qué necesitan de mí para arrancar?",
+    a: "Tu logo (o te ayudamos a hacer uno), fotos, textos y datos de contacto. Si no tienes fotos, las producimos nosotros.",
+  },
+  {
+    q: "¿Cómo se paga?",
+    a: "50% para iniciar y 50% al aprobar el sitio. Sin cargos escondidos ni renovaciones sorpresa.",
+  },
+  {
+    q: "¿Qué pasa después de la entrega?",
+    a: "El sitio es tuyo y puedes operarlo tú. Si prefieres no preocuparte por él, hay un plan de soporte de $900/mes para cambios, respaldos y revisión técnica: arranca con 3 meses y no hay contrato forzoso.",
+  },
+  {
+    q: "¿Atienden fuera de Guadalajara o Zapopan?",
+    a: "Nuestra base es la Zona Metropolitana de Guadalajara, pero trabajamos a distancia con negocios de todo México. Todo el proceso se puede hacer en línea.",
+  },
+  {
+    q: "¿Por qué cobran distinto a las páginas “desde $1,499”?",
+    a: "Porque no revendemos una plantilla en un subdominio ajeno. Diseñamos a la medida de tu negocio, publicamos en tu propio dominio y detrás hay un equipo real. Puedes abrir el portafolio y juzgar el nivel por ti mismo.",
+  },
+];
+
+// Datos estructurados para Google (FAQPage).
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: preguntas.map((p) => ({
+    "@type": "Question",
+    name: p.q,
+    acceptedAnswer: { "@type": "Answer", text: p.a },
+  })),
+};
+---
+
+<section class="seccion seccion--gris" id="faq">
+  <div class="contenedor">
+    <div class="revelar">
+      <span class="antetitulo">Dudas frecuentes</span>
+      <h2>Lo que casi todos preguntan antes de empezar</h2>
+    </div>
+
+    <div class="v-faq revelar" style="margin-top:2.4rem">
+      {preguntas.map((p) => (
+        <details class="v-faq__item">
+          <summary>{p.q}</summary>
+          <p>{p.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
