@@ -1,0 +1,66 @@
+---
+// Widget de chat del asistente VEIA.
+// Solo se monta desde index.astro cuando MOSTRAR_BOT = true (src/config.ts).
+// Nota: Astro emite el CSS de los componentes importados aunque no se
+// rendericen, así que con el interruptor en false queda un CSS inerte
+// (ninguna regla coincide con elementos reales) sin efecto visible.
+import "../styles/bot.css";
+
+const wa = "https://wa.me/525659898908";
+const waCabecera = `${wa}?text=${encodeURIComponent("Hola VEIA, vengo del chat")}`;
+const waFallback = `${wa}?text=${encodeURIComponent("Hola VEIA, prefiero WhatsApp")}`;
+---
+
+<button
+  class="bot-burbuja"
+  id="bot-burbuja"
+  type="button"
+  aria-expanded="false"
+  aria-controls="bot-panel"
+  aria-label="Abrir chat del asistente"
+>
+  <svg viewBox="0 0 24 24" aria-hidden="true"
+    ><path
+      d="M4 3h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"></path></svg
+  >
+</button>
+
+<section class="bot-panel" id="bot-panel" role="dialog" aria-modal="true" aria-labelledby="bot-titulo" hidden>
+  <header class="bot-cabecera">
+    <span class="bot-avatar" aria-hidden="true">V</span>
+    <span class="bot-quien">
+      <strong id="bot-titulo">Asistente VEIA</strong>
+      <small>En línea · responde al momento</small>
+    </span>
+    <a class="bot-wa" href={waCabecera} target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"
+        ><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Z"></path></svg
+      >WhatsApp
+    </a>
+    <button class="bot-cerrar" id="bot-cerrar" type="button" aria-label="Cerrar chat">✕</button>
+  </header>
+
+  <div class="bot-mensajes" id="bot-mensajes" role="log" aria-live="polite" aria-label="Conversación">
+    <div class="bot-msg bot-msg--bot">
+      Hola 👋 Soy el asistente de VEIA. ¿En qué te ayudo? Puedes elegir una duda:
+    </div>
+  </div>
+
+  <div class="bot-composer">
+    <form id="bot-form">
+      <label class="bot-sr" for="bot-texto">Escribe tu pregunta</label>
+      <textarea id="bot-texto" class="bot-texto" rows="1" placeholder="Escribe tu pregunta…"></textarea>
+      <button class="bot-enviar" id="bot-enviar" type="submit" aria-label="Enviar mensaje">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20 21 12 3 4l3 8h10L6 12Z"></path></svg>
+      </button>
+    </form>
+    <p class="bot-priv">
+      <span>🔒 Solo uso tus mensajes para responderte.</span>
+      <a href={waFallback} target="_blank" rel="noopener">Prefiero WhatsApp →</a>
+    </p>
+  </div>
+</section>
+
+<script>
+  import "../scripts/bot.js";
+</script>
