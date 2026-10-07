@@ -1,5 +1,6 @@
 ---
 import RedesSociales from "./RedesSociales.astro";
+import { MOSTRAR_PAQUETES } from "../config";
 
 const { raiz = "" } = Astro.props;
 const base = import.meta.env.BASE_URL;
@@ -11,7 +12,7 @@ const contacto = [
 const explorar = [
   { texto: "Servicios", href: `${raiz}#piezas` },
   { texto: "Casos", href: `${raiz}#casos` },
-  { texto: "Precios", href: `${raiz}#precio` },
+  ...(MOSTRAR_PAQUETES ? [{ texto: "Precios", href: `${raiz}#precio` }] : []),
   { texto: "Dudas frecuentes", href: `${raiz}#faq` },
   { texto: "Plantillas y soporte", href: `${raiz}plantillas/` },
   { texto: "Portafolio", href: `${raiz}portafolio/` },

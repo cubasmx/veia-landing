@@ -7,9 +7,11 @@ import Promesa from "../components/Promesa.astro";
 import Casos from "../components/Casos.astro";
 import Clientes from "../components/Clientes.astro";
 import Paquetes from "../components/Paquetes.astro";
+import WordPress from "../components/WordPress.astro";
 import FAQ from "../components/FAQ.astro";
 import CTA from "../components/CTA.astro";
 import Footer from "../components/Footer.astro";
+import { MOSTRAR_PAQUETES } from "../config";
 
 const raiz = import.meta.env.BASE_URL;
 ---
@@ -22,7 +24,7 @@ const raiz = import.meta.env.BASE_URL;
     <Promesa />
     <Casos />
     <Clientes />
-    <Paquetes />
+    {MOSTRAR_PAQUETES && <Paquetes />}
     <FAQ />
 
     <!-- Plantillas y soporte -->
@@ -43,6 +45,8 @@ const raiz = import.meta.env.BASE_URL;
         </div>
       </div>
     </section>
+
+    <WordPress />
 
     <CTA />
   </main>

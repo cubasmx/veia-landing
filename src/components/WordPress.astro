@@ -1,0 +1,69 @@
+---
+// Sección WordPress: alternativa cuando el sitio necesita escalar (catálogos
+// grandes, blog, tienda, mucho contenido administrado por el propio cliente).
+// Refuerza el mensaje de la casa: "tu sitio es tuyo". Sin cifras ni precios.
+const whatsapp =
+  "https://wa.me/525659898908?text=Hola%20VEIA,%20quiero%20saber%20si%20WordPress%20le%20conviene%20a%20mi%20proyecto";
+
+const razones = [
+  {
+    ico: "🧱",
+    num: "01",
+    titulo: "Cuando tu sitio necesita crecer",
+    texto:
+      "Es la alternativa para proyectos que tienen que escalar en serio: catálogos grandes, blog, tienda o mucho contenido que vas a administrar tú mismo.",
+  },
+  {
+    ico: "🌍",
+    num: "02",
+    titulo: "Con el respaldo de wordpress.org",
+    texto:
+      "Es software libre, con una comunidad enorme, actualizaciones constantes y miles de plugins. Lo usan millones de sitios en el mundo y sigue mejorando.",
+  },
+  {
+    ico: "🔓",
+    num: "03",
+    titulo: "Sin ataduras a un proveedor",
+    texto:
+      "Tu contenido queda en un sistema abierto: si mañana quieres cambiar de equipo o de hosting, te lo llevas contigo. Tu sitio es tuyo, en WordPress y en lo demás.",
+  },
+];
+---
+
+<section class="seccion" id="wordpress">
+  <div class="contenedor">
+    <div class="revelar">
+      <span class="antetitulo">WordPress</span>
+      <h2>Ahora también trabajamos con WordPress</h2>
+      <p class="destacado" style="margin-top:0.8rem">
+        Cuando tu proyecto pide más músculo —un catálogo grande, un blog, una
+        tienda o mucho contenido que administras tú—, WordPress es una gran
+        opción. Lo proponemos solo cuando de verdad conviene para tu caso.
+      </p>
+    </div>
+
+    <div class="v-rejilla v-rejilla--3 revelar" style="margin-top:2.6rem">
+      {razones.map((r) => (
+        <article class="v-tarjeta">
+          <span class="v-tarjeta__ico" aria-hidden="true">{r.ico}</span>
+          <span class="v-tarjeta__num">{r.num}</span>
+          <h3>{r.titulo}</h3>
+          <p>{r.texto}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="revelar" style="margin-top:2.2rem">
+      <p class="destacado">
+        No es para todo: si tu proyecto se resuelve mejor con un sitio a la
+        medida, te lo decimos de frente. Platícanos qué necesitas y vemos cuál
+        camino te conviene.
+      </p>
+      <div class="v-hero__acciones" style="margin-top:1.4rem">
+        <a class="boton boton--degradado" href={whatsapp} target="_blank" rel="noopener">
+          Platicar mi proyecto por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
