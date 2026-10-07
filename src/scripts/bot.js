@@ -237,6 +237,11 @@ if (panel) {
   burbuja.addEventListener("click", () => (panel.hidden || !panel.classList.contains("abierto") ? abrir() : cerrar()));
   cerrarBtn.addEventListener("click", cerrar);
 
+  // Enlace de "Dudas sobre tus datos": cierra el panel para poder llegar a
+  // #contacto (en móvil el fondo queda bloqueado mientras el panel está abierto).
+  const enlaceContacto = document.getElementById("bot-contacto");
+  if (enlaceContacto) enlaceContacto.addEventListener("click", cerrar);
+
   document.addEventListener("keydown", (e) => {
     if (panel.hidden) return;
     if (e.key === "Escape") {

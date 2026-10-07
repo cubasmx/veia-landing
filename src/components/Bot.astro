@@ -54,9 +54,16 @@ const waFallback = `${wa}?text=${encodeURIComponent("Hola VEIA, prefiero WhatsAp
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20 21 12 3 4l3 8h10L6 12Z"></path></svg>
       </button>
     </form>
-    <p class="bot-priv">
-      <span>🔒 Solo uso tus mensajes para responderte.</span>
-      <a href={waFallback} target="_blank" rel="noopener">Prefiero WhatsApp →</a>
+    <p class="bot-priv" id="bot-priv">
+      <span id="bot-priv-ia">
+        🤖 Soy un asistente automático (IA). Tu conversación se guarda solo para
+        atender tu consulta y no se usa para nada más.
+      </span>
+      <span class="bot-priv-contacto">
+        Dudas sobre tus datos:
+        <a href="#contacto" id="bot-contacto">escríbenos</a> ·
+        <a href={waFallback} target="_blank" rel="noopener">Prefiero WhatsApp →</a>
+      </span>
     </p>
   </div>
 </section>
