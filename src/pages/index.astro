@@ -2,63 +2,97 @@
 import Base from "../layouts/Base.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
-import Marquesina from "../components/Marquesina.astro";
-import Promesa from "../components/Promesa.astro";
-import Casos from "../components/Casos.astro";
 import Clientes from "../components/Clientes.astro";
-import Paquetes from "../components/Paquetes.astro";
-import WordPress from "../components/WordPress.astro";
+import ServiciosGrid from "../components/ServiciosGrid.astro";
+import Problema from "../components/Problema.astro";
+import Proceso from "../components/Proceso.astro";
+import Casos from "../components/Casos.astro";
+import Diferenciadores from "../components/Diferenciadores.astro";
 import FAQ from "../components/FAQ.astro";
-import CTA from "../components/CTA.astro";
+import BannerCTA from "../components/BannerCTA.astro";
 import Footer from "../components/Footer.astro";
-import Bot from "../components/Bot.astro";
-import { MOSTRAR_PAQUETES, MOSTRAR_BOT } from "../config";
+import { home } from "../data/home";
+import { ruta } from "../utils/ruta";
 
-const raiz = import.meta.env.BASE_URL;
+const organizacion = {
+  "@type": "ProfessionalService",
+  "@id": "https://veia.com.mx/#organizacion",
+  name: "VEIA",
+  url: "https://veia.com.mx/",
+  telephone: "+525659898908",
+  email: "contacto@veia.com.mx",
+  description:
+    "Soluciones tecnológicas para profesionistas, negocios locales y pymes: sitio web, tienda en línea, marca, publicidad, equipo de cómputo, CRM, ERP y desarrollo a medida.",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Guadalajara",
+    addressRegion: "Jalisco",
+    addressCountry: "MX",
+  },
+  areaServed: ["Guadalajara", "Zapopan", "Jalisco", "México"],
+  knowsAbout: [
+    "Diseño de páginas web",
+    "Tiendas en línea",
+    "Identidad visual",
+    "Publicidad digital",
+    "Equipo de cómputo y soporte",
+    "CRM",
+    "ERP",
+    "Desarrollo de software a medida",
+  ],
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    organizacion,
+    {
+      "@type": "FAQPage",
+      mainEntity: home.faq.preguntas.map((p) => ({
+        "@type": "Question",
+        name: p.q,
+        acceptedAnswer: { "@type": "Answer", text: p.a },
+      })),
+    },
+  ],
+};
 ---
 
-<Base>
-  <Header />
+<Base titulo={home.seo.titulo} descripcion={home.seo.descripcion}>
+  <Header home />
   <main id="contenido">
     <Hero />
-    <Marquesina />
-    <Promesa />
-    <Casos />
     <Clientes />
-    {MOSTRAR_PAQUETES && <Paquetes />}
-    <FAQ />
-
-    <!-- Plantillas y soporte -->
-    <section class="seccion">
-      <div class="contenedor">
-        <div class="revelar">
-          <span class="antetitulo">Plantillas y soporte</span>
-          <h2>Tu sitio no tiene que quedarse viejo</h2>
-          <p class="destacado" style="margin-top:0.8rem">
-            Trabajamos con plantillas base por giro: eliges la que se parece a tu negocio, la ajustamos a tu manera
-            y de ahí sale tu sitio. Después entra un plan de soporte que arranca con 3 meses, para que cambiar un
-            precio, subir una promoción o reemplazar una foto no dependa de ti. Tú mandas el texto y las fotos; el
-            resto lo hacemos nosotros.
+    <ServiciosGrid />
+    <Problema />
+    <Proceso overline={home.proceso.overline} h2={home.proceso.h2} intro={home.proceso.intro} pasos={home.proceso.pasos} />
+    <Casos />
+    <section class="seccion seccion--equipo" aria-labelledby="equipo-titulo">
+      <div class="contenedor equipo-home">
+        <div>
+          <span class="overline">Quiénes somos</span>
+          <h2 id="equipo-titulo">Dos personas, no un call center.</h2>
+        </div>
+        <div class="equipo-home__texto">
+          <p>
+            VEIA es un equipo de dos personas en Guadalajara. Quien te contesta por WhatsApp es
+            quien diseña, programa e implementa: sin ejecutivos de cuenta ni intermediarios.
           </p>
-          <div class="v-hero__acciones">
-            <a class="boton boton--degradado" href={`${raiz}plantillas/`}>Ver cómo funcionan las plantillas</a>
-          </div>
+          <p class="equipo-home__firma"><strong>Julio</strong> y <strong>Ana Paula</strong> · Guadalajara, Jalisco</p>
         </div>
       </div>
     </section>
-
-    <WordPress />
-
-    <CTA />
+    <Diferenciadores />
+    <FAQ overline={home.faq.overline} h2={home.faq.h2} preguntas={home.faq.preguntas} plantillas />
+    <BannerCTA
+      h2={home.cierre.h2}
+      texto={home.cierre.texto}
+      boton={home.cierre.primario}
+      destino="whatsapp"
+      mensaje="Hola, quiero hablar con VEIA sobre mi proyecto."
+      secundario={{ texto: home.cierre.secundario, href: ruta("contacto/") }}
+    />
   </main>
-  <Footer />
-
-  <a class="ws-flotante" href="https://wa.me/525659898908?text=Hola%20VEIA,%20quiero%20informaci%C3%B3n" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
-    <svg viewBox="0 0 32 32" aria-hidden="true">
-      <path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.6.8 5 2.3 7L4.7 27l5.3-1.7c1.9 1.2 4 1.8 6 1.8 6.6 0 12-5.3 12-11.9S22.6 3 16 3Zm0 21.8c-1.9 0-3.7-.6-5.3-1.6l-.4-.2-3.1 1 1-3-.3-.4a9.6 9.6 0 0 1-1.9-5.7c0-5.4 4.5-9.8 10-9.8s10 4.4 10 9.8-4.5 9.9-10 9.9Zm5.5-7.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1a8.1 8.1 0 0 1-4-3.5c-.3-.5.3-.5.9-1.7.1-.2 0-.4 0-.6l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1.1 1-1.1 2.6s1.1 3 1.3 3.2c.2.2 2.2 3.4 5.4 4.7 2 .9 2.8 1 3.8.8.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4l-1-.8Z"/>
-    </svg>
-  </a>
-
-  {/* Widget del asistente: oculto hasta poner MOSTRAR_BOT = true. */}
-  {MOSTRAR_BOT && <Bot />}
+  <Footer home />
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 </Base>

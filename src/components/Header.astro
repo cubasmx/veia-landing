@@ -1,49 +1,122 @@
 ---
-import RedesSociales from "./RedesSociales.astro";
-import { MOSTRAR_PAQUETES } from "../config";
+import Icono from "./Icono.astro";
+import { grupos, porSlug } from "../data/servicios";
+import { ruta, whatsapp } from "../utils/ruta";
 
-const { raiz = "" } = Astro.props;
-const base = import.meta.env.BASE_URL;
+interface Props {
+  home?: boolean;
+  activo?: "servicios" | "casos" | "proceso" | "dudas" | "contacto" | "";
+}
+
+const { home = false, activo = "" } = Astro.props;
+const cta = whatsapp("Hola, quiero agendar un diagnóstico con VEIA.");
+
+const ir = (ancla: string) => {
+  if (ancla === "#inicio") return home ? "#inicio" : ruta("");
+  if (ancla === "#contacto" && !home) return ruta("contacto/");
+  return home ? ancla : ruta(ancla);
+};
+
 const enlaces = [
-  { href: "#inicio", texto: "Inicio" },
-  { href: "#piezas", texto: "Servicios" },
-  { href: "#casos", texto: "Casos" },
-  ...(MOSTRAR_PAQUETES ? [{ href: "#precio", texto: "Precios" }] : []),
-  { href: "plantillas/", texto: "Plantillas" },
-  { href: "#faq", texto: "Dudas" },
-  { href: "#contacto", texto: "Contacto" },
+  { texto: "Casos", ancla: "#casos", clave: "casos" },
+  { texto: "Cómo trabajamos", ancla: "#proceso", clave: "proceso" },
+  { texto: "Dudas", ancla: "#faq", clave: "dudas" },
+  { texto: "Contacto", ancla: "#contacto", clave: "contacto" },
 ];
 ---
 
-<header class="v-header" id="inicio">
-  <div class="contenedor v-header__inner">
-    <a class="v-marca" href={`${raiz}#inicio`} aria-label="VEIA · Presencia digital para negocios locales">
-      <img class="v-marca__logo" src={`${base}img/logo-veia.png`} alt="VEIA" width="83" height="30" />
+<header class="header" id="header" data-header>
+  <div class="contenedor header__in">
+    <a class="marca" href={ir("#inicio")} aria-label="VEIA, inicio">
+      <img src={ruta("img/logo-veia.png")} alt="VEIA" width="77" height="28" />
     </a>
 
-    <nav class="v-nav" aria-label="Secciones">
-      {enlaces.map((e) => <a href={`${raiz}${e.href}`}>{e.texto}</a>)}
+    <nav class="nav" aria-label="Principal">
+      <div class="nav__item">
+        <button
+          class="nav__btn"
+          type="button"
+          data-servicios-btn
+          aria-expanded="false"
+          aria-controls="menu-servicios"
+          aria-haspopup="true"
+          aria-current={activo === "servicios" ? "page" : undefined}
+        >
+          Servicios <Icono nombre="flecha-abajo" tamano={14} />
+        </button>
+        <div class="desplegable" id="menu-servicios" data-servicios-panel>
+          <div class="desplegable__grid">
+            {grupos.map((g) => (
+              <div>
+                <p class="desplegable__rot">{g.nombre}</p>
+                {g.slugs.map((slug) => {
+                  const s = porSlug(slug);
+                  return s ? (
+                    <a href={ruta(`servicios/${s.slug}/`)}>
+                      <Icono nombre={s.icono} tamano={18} />
+                      {s.nombre}
+                    </a>
+                  ) : null;
+                })}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      {enlaces.map((e) => (
+        <a
+          href={ir(e.ancla)}
+          aria-current={activo === e.clave ? "page" : undefined}
+        >
+          {e.texto}
+        </a>
+      ))}
     </nav>
 
-    <div class="v-header__acciones">
-      <RedesSociales variante="header" />
-      <a class="boton boton--oscuro" href="https://wa.me/525659898908?text=Hola%20VEIA,%20quiero%20digitalizar%20mi%20negocio" target="_blank" rel="noopener">
-        Cotizar
+    <div class="header__acc">
+      <a class="btn btn--primario" href={cta} target="_blank" rel="noopener">
+        Agendar diagnóstico
       </a>
-      <button class="v-menu-btn" data-menu-btn aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil">
+      <button
+        class="hamb"
+        type="button"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="menu-movil"
+        data-menu-btn
+      >
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </header>
 
-<div class="v-menu-movil" id="menu-movil" data-menu-movil>
-  {enlaces.map((e) => <a href={`${raiz}${e.href}`}>{e.texto}</a>)}
-  <a class="boton boton--degradado" style="margin-top:1.2rem;width:100%" href="https://wa.me/525659898908?text=Hola%20VEIA,%20quiero%20digitalizar%20mi%20negocio" target="_blank" rel="noopener">
-    Cotizar por WhatsApp
+<nav class="menu-movil" id="menu-movil" data-menu-movil aria-label="Menú móvil">
+  <p class="menu-movil__rot">Servicios</p>
+  {grupos.map((g) => (
+    <Fragment>
+      <p class="menu-movil__rot">{g.nombre}</p>
+      {g.slugs.map((slug) => {
+        const s = porSlug(slug);
+        return s ? (
+          <a class="servicio-menu" href={ruta(`servicios/${s.slug}/`)}>
+            <span><Icono nombre={s.icono} tamano={20} clase="menu-movil__ico" /> {s.nombre}</span>
+            <Icono nombre="flecha" tamano={16} />
+          </a>
+        ) : null;
+      })}
+    </Fragment>
+  ))}
+  {enlaces.map((e) => (
+    <a href={ir(e.ancla)}>
+      {e.texto}
+      <Icono nombre="flecha" tamano={16} />
+    </a>
+  ))}
+  <a class="btn btn--primario" href={cta} target="_blank" rel="noopener">
+    Agendar diagnóstico
   </a>
-  <div class="v-menu-movil__redes">
-    <span class="antetitulo" style="margin-bottom:0.5rem">Síguenos</span>
-    <RedesSociales variante="menu" />
-  </div>
-</div>
+  <p class="menu-movil__nota">
+    Guadalajara · Zapopan · WhatsApp 56 5989 8908
+  </p>
+</nav>

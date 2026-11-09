@@ -10,9 +10,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $nombre   = trim($_POST['nombre'] ?? '');
 $negocio  = trim($_POST['negocio'] ?? '');
+$giro     = trim($_POST['giro'] ?? '');
 $telefono = trim($_POST['telefono'] ?? '');
 $correo   = trim($_POST['correo'] ?? '');
 $mensaje  = trim($_POST['mensaje'] ?? '');
+$acepta   = trim($_POST['acepta'] ?? '');
 
 /* Campo trampa anti-spam: los bots lo llenan, las personas no lo ven */
 if (!empty($_POST['sitio'])) {
@@ -26,12 +28,27 @@ if ($nombre === '' || $mensaje === '') {
   exit;
 }
 
+/* La casilla del aviso de privacidad es obligatoria (04-contenido / 05-legal) */
+if ($acepta !== 'si') {
+  http_response_code(400);
+  echo json_encode(['ok' => false, 'error' => 'Acepta el aviso de privacidad para enviar el mensaje']);
+  exit;
+}
+
+if ($correo !== '' && !filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+  http_response_code(400);
+  echo json_encode(['ok' => false, 'error' => 'Revisa el correo electrónico']);
+  exit;
+}
+
 $para   = 'contacto@veia.com.mx';
 $asunto = 'Nuevo mensaje del sitio — ' . $nombre;
 $cuerpo = "Nombre: $nombre\n"
         . "Negocio: $negocio\n"
+        . "Giro: $giro\n"
         . "Teléfono: $telefono\n"
-        . "Correo: $correo\n\n"
+        . "Correo: $correo\n"
+        . "Aceptó aviso de privacidad: sí\n\n"
         . "Mensaje:\n$mensaje\n";
 
 $headers  = "From: Sitio VEIA <contacto@veia.com.mx>\r\n";

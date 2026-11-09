@@ -1,0 +1,15 @@
+---
+import { ruta } from "../utils/ruta";
+interface Props {
+  actual: string;
+}
+const { actual } = Astro.props;
+---
+
+<nav class="contenedor miga" aria-label="Ruta de navegación">
+  <a href={ruta("")}>Inicio</a>
+  <span aria-hidden="true">/</span>
+  <a href={ruta("#servicios")}>Servicios</a>
+  <span aria-hidden="true">/</span>
+  <span aria-current="page">{actual}</span>
+</nav>

@@ -1,0 +1,23 @@
+---
+import Icono from "./Icono.astro";
+import { home } from "../data/home";
+const d = home.diferenciadores;
+---
+
+<section class="seccion seccion--alterna" aria-labelledby="diferenciadores-titulo">
+  <div class="contenedor">
+    <div class="seccion__cab">
+      <span class="overline">{d.overline}</span>
+      <h2 id="diferenciadores-titulo">{d.h2}</h2>
+    </div>
+    <div class="difs">
+      {d.items.map((item) => (
+        <div class="dif">
+          <Icono nombre={item.icono} tamano={24} clase="dif__ico" />
+          <h3>{item.titulo}</h3>
+          <p>{item.texto}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

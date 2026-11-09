@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VEIA · mockup dirección visual — socio tecnológico</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --morado:#570080; --morado-hover:#6B009E; --magenta:#F2006D; --magenta-texto:#C4005A;
+    --amarillo:#FBDD41;
+    --tinta:#14111A; --tinta-2:#2B2533;
+    --n600:#565063; --n500:#6E6879; --n300:#C9C4D2; --n200:#E3DFEA; --n100:#F2F0F5;
+    --papel:#FDFCFE; --blanco:#fff;
+    --degradado:linear-gradient(135deg,#570080 0%,#7A0A63 62%,#A4006A 100%);
+    --sombra-1:0 1px 2px rgb(20 17 26 / .05);
+    --sombra-2:0 18px 44px rgb(20 17 26 / .10);
+    --fuente:"Satoshi",system-ui,-apple-system,sans-serif;
+    --serif:"Instrument Serif",Georgia,serif;
+    --radio-b:10px; --radio-t:16px; --radio-p:20px;
+    --ancho:1180px; --gap:24px;
+    --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--fuente);color:var(--n600);background:var(--papel);line-height:1.65;-webkit-font-smoothing:antialiased;font-size:16px}
+  img,svg{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  ul{list-style:none}
+  :where(a,button,summary):focus-visible{outline:3px solid var(--tinta);outline-offset:2px;border-radius:4px}
+  .oscuro :focus-visible,.cta :focus-visible{outline-color:var(--amarillo)}
+  .contenedor{width:min(100% - 2.5rem,var(--ancho));margin-inline:auto}
+  .salto{position:absolute;left:-9999px;top:0;z-index:100;background:var(--tinta);color:#fff;padding:.8rem 1.2rem;font-weight:700}
+  .salto:focus{left:0}
+
+  /* ---------- tipografía ---------- */
+  h1,h2,h3,h4{font-weight:700;color:var(--tinta);letter-spacing:-.025em;line-height:1.1;text-wrap:balance}
+  .overline{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--n500)}
+  .overline::before{content:"";width:6px;height:6px;background:var(--magenta);border-radius:1px;flex:none}
+  .serif{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:0}
+  .lead{font-size:clamp(1.0625rem,1.3vw,1.1875rem);line-height:1.65;max-width:52ch}
+
+  /* ---------- botones ---------- */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;min-height:48px;padding:0 1.35rem;border-radius:var(--radio-b);border:1.5px solid transparent;font:inherit;font-size:.875rem;font-weight:700;letter-spacing:0;cursor:pointer;transition:background .18s ease-out,color .18s ease-out,border-color .18s ease-out;white-space:nowrap}
+  .btn svg{width:18px;height:18px;flex:none}
+  .btn--primario{background:var(--morado);color:#fff}
+  .btn--primario:hover{background:var(--morado-hover)}
+  .btn--primario:active{transform:translateY(1px)}
+  .btn--secundario{background:transparent;border-color:var(--tinta);color:var(--tinta)}
+  .btn--secundario:hover{background:var(--tinta);color:#fff}
+  .btn--claro{background:#fff;color:var(--morado)}
+  .btn--claro:hover{background:var(--amarillo);color:var(--tinta)}
+  .btn--contorno-claro{background:transparent;border-color:rgb(255 255 255 / .55);color:#fff}
+  .btn--contorno-claro:hover{background:rgb(255 255 255 / .12);border-color:#fff}
+  .enlace{display:inline-flex;align-items:center;gap:.4rem;font-size:.8125rem;font-weight:700;color:var(--morado);border-bottom:1px solid var(--n300);padding-bottom:2px;transition:color .16s ease-out,border-color .16s ease-out}
+  .enlace svg{width:16px;height:16px;transition:transform .16s ease-out}
+  .enlace:hover{color:var(--magenta-texto);border-color:var(--magenta)}
+  .enlace:hover svg{transform:translateX(3px)}
+
+  /* ---------- header ---------- */
+  .header{position:sticky;top:0;z-index:30;background:rgb(253 252 254 / .92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--n200)}
+  .header::before{content:"";position:absolute;inset:0 0 auto;height:2px;background:var(--degradado);opacity:0;transition:opacity .16s linear}
+  .header.fijo::before{opacity:1}
+  .header__in{display:flex;align-items:center;gap:2rem;height:72px}
+  .marca{display:inline-flex;align-items:center;flex:none}
+  .marca img{height:28px;width:auto}
+  .nav{display:none;gap:1.6rem;margin-inline:auto;font-size:.875rem;font-weight:500}
+  .nav a{color:var(--n600);padding:.4rem 0;border-bottom:2px solid transparent;transition:color .16s,border-color .16s}
+  .nav a:hover{color:var(--tinta);border-color:var(--magenta)}
+  .nav a[aria-current]{color:var(--tinta);border-color:var(--magenta)}
+  .header__acc{display:flex;align-items:center;gap:.75rem;margin-left:auto}
+  .header .btn{min-height:44px;padding:0 1rem;font-size:.8125rem}
+  .hamb{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:0 10px;background:none;border:0;cursor:pointer}
+  .hamb span{height:2px;background:var(--tinta);border-radius:2px;transition:transform .2s,opacity .2s}
+  @media (min-width:1024px){.nav{display:flex}.hamb{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{padding-block:clamp(3.5rem,7vw,6rem) clamp(3rem,6vw,5rem);position:relative;overflow:hidden}
+  .hero__grid{display:grid;gap:clamp(2.5rem,5vw,4rem);align-items:center}
+  .hero h1{font-size:clamp(2.55rem,6.2vw,4.35rem);line-height:1.02;letter-spacing:-.035em;margin:1.1rem 0 1.3rem;max-width:15ch}
+  .hero h1 .serif{color:var(--morado)}
+  .hero__acc{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+  .confianza{display:grid;grid-template-columns:1fr 1fr;gap:.9rem 1.25rem;margin-top:2.2rem;padding-top:1.6rem;border-top:1px solid var(--n200)}
+  .confianza li{display:flex;align-items:flex-start;gap:.55rem;font-size:.8125rem;font-weight:500;color:var(--n600);line-height:1.4}
+  .confianza svg{width:16px;height:16px;color:var(--morado);flex:none;margin-top:2px}
+  @media (min-width:1024px){
+    .hero__grid{grid-template-columns:7fr 5fr}
+    .confianza{grid-template-columns:1fr 1fr}
+  }
+
+  /* panel del hero */
+  .panel{background:var(--blanco);border:1px solid var(--n200);border-radius:var(--radio-p);box-shadow:var(--sombra-1);padding:clamp(1.25rem,2.5vw,1.75rem)}
+  .panel__cab{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-bottom:1rem;border-bottom:1px solid var(--n200)}
+  .panel__cab h2{font-size:1rem;letter-spacing:-.01em}
+  .pill{display:inline-flex;align-items:center;height:26px;padding:0 .7rem;border-radius:999px;background:rgb(242 0 109 / .08);color:var(--magenta-texto);font-size:.6875rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+  .panel ul{display:grid;gap:0}
+  .panel li{display:grid;grid-template-columns:24px 1fr 18px;align-items:center;gap:.8rem;padding:.85rem 0;border-bottom:1px solid var(--n200);font-size:.875rem;font-weight:500;color:var(--tinta)}
+  .panel li:last-child{border-bottom:0;padding-bottom:.2rem}
+  .panel li svg:first-child{color:var(--morado)}
+  .panel li svg:last-child{color:var(--n300)}
+  .panel li small{display:block;font-size:.75rem;font-weight:400;color:var(--n500);line-height:1.4}
+  .panel__pie{display:flex;align-items:center;gap:.5rem;margin-top:.9rem;padding-top:.9rem;border-top:1px solid var(--n200);font-size:.75rem;color:var(--n500)}
+  .panel__pie svg{width:16px;height:16px;color:var(--magenta)}
+
+  /* ---------- franja clientes ---------- */
+  .clientes{background:var(--n100);border-block:1px solid var(--n200);padding-block:1.6rem}
+  .clientes__in{display:flex;align-items:center;gap:clamp(1.5rem,4vw,3.5rem);flex-wrap:wrap;justify-content:center}
+  .clientes__rot{font-size:.6875rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--n500);flex:none}
+  .clientes img{height:26px;width:auto;object-fit:contain;filter:grayscale(1);opacity:.62;transition:filter .2s,opacity .2s}
+  .clientes img:hover{filter:none;opacity:1}
+  .clientes img.c-alto{height:30px}
+  @media (max-width:640px){
+    .clientes__in{gap:1.4rem 2rem}
+    .clientes__rot{width:100%;text-align:center}
+  }
+
+  /* ---------- sección genérica ---------- */
+  .seccion{padding-block:clamp(3.5rem,7vw,6rem)}
+  .seccion__cab{display:grid;gap:1rem;margin-bottom:clamp(2rem,4vw,3rem)}
+  .seccion__cab h2{font-size:clamp(1.75rem,3.4vw,2.5rem);max-width:20ch}
+  .seccion__cab p{max-width:46ch;font-size:1rem}
+  @media (min-width:900px){
+    .seccion__cab{grid-template-columns:1.2fr .8fr;align-items:end}
+    .seccion__cab p{justify-self:end;text-align:right}
+  }
+
+  /* ---------- servicios ---------- */
+  .grupo{display:grid;gap:1rem;margin-bottom:2.5rem}
+  .grupo:last-child{margin-bottom:0}
+  .grupo__rot{grid-column:1/-1;display:flex;align-items:center;gap:.75rem;font-size:.6875rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--n500);margin-bottom:.25rem}
+  .grupo__rot::after{content:"";flex:1;height:1px;background:var(--n200)}
+  @media (min-width:520px){.grupo{grid-template-columns:1fr 1fr}}
+  @media (min-width:1024px){.grupo{grid-template-columns:repeat(3,1fr)}}
+  .serv{display:flex;flex-direction:column;gap:.7rem;min-height:206px;padding:1.4rem;background:var(--blanco);border:1px solid var(--n200);border-radius:var(--radio-t);transition:border-color .18s ease-out,background .18s ease-out}
+  @media (max-width:519px){.serv{min-height:0;padding:1.15rem 1.25rem}}
+  .nota-tile{display:flex;flex-direction:column;gap:.6rem;min-height:206px;padding:1.4rem;background:var(--n100);border:1px solid var(--n200);border-radius:var(--radio-t);transition:border-color .18s ease-out}
+  .nota-tile:hover{border-color:var(--n300)}
+  .nota-tile .pill{align-self:flex-start}
+  .nota-tile h3{font-size:1.0625rem;line-height:1.25;letter-spacing:-.015em;margin-top:.2rem}
+  .nota-tile p{font-size:.8125rem;line-height:1.5;color:var(--n500);max-width:32ch}
+  .nota-tile .enlace{margin-top:auto;font-size:.75rem;border-bottom:0;color:var(--n600)}
+  .nota-tile:hover .enlace{color:var(--magenta-texto)}
+  @media (max-width:519px){.nota-tile{min-height:0;padding:1.15rem 1.25rem}}
+
+  /* ---------- problema ---------- */
+  .problema{background:var(--blanco);border-block:1px solid var(--n200);padding-block:clamp(3rem,6vw,5rem)}
+  .problema__grid{display:grid;gap:2rem}
+  .problema h2{font-size:clamp(1.55rem,3.2vw,2.35rem);line-height:1.15;max-width:26ch;margin-top:1rem}
+  .problema__lista{display:grid;align-content:start}
+  .problema__lista li{display:grid;grid-template-columns:32px 1fr;gap:.9rem;padding:1rem 0;border-top:1px solid var(--n200);font-size:.9375rem;line-height:1.5;color:var(--n600)}
+  .problema__lista li:last-child{border-bottom:1px solid var(--n200)}
+  .problema__lista span{font-family:var(--serif);font-style:italic;font-size:1.25rem;line-height:1.3;color:var(--magenta-texto)}
+  @media (min-width:900px){.problema__grid{grid-template-columns:6fr 6fr;gap:4rem;align-items:end}}
+  .serv:hover{border-color:var(--n300);background:#fff}
+  .serv__ico{width:32px;height:32px;color:var(--morado);transition:color .18s ease-out}
+  .serv:hover .serv__ico{color:var(--magenta)}
+  .serv h3{font-size:1.0625rem;line-height:1.25;letter-spacing:-.015em;margin-top:.15rem}
+  .serv p{font-size:.8125rem;line-height:1.5;color:var(--n500);max-width:30ch}
+  .serv .enlace{margin-top:auto;font-size:.75rem;border-bottom:0;color:var(--n600)}
+  .serv:hover .enlace{color:var(--magenta-texto)}
+  .serv--ancla{background:var(--morado);border-color:var(--morado);color:#fff}
+  .serv--ancla h3{color:#fff}
+  .serv--ancla p{color:rgb(255 255 255 / .76)}
+  .serv--ancla .serv__ico{color:var(--amarillo)}
+  .serv--ancla .enlace{color:#fff;border-bottom:1px solid rgb(255 255 255 / .4)}
+  .serv--ancla:hover{background:#4B0070;border-color:#4B0070}
+  .serv--ancla:hover .serv__ico{color:var(--amarillo)}
+
+  /* ---------- plantilla de servicio (demo) ---------- */
+  .demo{background:var(--n100);border-top:1px solid var(--n200);padding-block:2rem clamp(3rem,6vw,4.5rem)}
+  .demo__rot{display:flex;align-items:center;gap:.75rem;font-size:.6875rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--n500);margin-bottom:2rem}
+  .demo__rot::before,.demo__rot::after{content:"";height:1px;background:var(--n300);flex:1}
+  .miga{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;font-size:.75rem;color:var(--n500);margin-bottom:1.4rem}
+  .miga a:hover{color:var(--morado);text-decoration:underline;text-underline-offset:3px}
+  .miga span[aria-current]{color:var(--tinta);font-weight:600}
+  .srv-hero{display:grid;gap:2.5rem;align-items:start;margin-bottom:clamp(2.5rem,5vw,4rem)}
+  .srv-hero .srv-h1{font-size:clamp(2.1rem,4.4vw,3.25rem);line-height:1.08;margin:.9rem 0 1.1rem;max-width:16ch}
+  .srv-hero .lead{max-width:48ch}
+  .srv-hero__acc{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.8rem}
+  .caja{background:var(--blanco);border:1px solid var(--n200);border-radius:var(--radio-t);padding:1.4rem}
+  .caja h2{font-size:.9375rem;margin-bottom:1rem}
+  .caja ul{display:grid;gap:.7rem}
+  .caja li{display:flex;gap:.6rem;font-size:.8438rem;line-height:1.45;color:var(--n600)}
+  .caja li svg{width:18px;height:18px;color:var(--morado);flex:none;margin-top:1px}
+  .caja__nota{margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--n200);font-size:.75rem;color:var(--n500)}
+  @media (min-width:960px){.srv-hero{grid-template-columns:7fr 5fr}.srv-hero .caja{margin-top:2.4rem}}
+
+  .incluye{display:grid;gap:0}
+  .incluye__cab{display:grid;gap:.6rem;margin-bottom:1.5rem}
+  .incluye__cab h2{font-size:clamp(1.5rem,2.6vw,2rem)}
+  .incluye__cab p{max-width:44ch;font-size:.9375rem}
+  .incluye ul{display:grid;border-top:1px solid var(--n200)}
+  .incluye li{display:grid;grid-template-columns:28px 1fr;gap:1rem;padding:1.15rem 0;border-bottom:1px solid var(--n200)}
+  .incluye li svg{width:24px;height:24px;color:var(--morado);margin-top:2px}
+  .incluye h3{font-size:.9375rem;letter-spacing:-.01em;margin-bottom:.15rem}
+  .incluye p{font-size:.8125rem;color:var(--n500);line-height:1.5;max-width:56ch}
+  @media (min-width:768px){.incluye ul{grid-template-columns:1fr 1fr;column-gap:3rem}}
+
+  /* ---------- cierre demo / footer ---------- */
+  .demo__nota{margin-top:2rem;font-size:.75rem;color:var(--n500);max-width:60ch}
+  .demo__nota b{color:var(--n600);font-weight:700}
+  .footer{background:var(--tinta);color:var(--n300);padding-block:2.5rem;font-size:.8125rem}
+  .footer__in{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center}
+  .footer img{height:24px;width:auto;opacity:.92}
+  .footer p{font-size:.75rem;color:var(--n300)}
+
+  /* ---------- menú móvil ---------- */
+  .menu{position:fixed;inset:72px 0 0;z-index:25;background:var(--papel);padding:1.5rem 1.25rem 2rem;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .24s ease-out;display:flex;flex-direction:column;gap:.15rem}
+  .menu.abierto{opacity:1;pointer-events:auto}
+  .menu a{display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:.35rem 0;border-bottom:1px solid var(--n200);font-size:1.25rem;font-weight:700;color:var(--tinta);letter-spacing:-.02em}
+  .menu a:hover{color:var(--morado)}
+  .menu a svg{width:20px;height:20px;color:var(--n300)}
+  .menu .btn{margin-top:1.4rem;min-height:48px;font-size:.875rem;justify-content:center}
+  .menu__nota{margin-top:auto;padding-top:2rem;font-size:.75rem;color:var(--n500)}
+  @media (min-width:1024px){.menu{display:none}}
+  @media (max-width:699px){.header .btn{display:none}}
+  body.bloqueo{overflow:hidden}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{transition:none!important;animation:none!important}
+  }
+</style>
+</head>
+<body>
+<a class="salto" href="#contenido">Saltar al contenido</a>
+
+<header class="header" id="header">
+  <div class="contenedor header__in">
+    <a class="marca" href="#inicio" aria-label="VEIA, inicio">
+      <img src="/home/mantis/repos/veia-landing/public/img/logo-veia.png" alt="VEIA" width="77" height="28">
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#servicios">Servicios</a>
+      <a href="#demo">Casos</a>
+      <a href="#demo">Nosotros</a>
+      <a href="#demo">Dudas</a>
+      <a href="#demo">Contacto</a>
+    </nav>
+    <div class="header__acc">
+      <a class="btn btn--primario" href="#demo">Agendar diagnóstico
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <button class="hamb" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="menu" id="menu-movil">
+  <a href="#servicios">Servicios <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  <a href="#demo">Casos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  <a href="#demo">Nosotros <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  <a href="#demo">Dudas <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  <a href="#demo">Contacto <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  <a class="btn btn--primario" href="#demo">Agendar diagnóstico</a>
+  <p class="menu__nota">Guadalajara · Zapopan<br>WhatsApp 56 5989 8908</p>
+</div>
+
+<main id="contenido">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="inicio">
+    <div class="contenedor hero__grid">
+      <div>
+        <span class="overline">Consultoría tecnológica · Guadalajara</span>
+        <h1>Tecnología que tu negocio entiende y <span class="serif">usa</span>.</h1>
+        <p class="lead">Sitio web, tienda en línea, sistemas y el equipo de cómputo que los hace funcionar. Un solo socio para las ocho cosas que hoy te resuelven tres proveedores distintos.</p>
+        <div class="hero__acc">
+          <a class="btn btn--primario" href="#demo">Agendar diagnóstico
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn--secundario" href="#servicios">Ver servicios</a>
+        </div>
+        <ul class="confianza">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Trato directo con quien lo hace</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Soporte local en GDL y Zapopan</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Alcance y precio por escrito</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Sin permanencia forzada</li>
+        </ul>
+      </div>
+
+      <aside class="panel" aria-label="Lo que resolvemos">
+        <div class="panel__cab">
+          <h2>Tu operación, en un solo lugar</h2>
+          <span class="pill">8 líneas</span>
+        </div>
+        <ul>
+          <li>
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 8.5h18M6 6.3h.01M8.4 6.3h.01M7 12h6M7 15.5h10"/></svg>
+            <span>Sitio web <small>Presencia, catálogo y Google</small></span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 12.2a1.6 1.6 0 0 1-1.6 1.4H7.8a1.6 1.6 0 0 1-1.6-1.4Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/><circle cx="12" cy="14" r="1.1" fill="#F2006D" stroke="none"/></svg>
+            <span>Tienda en línea <small>Cobros, envíos e inventario</small></span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M5.5 16.5a3.5 3.5 0 0 1 7 0M14 9.5h4M14 13h3"/></svg>
+            <span>CRM <small>Seguimiento de clientes y cotizaciones</small></span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="17" height="12" rx="2"/><path d="M8 20h7M11.5 16v4"/><path d="m18.5 14.5 2 2m0-2-2 2"/></svg>
+            <span>Equipo de cómputo <small>Venta, configuración y soporte</small></span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          </li>
+        </ul>
+        <p class="panel__pie">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Guadalajara · Zapopan · atención remota en todo México
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ CLIENTES ============ -->
+  <section class="clientes" aria-label="Clientes">
+    <div class="contenedor clientes__in">
+      <span class="clientes__rot">Ya trabajan con nosotros</span>
+      <img src="/home/mantis/repos/veia-landing/public/images/logo-sanher.svg" alt="SANHER" height="26">
+      <img class="c-alto" src="/home/mantis/repos/veia-landing/public/images/logo-legend.webp" alt="Legend" height="30">
+      <img src="/home/mantis/repos/veia-landing/public/images/logo-uditore-full.png" alt="Uditore" height="26">
+      <img src="/home/mantis/repos/veia-landing/public/images/logo-tocomadera.png" alt="Tocoma&nbsp;Madera" height="26">
+      <img src="/home/mantis/repos/veia-landing/public/img/ascendia-logo.png" alt="Ascendia" height="26">
+    </div>
+  </section>
+
+  <!-- ============ SERVICIOS ============ -->
+  <section class="seccion" id="servicios">
+    <div class="contenedor">
+      <div class="seccion__cab">
+        <div>
+          <span class="overline">Servicios</span>
+          <h2>Ocho formas de resolver, un mismo equipo.</h2>
+        </div>
+        <p>No vendemos paquetes cerrados: diagnosticamos qué necesita tu operación y armamos el alcance con lo que ya tienes.</p>
+      </div>
+
+      <div class="grupo">
+        <p class="grupo__rot"><span>01 · Presencia</span></p>
+        <a class="serv" href="#demo">
+          <svg class="serv__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 8.5h18M6 6.3h.01M8.4 6.3h.01M7 12h6M7 15.5h10"/></svg>
+          <h3>Sitio web</h3>
+          <p>Tu negocio visible, claro y con la información que el cliente busca antes de llamar.</p>
+          <span class="enlace">Ver más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="serv" href="#demo">
+          <svg class="serv__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="5"/><rect x="11" y="11" width="9" height="9" rx="2"/><path d="m14.5 15.5 1.5 1.5 2.5-2.5"/></svg>
+          <h3>Marca y diseño</h3>
+          <p>Identidad, material impreso y plantillas para que todo se vea del mismo negocio.</p>
+          <span class="enlace">Ver más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="serv" href="#demo">
+          <svg class="serv__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10v4a1.5 1.5 0 0 0 1.5 1.5H8l7 4V4.5l-7 4H5.5A1.5 1.5 0 0 0 4 10Z"/><path d="M18.5 9a4 4 0 0 1 0 6M20.8 6.4a7.5 7.5 0 0 1 0 11.2"/></svg>
+          <h3>Publicidad digital</h3>
+          <p>Campañas en Google y Meta medidas en clientes reales, no en likes.</p>
+          <span class="enlace">Ver más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </div>
+
+      <div class="grupo">
+        <p class="grupo__rot"><span>02 · Ventas</span></p>
+        <a class="serv" href="#demo">
+          <svg class="serv__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 12.2a1.6 1.6 0 0 1-1.6 1.4H7.8a1.6 1.6 0 0 1-1.6-1.4Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/><circle cx="12" cy="14" r="1.1" fill="#F2006D" stroke="none"/></svg>
+          <h3>Tienda en línea</h3>
+          <p>Cobra, controla inventario y no depende de que alguien conteste el WhatsApp.</p>
+          <span class="enlace">Ver más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="serv" href="#demo">
+          <svg class="serv__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M5.5 16.5a3.5 3.5 0 0 1 7 0M14 9.5h4M14 13h3"/></svg>
+          <h3>CRM</h3>
+          <p>Sabes a quién le cotizaste, qué quedó pendiente y cuándo volver a llamar.</p>
+          <span class="enlace">Ver más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="nota-tile" href="#demo">
+          <span class="pill">Diagnóstico</span>
+          <h3>¿No sabes cuál te toca?</h3>
+          <p>En 20 minutos revisamos tu operación y te decimos qué sí necesitas y qué no.</p>
+          <span class="enlace">Agendar llamada <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </div>
+
+      <div class="grupo">
+        <p class="grupo__rot"><span>03 · Operación</span></p>
+        <a class="serv" href="#demo">
+          <svg class="serv__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="17" height="12" rx="2"/><path d="M8 20h7M11.5 16v4"/><path d="m18.5 14.5 2 2m0-2-2 2"/></svg>
+          <h3>Equipo de cómputo</h3>
+          <p>Venta, configuración y soporte de computadoras y red del negocio.</p>
+          <span class="enlace">Ver más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="serv" href="#demo">
+          <svg class="serv__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><path d="M17 13v4.5m0 0 2-2m-2 2-2-2"/></svg>
+          <h3>ERP</h3>
+          <p>Inventario, compras, ventas y reportes conectados, sin capturar lo mismo tres veces.</p>
+          <span class="enlace">Ver más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="serv serv--ancla" href="#demo">
+          <svg class="serv__ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4H6.5A1.5 1.5 0 0 0 5 5.5v13A1.5 1.5 0 0 0 6.5 20H8M16 4h1.5A1.5 1.5 0 0 1 19 5.5v13a1.5 1.5 0 0 1-1.5 1.5H16"/><path d="M14 8.5 10 15.5"/><circle cx="12" cy="12" r="1.1" fill="#FBDD41" stroke="none"/></svg>
+          <h3>Desarrollo a medida</h3>
+          <p>Cuando tu operación no cabe en un sistema de caja: lo construimos contigo.</p>
+          <span class="enlace">Ver más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROBLEMA ============ -->
+  <section class="problema" aria-labelledby="problema-titulo">
+    <div class="contenedor problema__grid">
+      <div>
+        <span class="overline">El punto de partida</span>
+        <h2 id="problema-titulo">Todo por WhatsApp, todo en Excel, todo en la <span class="serif">cabeza</span> del dueño.</h2>
+      </div>
+      <ul class="problema__lista">
+        <li><span>01</span>La información vive en tres lugares y ninguno se habla.</li>
+        <li><span>02</span>Cada cambio depende de alguien que ya no está.</li>
+        <li><span>03</span>Se compra herramienta antes de saber qué proceso resuelve.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ EJEMPLO: PLANTILLA DE SERVICIO ============ -->
+  <section class="demo" id="demo" aria-labelledby="demo-titulo">
+    <div class="contenedor">
+      <p class="demo__rot" id="demo-titulo">Ejemplo · plantilla de página de servicio</p>
+
+      <nav class="miga" aria-label="Ruta">
+        <a href="#inicio">Inicio</a><span aria-hidden="true">/</span>
+        <a href="#servicios">Servicios</a><span aria-hidden="true">/</span>
+        <span aria-current="page">CRM</span>
+      </nav>
+
+      <div class="srv-hero">
+        <div>
+          <span class="overline">CRM</span>
+          <h2 class="srv-h1">Un CRM que tu equipo <span class="serif">sí</span> va a usar.</h2>
+          <p class="lead">Ordenamos prospectos, cotizaciones y seguimientos en un solo tablero. Sin migrar todo de golpe: empezamos con lo que hoy vive en libretas y hojas de cálculo.</p>
+          <div class="srv-hero__acc">
+            <a class="btn btn--primario" href="#demo">Agendar diagnóstico
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn--secundario" href="#demo">Preguntar por WhatsApp</a>
+          </div>
+        </div>
+
+        <aside class="caja">
+          <h2>Ideal si hoy…</h2>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Las cotizaciones se pierden entre WhatsApp y la libreta.</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Nadie sabe qué cliente quedó pendiente de seguimiento.</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>El reporte de ventas se arma a mano cada mes.</li>
+          </ul>
+          <p class="caja__nota">Implementación por etapas · capacitación incluida · datos siempre tuyos.</p>
+        </aside>
+      </div>
+
+      <div class="incluye">
+        <div class="incluye__cab">
+          <span class="overline">Qué incluye</span>
+          <h2>Del primer contacto al reporte mensual.</h2>
+          <p>Alcance típico de un proyecto de CRM; se ajusta al tamaño de tu equipo.</p>
+        </div>
+        <ul>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M5.5 16.5a3.5 3.5 0 0 1 7 0M14 9.5h4M14 13h3"/></svg>
+            <div><h3>Base de contactos ordenada</h3><p>Importamos y depuramos lo que ya tienes; etiquetas por etapa y origen.</p></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h10a2 2 0 0 1 2 2v16l-7-3.5L5 21V5a2 2 0 0 1 2-2Z"/><path d="M9 8h6M9 11.5h4"/></svg>
+            <div><h3>Embudo de ventas</h3><p>Etapas claras, recordatorios y responsable asignado en cada oportunidad.</p></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg>
+            <div><h3>Cotizaciones y plantillas</h3><p>Documentos con tu marca, listos para enviar y dar seguimiento.</p></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5M4 19h16"/><path d="m7 14 3.5-4 3 2.5L20 6"/></svg>
+            <div><h3>Reportes que sí se leen</h3><p>Ventas por vendedor, conversión y pendientes, sin exportar a Excel.</p></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h9"/><circle cx="18.5" cy="17" r="3"/><path d="M18.5 15.6v1.6l1.1.7"/></svg>
+            <div><h3>Integración con WhatsApp y correo</h3><p>La conversación queda registrada en el contacto, no en un teléfono.</p></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg>
+            <div><h3>Capacitación al equipo</h3><p>Dos sesiones grabadas y un manual corto en español, con ejemplos reales.</p></div>
+          </li>
+        </ul>
+      </div>
+
+      <p class="demo__nota"><b>Nota de la propuesta:</b> este bloque es solo para validar dirección visual. La página completa suma problema, proceso, caso relacionado, FAQ y CTA; el header, el CTA y el pie son los mismos del home para que las 8 páginas se sientan una sola marca.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="contenedor footer__in">
+    <img src="/home/mantis/repos/veia-landing/public/img/veia-logo-blanco.png" alt="VEIA" height="24">
+    <p>Mockup de dirección visual · documentos en <code>docs/rediseno/</code></p>
+  </div>
+</footer>
+
+<script>
+  var h = document.getElementById('header');
+  var b = document.querySelector('.hamb');
+  var m = document.getElementById('menu-movil');
+  addEventListener('scroll', function(){ h.classList.toggle('fijo', scrollY > 24); }, {passive:true});
+
+  function alternar(abrir){
+    m.classList.toggle('abierto', abrir);
+    b.setAttribute('aria-expanded', String(abrir));
+    b.setAttribute('aria-label', abrir ? 'Cerrar menú' : 'Abrir menú');
+    document.body.classList.toggle('bloqueo', abrir);
+  }
+  b.addEventListener('click', function(){ alternar(!m.classList.contains('abierto')); });
+  m.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ alternar(false); }); });
+  addEventListener('keydown', function(e){ if (e.key === 'Escape' && m.classList.contains('abierto')) { alternar(false); b.focus(); } });
+</script>
+</body>
+</html>

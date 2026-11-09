@@ -1,0 +1,28 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { ruta } from "../utils/ruta";
+---
+
+<Base
+  titulo="Página no encontrada | VEIA"
+  descripcion="La página que buscas no existe. Vuelve al inicio o revisa las ocho líneas de servicio."
+  noindex
+>
+  <Header />
+  <main id="contenido">
+    <section class="pagina-404">
+      <div class="contenedor">
+        <span class="overline">Error 404</span>
+        <h1>Esta página no existe.</h1>
+        <p>Puede que el enlace esté viejo o que la dirección tenga un error. Desde aquí puedes seguir:</p>
+        <div class="acciones">
+          <a class="btn btn--primario" href={ruta("")}>Volver al inicio</a>
+          <a class="btn btn--secundario" href={ruta("#servicios")}>Ver los servicios</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>

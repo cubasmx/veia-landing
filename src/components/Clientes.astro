@@ -1,29 +1,27 @@
 ---
-const base = import.meta.env.BASE_URL;
-const clientes = [
-  { nombre: "SANHER Bienes Raíces", logo: `${base}images/logo-sanher.svg`, href: "https://sanherbienesraices.com/" },
-  { nombre: "Legend Horizon Living", logo: `${base}images/logo-legend.webp`, href: "https://legendtower.com.mx/" },
-  { nombre: "Uditore", logo: `${base}images/logo-uditore-full.png`, href: "https://uditore.mx/" },
-  { nombre: "Tocomadera", logo: `${base}images/logo-tocomadera.png`, href: "https://tocomadera.mx/" },
-  { nombre: "Ascendia", logo: `${base}img/ascendia-logo.png`, href: "https://ascendia.mx/", oscuro: true },
-];
+import { home } from "../data/home";
+import { ruta } from "../utils/ruta";
+
+interface Props {
+  rotulo?: string;
+}
+const { rotulo = home.clientes.rotulo } = Astro.props;
 ---
 
-<section class="seccion seccion--gris" id="clientes">
-  <div class="contenedor">
-    <div class="revelar">
-      <span class="antetitulo">Trabajo real</span>
-      <h2>Negocios que ya tienen presencia digital</h2>
-    </div>
-    <div class="v-clientes revelar" style="margin-top:2.4rem">
-      {clientes.map((c) => (
-        <a class:list={["v-cliente", c.oscuro && "v-cliente--oscuro"]} href={c.href} target="_blank" rel="noopener">
-          <img src={c.logo} alt={c.nombre} loading="lazy" />
-        </a>
-      ))}
-    </div>
-    <div class="revelar" style="margin-top:2.2rem;text-align:center">
-      <a class="boton boton--contorno" href={`${base}portafolio/`}>Ver portafolio</a>
-    </div>
+<section class="clientes" aria-label="Clientes">
+  <div class="contenedor clientes__in revelar">
+    <p class="clientes__rot">{rotulo}</p>
+    {home.clientes.lista.map((c) => (
+      <a href={c.href} target="_blank" rel="noopener" title={c.nombre}>
+        <img
+          src={ruta(c.logo)}
+          alt={c.nombre}
+          height={c.alto ? 30 : 26}
+          class:list={[c.alto && "alto", c.clara && "clara"]}
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+    ))}
   </div>
 </section>

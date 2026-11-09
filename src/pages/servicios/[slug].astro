@@ -1,0 +1,192 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import Icono from "../../components/Icono.astro";
+import Proceso from "../../components/Proceso.astro";
+import FAQ from "../../components/FAQ.astro";
+import BannerCTA from "../../components/BannerCTA.astro";
+import OtrasLineas from "../../components/OtrasLineas.astro";
+import Clientes from "../../components/Clientes.astro";
+import { servicios } from "../../data/servicios";
+import { resaltar, ruta, whatsapp } from "../../utils/ruta";
+
+export function getStaticPaths() {
+  return servicios.map((servicio) => ({
+    params: { slug: servicio.slug },
+    props: { servicio },
+  }));
+}
+
+const { servicio: s } = Astro.props;
+const primario =
+  s.hero.primario.destino === "whatsapp"
+    ? whatsapp(s.whatsapp)
+    : ruta("contacto/");
+const primarioExterno = s.hero.primario.destino === "whatsapp";
+const secundario =
+  s.hero.secundario.destino === "whatsapp"
+    ? whatsapp(s.whatsapp)
+    : s.hero.secundario.valor;
+const secundarioExterno = s.hero.secundario.destino === "whatsapp";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: s.nombre,
+    serviceType: s.nombre,
+    description: s.seo.descripcion,
+    url: new URL(Astro.url.pathname, Astro.site).href,
+    areaServed: [
+      { "@type": "City", name: "Guadalajara" },
+      { "@type": "City", name: "Zapopan" },
+      { "@type": "Country", name: "México" },
+    ],
+    provider: {
+      "@type": "Organization",
+      name: "VEIA",
+      url: new URL(import.meta.env.BASE_URL, Astro.site).href,
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: s.faq.preguntas.map((p) => ({
+      "@type": "Question",
+      name: p.q,
+      acceptedAnswer: { "@type": "Answer", text: p.a },
+    })),
+  },
+];
+---
+
+<Base titulo={s.seo.titulo} descripcion={s.seo.descripcion}>
+  <Header activo="servicios" />
+  <main id="contenido">
+    <Breadcrumb actual={s.nombre} />
+
+    <section class="hero-compacto">
+      <div class="contenedor hero-compacto__grid">
+        <div>
+          <span class="overline">{s.eyebrow}</span>
+          <h1 set:html={resaltar(s.hero.h1)} />
+          <p class="lead">{s.hero.lead}</p>
+          <div class="hero__acciones">
+            <a
+              class="btn btn--primario"
+              href={primario}
+              target={primarioExterno ? "_blank" : undefined}
+              rel={primarioExterno ? "noopener" : undefined}
+            >
+              {s.hero.primario.texto} <Icono nombre={primarioExterno ? "whatsapp" : "flecha"} tamano={18} />
+            </a>
+            <a
+              class="btn btn--secundario"
+              href={secundario}
+              target={secundarioExterno ? "_blank" : undefined}
+              rel={secundarioExterno ? "noopener" : undefined}
+            >
+              {s.hero.secundario.texto}
+            </a>
+          </div>
+        </div>
+
+        <aside class="caja" aria-labelledby="ideal-titulo">
+          <h2 id="ideal-titulo">{s.aside.titulo}</h2>
+          <ul>
+            {s.aside.items.map((item) => (
+              <li><Icono nombre="check" tamano={18} /> {item}</li>
+            ))}
+          </ul>
+          <p class="caja__nota">{s.aside.nota}</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="seccion seccion--alterna" aria-labelledby="problema-servicio">
+      <div class="contenedor">
+        <div class="prosa">
+          <span class="overline">El punto de partida</span>
+          <h2 id="problema-servicio">{s.problema.h2}</h2>
+          {s.problema.parrafos.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion" id="incluye">
+      <div class="contenedor">
+        <div class="seccion__cab">
+          <span class="overline">Alcance</span>
+          <h2>{s.incluye.h2}</h2>
+        </div>
+        <div class="incluye">
+          <ul>
+            {s.incluye.items.map((item) => (
+              <li>
+                <Icono nombre="check" tamano={24} />
+                <div>
+                  <h3>{item.titulo}</h3>
+                  <p>{item.texto}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <Proceso h2={s.proceso.h2} pasos={s.proceso.pasos} alterna />
+
+    <section class="seccion" id="entregables">
+      <div class="contenedor">
+        <div class="seccion__cab">
+          <span class="overline">Entregables</span>
+          <h2>{s.entregables.h2}</h2>
+        </div>
+        <ul class="entregables">
+          {s.entregables.items.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    {s.caso && (
+      <section class="seccion seccion--alterna" aria-labelledby="caso-titulo">
+        <div class="contenedor">
+          <div class="seccion__cab">
+            <span class="overline">Caso</span>
+            <h2 id="caso-titulo">{s.caso.cliente}</h2>
+          </div>
+          <article class="caso-ancho">
+            <img src={ruta(s.caso.logo)} alt={s.caso.cliente} height="32" loading="lazy" decoding="async" />
+            <p><strong>El reto:</strong> {s.caso.reto}</p>
+            <p><strong>Qué hicimos:</strong> {s.caso.hizo}</p>
+            <p><strong>Hoy:</strong> {s.caso.hoy}</p>
+            <p>
+              <a class="enlace" href={s.caso.url} target="_blank" rel="noopener">
+                Ver el sitio de {s.caso.cliente} <Icono nombre="flecha-arriba" tamano={16} />
+              </a>
+            </p>
+          </article>
+        </div>
+      </section>
+    )}
+
+    {!s.caso && <Clientes />}
+
+    <OtrasLineas slugs={s.relacionados} />
+
+    <FAQ h2={s.faq.h2} preguntas={s.faq.preguntas} />
+
+    <BannerCTA
+      h2={s.cierre.h2}
+      texto={s.cierre.texto}
+      boton={s.cierre.boton}
+      destino={s.hero.primario.destino}
+      mensaje={s.whatsapp}
+    />
+  </main>
+  <Footer />
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</Base>

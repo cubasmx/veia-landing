@@ -1,0 +1,206 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { ruta } from "../utils/ruta";
+---
+
+<Base
+  titulo="Aviso de privacidad | VEIA"
+  descripcion="Aviso de privacidad de VEIA: responsable, datos que recabamos, finalidades, derechos ARCO y medidas de seguridad."
+>
+  <Header />
+  <main id="contenido">
+    <!-- TODO: confirmar datos del responsable antes de publicar -->
+    <article class="legal">
+      <div class="contenedor">
+        <div class="legal__cuerpo">
+          <span class="overline">Legal</span>
+          <h1>Aviso de privacidad</h1>
+          <p class="legal__fecha"><strong>Última actualización:</strong> noviembre de 2026</p>
+
+          <h2>1. Quién es el responsable de tus datos</h2>
+          <p>
+            <strong>VEIA</strong>, con domicilio en Guadalajara, Jalisco, México, es responsable del
+            tratamiento de los datos personales que recaba a través de este sitio.
+          </p>
+          <ul>
+            <li>Correo para asuntos de privacidad: <a href="mailto:contacto@veia.com.mx">contacto@veia.com.mx</a></li>
+            <li>Teléfono: 56 5989 8908</li>
+            <li>Sitio: veia.com.mx</li>
+          </ul>
+          <p>
+            Somos una agencia pequeña: el mismo equipo que atiende tu proyecto atiende tus solicitudes de
+            privacidad.
+          </p>
+
+          <h2>2. Qué datos personales recabamos</h2>
+          <p>
+            <strong>Por el formulario de contacto (<a href={ruta("contacto/")}>/contacto</a>):</strong> nombre,
+            nombre del negocio o proyecto, giro, teléfono, correo electrónico y la descripción de lo que
+            necesitas.
+          </p>
+          <p>
+            <strong>Si nos escribes por WhatsApp, teléfono o correo:</strong> los datos que decidas incluir
+            en tu mensaje, incluido tu número de teléfono o tu dirección de correo.
+          </p>
+          <p>
+            <strong>No recabamos datos personales sensibles</strong> (salud, origen étnico o racial,
+            creencias religiosas, opiniones políticas, orientación sexual, datos biométricos o genéticos)
+            <strong>ni datos patrimoniales o financieros</strong> a través de este sitio. Te pedimos no
+            incluirlos en el campo de descripción; si los necesitamos para un proyecto, te lo pediremos
+            por un medio aparte y con las medidas que correspondan.
+          </p>
+          <p>Este sitio se dirige a personas mayores de edad con actividad empresarial o profesional.</p>
+
+          <h2>3. Para qué usamos tus datos (finalidades primarias)</h2>
+          <ol>
+            <li>Responder tu mensaje y ponernos en contacto contigo.</li>
+            <li>Elaborar y enviarte una propuesta o cotización.</li>
+            <li>
+              Dar seguimiento a la relación comercial y, si contratas, ejecutar el proyecto, incluidas
+              entregas, soporte y garantías.
+            </li>
+            <li>Facturar y cumplir obligaciones fiscales, contables y de archivo.</li>
+            <li>Atender aclaraciones, reclamaciones y requerimientos de autoridad.</li>
+          </ol>
+          <p>
+            Estas finalidades son necesarias para la relación contigo.
+            <strong>Si no las aceptas, no podremos responder tu solicitud ni prestarte el servicio.</strong>
+          </p>
+
+          <h2>4. Finalidades secundarias</h2>
+          <p>
+            <strong>No tenemos finalidades secundarias.</strong> No usamos tus datos para publicidad,
+            prospección comercial, perfilamiento ni para enviarte promociones de VEIA o de terceros.
+          </p>
+          <p>
+            Si en el futuro quisiéramos usar tus datos para algo distinto, te lo pediremos
+            <strong>antes y por separado</strong>, y podrás negarte sin que eso afecte la atención de tu
+            proyecto.
+          </p>
+
+          <h2>5. Fundamento legal y consentimiento</h2>
+          <p>
+            Tratamos tus datos conforme a la <strong>Ley Federal de Protección de Datos Personales en
+            Posesión de los Particulares (LFPDPPP)</strong>, su Reglamento y los Lineamientos del aviso de
+            privacidad, con los principios de licitud, finalidad, lealtad, consentimiento, calidad,
+            proporcionalidad, información y responsabilidad.
+          </p>
+          <p>
+            El consentimiento se otorga de forma <strong>tácita</strong> al enviar el formulario o al
+            escribirnos, después de haber puesto este aviso a tu disposición. No condicionamos la atención
+            a que aceptes finalidades secundarias, porque no las hay.
+          </p>
+
+          <h2>6. Transferencias y proveedores</h2>
+          <ul>
+            <li>
+              <strong>No vendemos, rentamos ni cedemos tus datos</strong> a terceros para sus propios fines.
+            </li>
+            <li>
+              <strong>Encargados</strong> que tratan datos por cuenta de VEIA, bajo obligación de
+              confidencialidad y contrato: el proveedor de hosting y el servidor de correo que aloja el
+              buzón <a href="mailto:contacto@veia.com.mx">contacto@veia.com.mx</a> (Hostinger / VPS de
+              VEIA). El formulario <strong>no usa base de datos</strong>: el mensaje llega como correo a
+              ese buzón.
+            </li>
+            <li>
+              <strong>WhatsApp / Meta.</strong> Si eliges escribirnos por WhatsApp, la conversación ocurre
+              en una plataforma operada por Meta Platforms, que trata los datos conforme a sus propias
+              políticas. VEIA no envía tus datos a Meta: tú decides usar ese canal. Si prefieres no usarlo,
+              tienes el formulario y el correo.
+            </li>
+            <li>
+              <strong>Autoridades.</strong> Solo entregamos datos cuando lo ordene una autoridad competente
+              o lo exija la ley.
+            </li>
+            <li><strong>No realizamos transferencias que requieran tu consentimiento.</strong></li>
+          </ul>
+
+          <h2>7. Cuánto tiempo los conservamos</h2>
+          <ul>
+            <li>Mensajes que no derivan en proyecto: <strong>12 meses</strong> desde el último contacto.</li>
+            <li>
+              Datos de clientes y proyectos: durante la relación y <strong>5 años</strong> después, por
+              obligaciones fiscales, contables y contractuales.
+            </li>
+            <li>Después se eliminan o anonimizan de forma segura.</li>
+          </ul>
+          <p>
+            Como el formulario envía por correo, tu mensaje se conserva en el buzón de contacto mientras
+            aplique el plazo anterior.
+          </p>
+
+          <h2>8. Tus derechos ARCO y la revocación del consentimiento</h2>
+          <p>
+            Puedes ejercer en cualquier momento tus derechos de <strong>Acceso, Rectificación, Cancelación
+            y Oposición</strong>, revocar tu consentimiento y limitar el uso o divulgación de tus datos.
+          </p>
+          <p>
+            <strong>Cómo solicitarlo:</strong> envía un correo a
+            <a href="mailto:contacto@veia.com.mx">contacto@veia.com.mx</a> o una carta al domicilio
+            indicado, con:
+          </p>
+          <ol>
+            <li>Tu nombre y un medio para responderte.</li>
+            <li>Documento que acredite tu identidad (o la representación legal, si aplica).</li>
+            <li>Descripción clara del derecho que ejerces y de los datos involucrados.</li>
+            <li>Cualquier dato que nos ayude a localizar tu información.</li>
+          </ol>
+          <p>
+            <strong>Plazos:</strong> respondemos en un máximo de <strong>20 días hábiles</strong>,
+            prorrogables <strong>10 días hábiles</strong> cuando las circunstancias lo justifiquen. Si la
+            solicitud procede, se hace efectiva en los <strong>15 días hábiles</strong> siguientes. Estos
+            trámites son gratuitos.
+          </p>
+          <p>
+            La revocación no procede cuando el tratamiento es necesario para cumplir una obligación legal o
+            contractual, ni mientras exista un adeudo o una garantía vigente.
+          </p>
+          <p>
+            Si consideras que no atendimos correctamente tu solicitud, puedes acudir a la
+            <strong>autoridad competente en materia de protección de datos personales</strong>.
+          </p>
+
+          <h2>9. Cómo limitamos el uso de tus datos</h2>
+          <p>
+            Mantenemos una lista interna de exclusión. Escríbenos a
+            <a href="mailto:contacto@veia.com.mx">contacto@veia.com.mx</a> y te incluimos para que no te
+            contactemos con fines distintos a los de tu proyecto. También puedes solicitar la cancelación
+            de tus datos cuando ya no sean necesarios.
+          </p>
+
+          <h2>10. Medidas de seguridad</h2>
+          <p>
+            Aplicamos medidas administrativas, técnicas y físicas razonables: conexión HTTPS en todo el
+            sitio, formulario sin base de datos, buzón con acceso restringido y autenticación reforzada,
+            protección anti-spam, respaldos y confidencialidad del equipo que trata los datos.
+          </p>
+          <p>
+            Ningún sistema es infalible: no podemos garantizar seguridad absoluta. Si ocurriera una
+            vulneración que afecte tus datos de forma significativa, te lo notificaremos y, en su caso,
+            informaremos a la autoridad, conforme a la ley.
+          </p>
+
+          <h2>11. Cookies</h2>
+          <p>
+            Este sitio <strong>no utiliza cookies de analítica, publicidad ni de terceros</strong>. Solo
+            puede usar almacenamiento técnico necesario para que el sitio funcione (por ejemplo,
+            preferencias de navegación). Por eso no verás un banner de cookies. Si en el futuro instalamos
+            medición o publicidad, actualizaremos este aviso y pediremos tu consentimiento antes de
+            activarlas.
+          </p>
+
+          <h2>12. Cambios a este aviso</h2>
+          <p>
+            Cualquier cambio se publica en esta misma página con su <strong>fecha de actualización</strong>.
+            Si el cambio afecta las finalidades del tratamiento, te lo avisaremos por correo o en el sitio
+            <strong>antes</strong> de aplicarlo, y podrás oponerte.
+          </p>
+        </div>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Base>

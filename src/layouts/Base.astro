@@ -1,75 +1,199 @@
 ---
-const { titulo = "VEIA · Presencia digital para negocios locales", descripcion = "Digitalizamos negocios locales: sitio web, presencia en Google y WhatsApp listos para vender." } = Astro.props;
 import "../styles/global.css";
+
+interface Props {
+  titulo: string;
+  descripcion: string;
+  noindex?: boolean;
+}
+const { titulo, descripcion, noindex = false } = Astro.props;
+
+const sitio = Astro.site ?? new URL("https://veia.com.mx");
+const base = import.meta.env.BASE_URL;
+const rutaCanonica = Astro.url.pathname.replace(base, "/");
+const canonical = new URL(rutaCanonica, sitio).href;
+const imagen = new URL("/img/logo-veia.png", sitio).href;
 ---
+
 <!doctype html>
-<html lang="es">
+<html lang="es-MX">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{titulo}</title>
     <meta name="description" content={descripcion} />
-    <link rel="icon" type="image/png" href={`${import.meta.env.BASE_URL}favicon.png`} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
 
-    <!-- Tipografías del landing de referencia: Satoshi + Instrument Serif -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="VEIA" />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imagen} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={titulo} />
+    <meta name="twitter:description" content={descripcion} />
+    <meta name="theme-color" content="#570080" />
+
+    <link rel="icon" type="image/png" href={`${base}favicon.png`} />
+
     <link rel="preconnect" href="https://api.fontshare.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
   </head>
   <body>
     <a class="saltar-contenido" href="#contenido">Saltar al contenido</a>
     <slot />
 
     <script>
-      // Aparición suave de secciones al hacer scroll (equivalente a las
-      // animaciones de entrada del landing de Framer).
-      const observador = new IntersectionObserver(
-        (entradas) => {
-          for (const e of entradas) {
-            if (e.isIntersecting) {
-              e.target.classList.add("visto");
-              observador.unobserve(e.target);
-            }
+      // Borde superior del header al hacer scroll.
+      const header = document.querySelector("[data-header]");
+      const marcarHeader = () => {
+        header?.classList.toggle("con-borde", window.scrollY > 24);
+      };
+      marcarHeader();
+      window.addEventListener("scroll", marcarHeader, { passive: true });
+
+      // Desplegable "Servicios" (teclado y clic fuera).
+      const sBtn = document.querySelector("[data-servicios-btn]");
+      const sPanel = document.querySelector("[data-servicios-panel]");
+
+      if (sBtn && sPanel) {
+        const abrir = (abierto, foco = false) => {
+          sPanel.classList.toggle("abierto", abierto);
+          sBtn.setAttribute("aria-expanded", String(abierto));
+          if (abierto && foco) {
+            sPanel.querySelector("a, button")?.focus();
           }
-        },
-        { threshold: 0.12 }
-      );
-      document.querySelectorAll(".revelar").forEach((el) => observador.observe(el));
+        };
 
-      // Menú móvil
-      const menuBtn = document.querySelector("[data-menu-btn]");
-      const menu = document.querySelector("[data-menu-movil]");
-      if (menuBtn && menu) {
-        menuBtn.addEventListener("click", () => {
-          const abierto = menu.classList.toggle("abierto");
-          menuBtn.classList.toggle("activo", abierto);
-          document.body.classList.toggle("menu-abierto", abierto);
+        sBtn.addEventListener("click", () => {
+          abrir(!sPanel.classList.contains("abierto"));
         });
-        menu.querySelectorAll("a").forEach((a) =>
-          a.addEventListener("click", () => {
-            menu.classList.remove("abierto");
-            menuBtn.classList.remove("activo");
-            document.body.classList.remove("menu-abierto");
-          })
+
+        sBtn.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowDown") {
+            e.preventDefault();
+            abrir(true, true);
+          }
+        });
+
+        document.addEventListener("click", (e) => {
+          const t = e.target;
+          if (!sPanel.contains(t) && !sBtn.contains(t)) abrir(false);
+        });
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && sPanel.classList.contains("abierto")) {
+            abrir(false);
+            sBtn.focus();
+          }
+        });
+
+        sPanel.querySelectorAll("a").forEach((a) => {
+          a.addEventListener("click", () => abrir(false));
+        });
+      }
+
+      // Menú móvil a pantalla completa con foco atrapado.
+      const mBtn = document.querySelector("[data-menu-btn]");
+      const menu = document.querySelector("[data-menu-movil]");
+      let focoPrevio = null;
+
+      if (mBtn && menu) {
+        const focusables = () =>
+          Array.from(
+            menu.querySelectorAll("a[href], button:not([disabled])")
+          ).filter((el) => el.offsetParent !== null);
+
+        const cerrarMenu = (devolverFoco) => {
+          menu.classList.remove("abierto");
+          menu.setAttribute("aria-hidden", "true");
+          mBtn.setAttribute("aria-expanded", "false");
+          mBtn.setAttribute("aria-label", "Abrir menú");
+          document.body.classList.remove("menu-abierto");
+          if (devolverFoco) (focoPrevio || mBtn).focus();
+        };
+
+        const abrirMenu = () => {
+          focoPrevio = document.activeElement;
+          menu.classList.add("abierto");
+          menu.removeAttribute("aria-hidden");
+          mBtn.setAttribute("aria-expanded", "true");
+          mBtn.setAttribute("aria-label", "Cerrar menú");
+          document.body.classList.add("menu-abierto");
+          focusables()[0]?.focus();
+        };
+
+        menu.setAttribute("aria-hidden", "true");
+
+        mBtn.addEventListener("click", () => {
+          if (menu.classList.contains("abierto")) cerrarMenu(true);
+          else abrirMenu();
+        });
+
+        menu.querySelectorAll("a").forEach((a) => {
+          a.addEventListener("click", () => cerrarMenu(false));
+        });
+
+        menu.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            e.preventDefault();
+            cerrarMenu(true);
+            return;
+          }
+          if (e.key !== "Tab") return;
+          const f = focusables();
+          if (!f.length) return;
+          const primero = f[0];
+          const ultimo = f[f.length - 1];
+          if (e.shiftKey && document.activeElement === primero) {
+            e.preventDefault();
+            ultimo.focus();
+          } else if (!e.shiftKey && document.activeElement === ultimo) {
+            e.preventDefault();
+            primero.focus();
+          }
+        });
+
+        window.matchMedia("(min-width: 1024px)").addEventListener("change", (e) => {
+          if (e.matches && menu.classList.contains("abierto")) cerrarMenu(false);
+        });
+      }
+
+      // Aparición de secciones; respeta reduced-motion.
+      const revelar = document.querySelectorAll(".revelar");
+      const sinMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (sinMovimiento || !("IntersectionObserver" in window)) {
+        revelar.forEach((el) => el.classList.add("visto"));
+      } else {
+        const observador = new IntersectionObserver(
+          (entradas) => {
+            for (const entrada of entradas) {
+              if (entrada.isIntersecting) {
+                entrada.target.classList.add("visto");
+                observador.unobserve(entrada.target);
+              }
+            }
+          },
+          { threshold: 0.12 }
         );
+        revelar.forEach((el) => observador.observe(el));
       }
 
-      // Botón flotante de WhatsApp aparece al salir del hero
-      const flotante = document.querySelector(".ws-flotante");
-      const hero = document.querySelector("[data-hero]");
-      if (flotante && hero) {
-        new IntersectionObserver(
-          ([e]) => flotante.classList.toggle("visible", !e.isIntersecting),
-          { rootMargin: "-20% 0px 0px 0px" }
-        ).observe(hero);
-      }
-
-      // Año del footer
-      const anio = document.getElementById("anio");
-      if (anio) anio.textContent = String(new Date().getFullYear());
+      // Año del pie.
+      document.querySelectorAll("[data-anio]").forEach((el) => {
+        el.textContent = String(new Date().getFullYear());
+      });
     </script>
   </body>
 </html>

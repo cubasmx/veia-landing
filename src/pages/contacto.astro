@@ -1,0 +1,234 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Icono from "../components/Icono.astro";
+import { resaltar, base, ruta, whatsapp } from "../utils/ruta";
+
+const wsp = whatsapp("Hola, quiero información sobre los servicios de VEIA.");
+---
+
+<Base
+  titulo="Contacto | VEIA"
+  descripcion="Escríbenos por WhatsApp o por el formulario. Respondemos en horario hábil, L–V de 9:00 a 18:00, hora de CDMX."
+>
+  <Header activo="contacto" />
+  <main id="contenido">
+    <section class="contacto">
+      <div class="contenedor">
+        <div class="seccion__cab">
+          <span class="overline">Contacto</span>
+          <h1 set:html={resaltar("Cuéntanos qué necesitas y con qué [cuentas].")} />
+          <p class="lead">
+            Un formulario corto o un mensaje por WhatsApp. Con lo que nos digas podemos decirte si lo resolvemos, cómo y en cuánto tiempo.
+          </p>
+        </div>
+
+        <div class="contacto__grid">
+          <form class="formulario" id="form-contacto" action={`${base}enviar.php`} method="post" novalidate>
+            <div class="aviso-envio" id="form-estado" role="status" aria-live="polite" tabindex="-1"></div>
+
+            <h2>Escríbenos</h2>
+
+            <div class="formulario__fila">
+              <div class="campo">
+                <label for="nombre">Nombre</label>
+                <input id="nombre" name="nombre" type="text" autocomplete="name" required aria-describedby="ayuda-nombre error-nombre" />
+                <p class="ayuda" id="ayuda-nombre">Cómo te llamas.</p>
+                <p class="error" id="error-nombre">Escribe tu nombre.</p>
+              </div>
+
+              <div class="campo">
+                <label for="negocio">Negocio</label>
+                <input id="negocio" name="negocio" type="text" autocomplete="organization" required aria-describedby="ayuda-negocio error-negocio" />
+                <p class="ayuda" id="ayuda-negocio">Nombre del negocio o proyecto. Si aún no tiene, escribe “en proyecto”.</p>
+                <p class="error" id="error-negocio">Escribe el nombre del negocio o “en proyecto”.</p>
+              </div>
+            </div>
+
+            <div class="formulario__fila">
+              <div class="campo">
+                <label for="giro">Giro</label>
+                <input id="giro" name="giro" type="text" aria-describedby="ayuda-giro" />
+                <p class="ayuda" id="ayuda-giro">A qué se dedica, en una línea.</p>
+              </div>
+
+              <div class="campo">
+                <label for="telefono">Teléfono</label>
+                <input id="telefono" name="telefono" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="ayuda-telefono error-telefono" />
+                <p class="ayuda" id="ayuda-telefono">Con lada. Solo lo usamos para responderte.</p>
+                <p class="error" id="error-telefono">Escribe un teléfono con lada.</p>
+              </div>
+            </div>
+
+            <div class="campo">
+              <label for="correo">Correo</label>
+              <input id="correo" name="correo" type="email" autocomplete="email" required aria-describedby="ayuda-correo error-correo" />
+              <p class="ayuda" id="ayuda-correo">Aquí te mandamos la propuesta.</p>
+              <p class="error" id="error-correo">Escribe un correo válido.</p>
+            </div>
+
+            <div class="campo">
+              <label for="mensaje">¿Qué necesitas?</label>
+              <textarea id="mensaje" name="mensaje" required aria-describedby="ayuda-mensaje error-mensaje"></textarea>
+              <p class="ayuda" id="ayuda-mensaje">Qué quieres resolver. Si no lo tienes claro, descríbelo como puedas.</p>
+              <p class="error" id="error-mensaje">Cuéntanos qué necesitas.</p>
+            </div>
+
+            <div class="campo" id="campo-acepta">
+              <label class="acepta" for="acepta">
+                <input id="acepta" name="acepta" type="checkbox" value="si" required aria-describedby="error-acepta" />
+                <span>Acepto el <a href={ruta("aviso-de-privacidad/")}>aviso de privacidad</a>.</span>
+              </label>
+              <p class="error" id="error-acepta">Marca la casilla para poder escribirte.</p>
+            </div>
+
+            <div class="visualmente-oculto" aria-hidden="true">
+              <label for="sitio">No llenar este campo</label>
+              <input id="sitio" name="sitio" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div class="formulario__pie">
+              <button class="btn btn--primario" type="submit" data-enviar>Enviar mensaje</button>
+              <p class="formulario__nota">
+                Usamos tus datos para responder y cotizar. Al enviar aceptas el
+                <a href={ruta("aviso-de-privacidad/")}>aviso de privacidad</a>.
+              </p>
+              <p class="formulario__nota">
+                Si tu proyecto es un sistema (CRM, ERP o desarrollo), el formulario nos ayuda a llegar preparados al diagnóstico.
+              </p>
+            </div>
+          </form>
+
+          <aside class="datos-contacto" aria-labelledby="contacto-directo">
+            <h2 id="contacto-directo">Contacto directo</h2>
+            <dl>
+              <div>
+                <dt><Icono nombre="whatsapp" tamano={18} /> WhatsApp</dt>
+                <dd><a href={wsp} target="_blank" rel="noopener">56 5989 8908</a></dd>
+              </div>
+              <div>
+                <dt><Icono nombre="telefono" tamano={18} /> Teléfono</dt>
+                <dd><a href="tel:+525659898908">56 5989 8908</a></dd>
+              </div>
+              <div>
+                <dt><Icono nombre="correo" tamano={18} /> Correo</dt>
+                <dd><a href="mailto:contacto@veia.com.mx">contacto@veia.com.mx</a></dd>
+              </div>
+              <div>
+                <dt><Icono nombre="ubicacion" tamano={18} /> Ubicación</dt>
+                <dd>Guadalajara y Zapopan, Jalisco</dd>
+              </div>
+              <div>
+                <dt><Icono nombre="reloj" tamano={18} /> Horario</dt>
+                <dd>Lunes a viernes, 9:00–18:00 (hora CDMX). Fuera de horario, déjanos mensaje y respondemos el siguiente día hábil.</dd>
+              </div>
+            </dl>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+
+  <script>
+    const form = document.getElementById("form-contacto");
+    const estado = document.getElementById("form-estado");
+    const boton = form?.querySelector("[data-enviar]");
+
+    const reglas = {
+      nombre: (v) => v.trim().length >= 2,
+      negocio: (v) => v.trim().length >= 2,
+      telefono: (v) => /^[0-9+()\s-]{10,}/.test(v.trim()) && v.trim().length < 25,
+      correo: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}/.test(v.trim()),
+      mensaje: (v) => v.trim().length >= 10,
+    };
+
+    const marcar = (campo, valido) => {
+      const contenedor = campo.closest(".campo");
+      contenedor?.classList.toggle("con-error", !valido);
+      campo.setAttribute("aria-invalid", String(!valido));
+      return valido;
+    };
+
+    const validar = () => {
+      let primero = null;
+      Object.entries(reglas).forEach(([id, regla]) => {
+        const campo = document.getElementById(id);
+        if (!campo) return;
+        const ok = marcar(campo, regla(campo.value));
+        if (!ok && !primero) primero = campo;
+      });
+
+      const acepta = document.getElementById("acepta");
+      if (acepta) {
+        const ok = acepta.checked;
+        document.getElementById("campo-acepta")?.classList.toggle("con-error", !ok);
+        acepta.setAttribute("aria-invalid", String(!ok));
+        if (!ok && !primero) primero = acepta;
+      }
+
+      return primero;
+    };
+
+    if (form && estado && boton) {
+      const limpiarEstado = () => {
+        estado.className = "aviso-envio";
+        estado.textContent = "";
+        estado.hidden = true;
+      };
+      limpiarEstado();
+
+      form.addEventListener("input", (e) => {
+        const campo = e.target;
+        if (campo instanceof HTMLInputElement || campo instanceof HTMLTextAreaElement) {
+          campo.removeAttribute("aria-invalid");
+          campo.closest(".campo")?.classList.remove("con-error");
+        }
+      });
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        limpiarEstado();
+
+        const primero = validar();
+        if (primero) {
+          primero.focus();
+          estado.hidden = false;
+          estado.className = "aviso-envio aviso-envio--error";
+          estado.textContent = "Revisa los campos marcados antes de enviar.";
+          return;
+        }
+
+        boton.disabled = true;
+        const textoOriginal = boton.textContent;
+        boton.textContent = "Enviando…";
+
+        try {
+          const respuesta = await fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: { Accept: "application/json" },
+          });
+          const datos = await respuesta.json().catch(() => ({ ok: false }));
+          if (!respuesta.ok || !datos.ok) throw new Error("envio");
+
+          form.reset();
+          estado.hidden = false;
+          estado.className = "aviso-envio aviso-envio--ok";
+          estado.textContent =
+            "Recibimos tu mensaje. Te respondemos en horario hábil: L–V, 9:00–18:00 (hora CDMX).";
+          estado.focus?.();
+        } catch {
+          estado.hidden = false;
+          estado.className = "aviso-envio aviso-envio--error";
+          estado.innerHTML =
+            'No se pudo enviar. Revisa los campos marcados o escríbenos por WhatsApp al <a href="https://wa.me/525659898908" target="_blank" rel="noopener">56 5989 8908</a>.';
+        } finally {
+          boton.disabled = false;
+          boton.textContent = textoOriginal;
+        }
+      });
+    }
+  </script>
+</Base>

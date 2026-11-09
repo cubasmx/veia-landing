@@ -1,0 +1,36 @@
+---
+import Icono from "./Icono.astro";
+import { home } from "../data/home";
+import { porSlug } from "../data/servicios";
+import { ruta } from "../utils/ruta";
+
+interface Props {
+  slugs: string[];
+}
+const { slugs } = Astro.props;
+const o = home.otrasLineas;
+const items = slugs.map(porSlug).filter((s) => Boolean(s));
+---
+
+<section class="otras" aria-labelledby="otras-titulo">
+  <div class="contenedor">
+    <div class="otras__cab">
+      <span class="overline">{o.overline}</span>
+      <h2 id="otras-titulo">{o.h2}</h2>
+    </div>
+    <div class="rejilla rejilla--3 otras__rejilla">
+      {items.map((s) => s && (
+        <a class="tarjeta" href={ruta(`servicios/${s.slug}/`)}>
+          <Icono nombre={s.icono} tamano={28} clase="tarjeta__ico" />
+          <h3>{s.nombre}</h3>
+          <p>{s.resumen}</p>
+        </a>
+      ))}
+    </div>
+    <p class="otras__enlace">
+      <a class="enlace" href={ruta("#servicios")}>
+        {o.enlace} <Icono nombre="flecha" tamano={16} />
+      </a>
+    </p>
+  </div>
+</section>

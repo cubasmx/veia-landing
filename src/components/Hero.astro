@@ -1,60 +1,48 @@
 ---
-import { MOSTRAR_PAQUETES } from "../config";
+import Icono from "./Icono.astro";
+import { home } from "../data/home";
+import { resaltar, whatsapp } from "../utils/ruta";
 
-const base = import.meta.env.BASE_URL;
-const whatsapp = "https://wa.me/525659898908?text=Hola%20VEIA,%20quiero%20cotizar%20mi%20presencia%20digital";
-
-// Sellos concretos: sin promesas infladas, solo lo que ya se cumple.
-const confianza = [
-  "Tu sitio en tu propio dominio (.com o .mx), no en un subdominio nuestro",
-  "Entregas desde 5 días hábiles",
-  "Pago 50% al inicio y 50% al entregar",
-  "Trato directo con quienes hacen tu sitio",
-];
+const h = home.hero;
+const cta = whatsapp("Hola, quiero agendar un diagnóstico con VEIA.");
 ---
 
-<section class="v-hero" data-hero>
-  <div class="contenedor v-hero__grid">
-    <div class="v-hero__texto revelar">
-      <span class="antetitulo">Sitios web, catálogos y Google para negocios locales</span>
-      <h1>Tu negocio listo para <span class="acento-serif">vender</span> en internet.</h1>
-      <p class="destacado">
-        Digitalizamos negocios de Guadalajara y Zapopan: sitio web, catálogo de
-        productos, presencia en Google y WhatsApp listos para vender. Sin
-        soluciones gigantes ni procesos enredados.
-      </p>
-      <div class="v-hero__acciones">
-        <a class="boton boton--degradado" href={whatsapp} target="_blank" rel="noopener">Cotizar por WhatsApp</a>
-        {MOSTRAR_PAQUETES && <a class="boton boton--contorno" href="#precio">Ver precios y alcance</a>}
+<section class="hero" id="inicio">
+  <div class="contenedor hero__grid">
+    <div class="revelar">
+      <span class="overline">{h.overline}</span>
+      <h1 class="display" set:html={resaltar(h.h1)} />
+      <p class="lead">{h.lead}</p>
+      <div class="hero__acciones">
+        <a class="btn btn--primario" href={cta} target="_blank" rel="noopener">
+          {h.primario} <Icono nombre="flecha" tamano={18} />
+        </a>
+        <a class="btn btn--secundario" href="#servicios">{h.secundario}</a>
       </div>
-      <ul class="v-confianza" aria-label="Por qué trabajar con VEIA">
-        {confianza.map((c) => <li>{c}</li>)}
+      <ul class="confianza" aria-label="Cómo trabajamos">
+        {h.confianza.map((c) => (
+          <li><Icono nombre="check" tamano={16} /> {c}</li>
+        ))}
       </ul>
-      <p class="v-hero__nota">
-        ¿Prefieres ver primero? <a href="#casos">Revisa tres casos reales</a>.
-      </p>
     </div>
 
-    <div class="v-hero__mockup revelar">
-      <div class="v-blob" aria-hidden="true"></div>
-      <div class="v-telefono" aria-hidden="true">
-        <div class="v-telefono__barra">
-          <img class="v-telefono__logo-img" src={`${base}img/logo-veia.png`} alt="" width="38" height="14" />
-        </div>
-        <div class="v-telefono__pantalla">
-          <div class="v-telefono__hero-mini">
-            Tu negocio, <em>listo para vender</em>
-          </div>
-          <div class="v-linea v-linea--media"></div>
-          <div class="v-linea v-linea--corta"></div>
-          <div class="v-telefono__tarjeta">
-            <span class="v-linea" style="width:70%"></span>
-            <span class="v-linea v-linea--media"></span>
-          </div>
-          <div class="v-linea v-linea--media"></div>
-          <span class="v-telefono__pildora">Cotizar</span>
-        </div>
+    <aside class="panel revelar" aria-label="Lo que resolvemos">
+      <div class="panel__cab">
+        <h2>{h.panel.titulo}</h2>
+        <span class="pill">{h.panel.pill}</span>
       </div>
-    </div>
+      <ul>
+        {h.panel.filas.map((f) => (
+          <li>
+            <Icono nombre={f.icono} tamano={24} />
+            <span>{f.nombre} <small>{f.nota}</small></span>
+          </li>
+        ))}
+      </ul>
+      <p class="panel__pie">
+        <Icono nombre="ubicacion" tamano={16} />
+        {h.panel.nota}
+      </p>
+    </aside>
   </div>
 </section>

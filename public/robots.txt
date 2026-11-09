@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Sitio publicado en https://veia.com.mx y espejo en
+# https://cubasmx.github.io/veia-landing/
+Sitemap: https://veia.com.mx/sitemap.xml

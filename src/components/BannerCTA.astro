@@ -1,0 +1,47 @@
+---
+import Icono from "./Icono.astro";
+import { ruta, whatsapp } from "../utils/ruta";
+
+interface Props {
+  h2: string;
+  texto: string;
+  boton: string;
+  destino?: "whatsapp" | "contacto";
+  mensaje?: string;
+  secundario?: { texto: string; href: string };
+  id?: string;
+}
+const {
+  h2,
+  texto,
+  boton,
+  destino = "whatsapp",
+  mensaje = "Hola, quiero información sobre los servicios de VEIA.",
+  secundario,
+  id = "contacto",
+} = Astro.props;
+
+const primario = destino === "whatsapp" ? whatsapp(mensaje) : ruta("contacto/");
+const externo = destino === "whatsapp";
+---
+
+<section class="cta" id={id} aria-labelledby={`${id}-titulo`}>
+  <div class="contenedor">
+    <div class="cta__caja revelar">
+      <div class="cta__grid">
+        <div>
+          <h2 id={`${id}-titulo`}>{h2}</h2>
+          <p>{texto}</p>
+        </div>
+        <div class="cta__acciones">
+          <a class="btn btn--claro" href={primario} target={externo ? "_blank" : undefined} rel={externo ? "noopener" : undefined}>
+            {boton} <Icono nombre={destino === "whatsapp" ? "whatsapp" : "flecha"} tamano={18} />
+          </a>
+          {secundario && (
+            <a class="btn btn--contorno-claro" href={secundario.href}>{secundario.texto}</a>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,52 +1,65 @@
 ---
-import RedesSociales from "./RedesSociales.astro";
-import { MOSTRAR_PAQUETES } from "../config";
+import { servicios } from "../data/servicios";
+import { ruta, whatsapp } from "../utils/ruta";
 
-const { raiz = "" } = Astro.props;
-const base = import.meta.env.BASE_URL;
-const contacto = [
-  { texto: "WhatsApp: 56 5989 8908", href: "https://wa.me/525659898908" },
-  { texto: "contacto@veia.com.mx", href: "mailto:contacto@veia.com.mx" },
-  { texto: "Guadalajara · Zapopan, Jal.", href: null },
-];
-const explorar = [
-  { texto: "Servicios", href: `${raiz}#piezas` },
-  { texto: "Casos", href: `${raiz}#casos` },
-  ...(MOSTRAR_PAQUETES ? [{ texto: "Precios", href: `${raiz}#precio` }] : []),
-  { texto: "Dudas frecuentes", href: `${raiz}#faq` },
-  { texto: "Plantillas y soporte", href: `${raiz}plantillas/` },
-  { texto: "Portafolio", href: `${raiz}portafolio/` },
-];
+interface Props {
+  home?: boolean;
+}
+const { home = false } = Astro.props;
+const ir = (ancla: string) => {
+  if (ancla === "#inicio" && !home) return ruta("");
+  if (ancla === "#contacto" && !home) return ruta("contacto/");
+  return home ? ancla : ruta(ancla);
+};
+const wsp = whatsapp("Hola, quiero información sobre los servicios de VEIA.");
 ---
 
-<footer class="v-footer" id="contacto">
+<footer class="footer oscuro">
   <div class="contenedor">
-    <div class="v-footer__grid">
+    <div class="footer__grid">
       <div>
-        <a class="v-marca" href={`${raiz}#inicio`} aria-label="VEIA · Presencia digital para negocios locales">
-          <img class="v-marca__logo" src={`${base}img/veia-logo-blanco.png`} alt="VEIA" width="97" height="30" />
+        <a href={ir("#inicio")} aria-label="VEIA, inicio">
+          <img src={ruta("img/veia-logo-blanco.png")} alt="VEIA" width="97" height="28" />
         </a>
-        <p style="max-width:30em">Digitalizamos negocios locales: sitio web, presencia en Google y WhatsApp listos para vender.</p>
-        <div class="v-footer__redes">
-          <h4>Síguenos</h4>
-          <RedesSociales variante="footer" />
-        </div>
+        <p class="footer__frase">Un equipo pequeño, del sitio al sistema.</p>
       </div>
-      <div>
-        <h4>Explorar</h4>
+
+      <nav aria-label="Servicios">
+        <h2 class="footer__titulo">Servicios</h2>
         <ul>
-          {explorar.map((e) => <li><a href={e.href}>{e.texto}</a></li>)}
-        </ul>
-      </div>
-      <div>
-        <h4>Contacto</h4>
-        <ul>
-          {contacto.map((c) => (
-            <li>{c.href ? <a href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel={c.href.startsWith("http") ? "noopener" : undefined}>{c.texto}</a> : c.texto}</li>
+          {servicios.map((s) => (
+            <li><a href={ruta(`servicios/${s.slug}/`)}>{s.nombre}</a></li>
           ))}
         </ul>
+      </nav>
+
+      <nav aria-label="Empresa">
+        <h2 class="footer__titulo">Empresa</h2>
+        <ul>
+          <li><a href={ir("#casos")}>Casos</a></li>
+          <li><a href={ir("#proceso")}>Cómo trabajamos</a></li>
+          <li><a href={ir("#faq")}>Dudas</a></li>
+          <li><a href={ir("#contacto")}>Contacto</a></li>
+          <li><a href={ruta("plantillas/")}>Plantillas</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer__contacto">
+        <h2 class="footer__titulo">Contacto</h2>
+        <p><a href={wsp} target="_blank" rel="noopener">WhatsApp 56 5989 8908</a></p>
+        <p><a href="mailto:contacto@veia.com.mx">contacto@veia.com.mx</a></p>
+        <p>Guadalajara y Zapopan, Jalisco</p>
+        <p>L–V 9:00–18:00 (hora CDMX)</p>
       </div>
     </div>
-    <div class="v-footer__bottom">© <span id="anio"></span> VEIA · Guadalajara · Zapopan, Jal.</div>
+
+    <div class="footer__base">
+      <p>© <span data-anio>2026</span> VEIA. Todos los derechos reservados.</p>
+      <p>
+        <a href={ruta("aviso-de-privacidad/")}>Aviso de privacidad</a>
+        <span aria-hidden="true"> · </span>
+        Hecho en Guadalajara
+      </p>
+    </div>
   </div>
 </footer>

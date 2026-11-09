@@ -2,68 +2,74 @@
 import Base from "../layouts/Base.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import CTA from "../components/CTA.astro";
-
-const raiz = import.meta.env.BASE_URL;
+import BannerCTA from "../components/BannerCTA.astro";
+import { ruta } from "../utils/ruta";
 
 const clientes = [
-  { nombre: "SANHER Bienes Raíces", logo: `${raiz}images/logo-sanher.svg`, href: "https://sanherbienesraices.com/" },
-  { nombre: "Legend Horizon Living", logo: `${raiz}images/logo-legend.webp`, href: "https://legendtower.com.mx/" },
-  { nombre: "Uditore", logo: `${raiz}images/logo-uditore-full.png`, href: "https://uditore.mx/" },
-  { nombre: "Tocomadera", logo: `${raiz}images/logo-tocomadera.png`, href: "https://tocomadera.mx/" },
-  { nombre: "Ascendia", logo: `${raiz}img/ascendia-logo.png`, href: "https://ascendia.mx/", oscuro: true },
+  { nombre: "SANHER Bienes Raíces", logo: "images/logo-sanher.svg", href: "https://sanherbienesraices.com/" },
+  { nombre: "Legend Horizon Living", logo: "images/logo-legend.webp", href: "https://legendtower.com.mx/" },
+  { nombre: "Uditore", logo: "images/logo-uditore-full.png", href: "https://uditore.mx/" },
+  { nombre: "Tocomadera", logo: "images/logo-tocomadera.png", href: "https://tocomadera.mx/" },
+  { nombre: "Ascendia", logo: "img/ascendia-logo.png", href: "https://ascendia.mx/", clara: true },
 ];
 ---
 
-<Base titulo='Portafolio · VEIA'>
-  <Header raiz={raiz} />
+<Base
+  titulo="Portafolio | VEIA"
+  descripcion="Sitios web hechos por VEIA para negocios de Guadalajara y Zapopan: SANHER, Legend Horizon Living, Uditore, Tocomadera y Ascendia."
+>
+  <Header />
   <main id="contenido">
-    <!-- Hero compacto -->
-    <section class="v-hero" style="padding-block:clamp(2.6rem,6vw,4.5rem);padding-inline:0">
+    <section class="hero-compacto">
       <div class="contenedor">
-        <div class="v-hero__texto revelar">
-          <span class="antetitulo">Trabajo real</span>
+        <div class="prosa">
+          <span class="overline">Trabajo real</span>
           <h1>Proyectos que hablan por nosotros</h1>
-          <p class="destacado">Estos son algunos de los sitios web que hemos creado para nuestros clientes.</p>
+          <p class="lead">Estos son algunos de los sitios web que hemos creado para nuestros clientes.</p>
         </div>
       </div>
     </section>
 
-    <!-- Clientes -->
-    <section class="seccion seccion--gris">
+    <section class="seccion seccion--alterna" aria-labelledby="clientes-titulo">
       <div class="contenedor">
-        <div class="revelar">
-          <span class="antetitulo">Clientes</span>
-          <h2>Negocios que ya tienen presencia digital</h2>
+        <div class="seccion__cab">
+          <span class="overline">Clientes</span>
+          <h2 id="clientes-titulo">Negocios que ya tienen presencia digital</h2>
         </div>
-        <div class="v-clientes revelar" style="margin-top:2.4rem">
+        <div class="clientes-rejilla">
           {clientes.map((c) => (
-            <a class:list={["v-cliente", c.oscuro && "v-cliente--oscuro"]} href={c.href} target="_blank" rel="noopener">
-              <img src={c.logo} alt={c.nombre} loading="lazy" />
+            <a href={c.href} target="_blank" rel="noopener" title={c.nombre}>
+              <img src={ruta(c.logo)} alt={c.nombre} height="32" loading="lazy" decoding="async" class:list={[c.clara && "clara"]} />
             </a>
           ))}
         </div>
       </div>
     </section>
 
-    <!-- Plantillas -->
-    <section class="seccion">
+    <section class="seccion" aria-labelledby="plantillas-titulo">
       <div class="contenedor">
-        <div class="revelar">
-          <span class="antetitulo">Plantillas</span>
-          <h2>Así parten nuestros sitios</h2>
-          <p class="destacado" style="margin-top:0.8rem">
-            Trabajamos sobre plantillas base por giro y las ajustamos a cada negocio. Puedes verlas y entender cómo
-            funciona el soporte en su propia página.
+        <div class="prosa">
+          <span class="overline">Plantillas</span>
+          <h2 id="plantillas-titulo">Así parten nuestros sitios</h2>
+          <p>
+            Trabajamos sobre plantillas base por giro y las ajustamos a cada negocio. Puedes verlas y
+            entender cómo funciona el soporte en su propia página.
           </p>
-          <div class="v-hero__acciones">
-            <a class="boton boton--degradado" href={`${raiz}plantillas/`}>Ver plantillas y soporte</a>
+          <div class="hero__acciones">
+            <a class="btn btn--primario" href={ruta("plantillas/")}>Ver plantillas y soporte</a>
           </div>
         </div>
       </div>
     </section>
 
-    <CTA />
+    <BannerCTA
+      h2="Empecemos por una llamada."
+      texto="Cuéntanos qué necesitas y qué tienes hoy. Te decimos si podemos resolverlo, cómo y en cuánto tiempo. Respondemos en horario hábil."
+      boton="Escribir por WhatsApp"
+      destino="whatsapp"
+      mensaje="Hola, quiero hablar con VEIA sobre mi proyecto."
+      secundario={{ texto: "Llenar el formulario", href: ruta("contacto/") }}
+    />
   </main>
-  <Footer raiz={raiz} />
+  <Footer />
 </Base>

@@ -1,0 +1,26 @@
+---
+import { home } from "../data/home";
+import { resaltar } from "../utils/ruta";
+const p = home.problema;
+---
+
+<section class="problema" id="problema" aria-labelledby="problema-titulo">
+  <div class="contenedor problema__grid revelar">
+    <div>
+      <span class="overline">{p.overline}</span>
+      <h2 id="problema-titulo" set:html={resaltar(p.h2)} />
+      <p class="problema__intro">{p.intro}</p>
+    </div>
+    <ol class="problema__lista">
+      {p.puntos.map((punto, i) => (
+        <li>
+          <span aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+          <div>
+            <strong>{punto.titulo}</strong>
+            {punto.texto}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

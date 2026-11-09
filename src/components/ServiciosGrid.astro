@@ -1,0 +1,49 @@
+---
+import Icono from "./Icono.astro";
+import { home } from "../data/home";
+import { grupos, porSlug } from "../data/servicios";
+import { ruta, whatsapp } from "../utils/ruta";
+
+const cab = home.servicios;
+const aside = cab.aside;
+const agenda = whatsapp(aside.mensaje);
+---
+
+<section class="seccion" id="servicios">
+  <div class="contenedor">
+    <div class="seccion__cab seccion__cab--dos revelar">
+      <div>
+        <span class="overline">{cab.overline}</span>
+        <h2>{cab.h2}</h2>
+      </div>
+      <p>{cab.intro}</p>
+    </div>
+
+    {grupos.map((g) => (
+      <div class="grupo revelar">
+        <p class="grupo__rot"><span>{g.rotulo}</span></p>
+        {g.slugs.map((slug) => {
+          const s = porSlug(slug);
+          if (!s) return null;
+          const ancla = s.slug === "desarrollo-a-medida";
+          return (
+            <a class:list={["serv", ancla && "serv--ancla"]} href={ruta(`servicios/${s.slug}/`)}>
+              <Icono nombre={s.icono} tamano={32} clase="serv__ico" />
+              <h3>{s.nombre}</h3>
+              <p>{s.resumen}</p>
+              <span class="enlace">{s.enlace} <Icono nombre="flecha" tamano={16} /></span>
+            </a>
+          );
+        })}
+        {g.nombre === "Ventas" && (
+          <a class="nota-tile" href={agenda} target="_blank" rel="noopener">
+            <span class="pill">{aside.pill}</span>
+            <h3>{aside.titulo}</h3>
+            <p>{aside.texto}</p>
+            <span class="enlace">{aside.enlace} <Icono nombre="flecha" tamano={16} /></span>
+          </a>
+        )}
+      </div>
+    ))}
+  </div>
+</section>

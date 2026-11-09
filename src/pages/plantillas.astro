@@ -2,19 +2,19 @@
 import Base from "../layouts/Base.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Icono from "../components/Icono.astro";
+import { ruta, whatsapp } from "../utils/ruta";
 
-const raiz = import.meta.env.BASE_URL;
-
-const whatsappPlantillas = "https://wa.me/525659898908?text=Hola%20VEIA%2C%20quiero%20ver%20las%20plantillas";
-const whatsappPlantillaConviene = "https://wa.me/525659898908?text=Hola%20VEIA%2C%20quiero%20saber%20qu%C3%A9%20plantilla%20me%20conviene";
+const whatsappPlantillas = whatsapp("Hola VEIA, quiero ver las plantillas");
+const whatsappPlantillaConviene = whatsapp("Hola VEIA, quiero saber qué plantilla me conviene");
 
 const plantillas = [
-  { nombre: "Estética/Belleza", slug: "belleza", icono: "💅" },
-  { nombre: "Taller/Servicios", slug: "taller", icono: "🔧" },
-  { nombre: "Tienda/Comercio", slug: "tienda", icono: "🛍️" },
-  { nombre: "Salud/Consultorio", slug: "salud", icono: "🩺" },
-  { nombre: "Profesional/Servicios", slug: "profesional", icono: "💼" },
-  { nombre: "Parroquia/Comunidad", slug: "parroquia", icono: "⛪" },
+  { nombre: "Estética/Belleza", slug: "belleza", icono: "diseno" },
+  { nombre: "Taller/Servicios", slug: "taller", icono: "equipo" },
+  { nombre: "Tienda/Comercio", slug: "tienda", icono: "tienda" },
+  { nombre: "Salud/Consultorio", slug: "salud", icono: "crm" },
+  { nombre: "Profesional/Servicios", slug: "profesional", icono: "sitio" },
+  { nombre: "Parroquia/Comunidad", slug: "parroquia", icono: "capas" },
 ];
 
 const pasos = [
@@ -65,142 +65,144 @@ const aparte = [
 ];
 ---
 
-<Base titulo='Plantillas y soporte · VEIA'>
-  <Header raiz={raiz} />
+<Base
+  titulo="Plantillas y soporte | VEIA"
+  descripcion="Plantillas base por giro, ajuste a tu negocio y soporte mensual para mantener el sitio al día."
+>
+  <Header />
   <main id="contenido">
-    <!-- Hero compacto -->
-    <section class="v-hero" style="padding-block:clamp(2.6rem,6vw,4.5rem);padding-inline:0">
+    <section class="hero-compacto">
       <div class="contenedor">
-        <div class="v-hero__texto revelar">
-          <span class="antetitulo">Plantillas y soporte</span>
-          <h1 style="font-size:clamp(2.1rem,5vw,3.6rem)">
-            Una plantilla hecha, para empezar. Alguien que la mantenga, para que no se quede vieja.
-          </h1>
-          <p class="destacado">
-            Tenemos plantillas base por giro: belleza, taller, tienda, salud, despacho profesional y parroquia.
-            Eliges la que se parece a tu negocio, la ajustamos con tus textos y tus fotos, y seguimos ahí: el sitio
-            se mantiene al día sin que tengas que aprender a editarlo. La base sale a un costo mínimo; lo que pagas
-            es el trabajo de ajustarla y mantenerla.
+        <div class="prosa">
+          <span class="overline">Plantillas y soporte</span>
+          <h1>Una plantilla hecha, para empezar. Alguien que la mantenga, para que no se quede vieja.</h1>
+          <p class="lead">
+            Tenemos plantillas base por giro: belleza, taller, tienda, salud, despacho profesional y
+            parroquia. Eliges la que se parece a tu negocio, la ajustamos con tus textos y tus fotos, y
+            seguimos ahí: el sitio se mantiene al día sin que tengas que aprender a editarlo. Lo que se
+            cotiza es el ajuste a tu negocio y el soporte para mantenerla al día.
           </p>
-          <div class="v-hero__acciones">
-            <a class="boton boton--degradado" href={whatsappPlantillas} target="_blank" rel="noopener">
+          <div class="hero__acciones">
+            <a class="btn btn--primario" href={whatsappPlantillas} target="_blank" rel="noopener">
               Elegir mi plantilla por WhatsApp
             </a>
-            <a class="boton boton--contorno" href="#demos">Ver las plantillas</a>
+            <a class="btn btn--secundario" href="#demos">Ver las plantillas</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Demos -->
     <section class="seccion" id="demos">
       <div class="contenedor">
-        <div class="revelar">
-          <span class="antetitulo">Demos</span>
+        <div class="seccion__cab">
+          <span class="overline">Demos</span>
           <h2>Elige un punto de partida</h2>
-          <p class="destacado" style="margin-top:0.8rem">
-            Explora las plantillas base y mira la que más se parece a tu negocio.
-          </p>
+          <p>Explora las plantillas base y mira la que más se parece a tu negocio.</p>
         </div>
-        <div class="v-rejilla v-rejilla--3 revelar" style="margin-top:2.4rem">
+        <div class="rejilla rejilla--3">
           {plantillas.map((p) => (
-            <a class="v-tarjeta" href={`${raiz}plantillas/${p.slug}/`} style="text-decoration:none;color:inherit">
-              <span class="v-tarjeta__ico">{p.icono}</span>
+            <a class="tarjeta" href={ruta(`plantillas/${p.slug}/`)}>
+              <Icono nombre={p.icono} tamano={28} clase="tarjeta__ico" />
               <h3>{p.nombre}</h3>
+              <span class="enlace">Ver plantilla <Icono nombre="flecha" tamano={16} /></span>
             </a>
           ))}
         </div>
       </div>
     </section>
 
-    <!-- Cómo funciona -->
-    <section class="seccion seccion--gris">
+    <section class="seccion seccion--alterna" aria-labelledby="como-funciona">
       <div class="contenedor">
-        <div class="revelar">
-          <h2>Cómo funciona</h2>
+        <div class="seccion__cab">
+          <span class="overline">Cómo funciona</span>
+          <h2 id="como-funciona">De la plantilla al sitio en tres pasos</h2>
         </div>
-        <div class="v-pasos revelar" style="margin-top:2.4rem">
+        <ol class="pasos">
           {pasos.map((p) => (
-            <div class="v-paso">
-              <span class="v-paso__num">{p.num}</span>
+            <li class="paso">
+              <span class="paso__num" aria-hidden="true">{p.num}</span>
               <h3>{p.titulo}</h3>
-              <p style="max-width:52em">{p.texto}</p>
-            </div>
+              <p>{p.texto}</p>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
 
-    <!-- Qué incluye el soporte -->
-    <section class="seccion">
+    <section class="seccion" aria-labelledby="soporte-titulo">
       <div class="contenedor">
-        <div class="revelar">
-          <h2>Qué incluye el soporte</h2>
-          <p class="destacado" style="margin-top:0.8rem">
-            El soporte tiene dos niveles, Esencial y Activo. Los dos cubren cambios de contenido y mantenimiento
-            técnico; la diferencia está en cuánto cabe al mes. El Activo es para negocios que mueven su sitio
-            seguido: promociones, catálogo, cambios cada quince días.
+        <div class="seccion__cab">
+          <span class="overline">Soporte</span>
+          <h2 id="soporte-titulo">Qué incluye el soporte</h2>
+          <p>
+            El soporte tiene dos niveles, Esencial y Activo. Los dos cubren cambios de contenido y
+            mantenimiento técnico; la diferencia está en cuánto cabe al mes. El Activo es para negocios que
+            mueven su sitio seguido: promociones, catálogo, cambios cada quince días.
           </p>
         </div>
 
-        <div class="v-rejilla v-rejilla--2 revelar" style="margin-top:2.4rem">
-          <article class="v-tarjeta v-tarjeta--paquete">
+        <div class="rejilla rejilla--2">
+          <article class="tarjeta">
             <h3>Esencial</h3>
-            <ul class="v-mini">
+            <ul class="lista-check">
               {esencial.map((i) => <li>{i}</li>)}
             </ul>
           </article>
-          <article class="v-tarjeta v-tarjeta--paquete">
+          <article class="tarjeta">
             <h3>Activo</h3>
             <p>Todo lo de Esencial, con más margen al mes para:</p>
-            <ul class="v-mini">
+            <ul class="lista-check">
               {activo.map((i) => <li>{i}</li>)}
             </ul>
           </article>
         </div>
 
-        <p class="destacado revelar" style="margin-top:2.4rem">
-          Cada nivel trae una bolsa de tiempo mensual para cambios de contenido. No es trabajo ilimitado: dentro de
-          esa bolsa hacemos lo que nos pidas, y lo que se salga se cotiza aparte. De tu lado necesitamos los textos
-          y las fotos listos; de este lado queda armarlos y publicarlos.
+        <p class="prosa" style="margin-top:2.4rem">
+          Cada nivel trae una bolsa de tiempo mensual para cambios de contenido. No es trabajo ilimitado:
+          dentro de esa bolsa hacemos lo que nos pidas, y lo que se salga se cotiza aparte. De tu lado
+          necesitamos los textos y las fotos listos; de este lado queda armarlos y publicarlos.
         </p>
       </div>
     </section>
 
-    <!-- Qué se cotiza aparte -->
-    <section class="seccion seccion--gris">
+    <section class="seccion seccion--alterna" aria-labelledby="aparte-titulo">
       <div class="contenedor">
-        <div class="revelar">
-          <h2>Qué se cotiza aparte</h2>
-          <p class="destacado" style="margin-top:0.8rem">
-            El soporte cubre lo que ya existe. Cuando se trata de algo nuevo, se cotiza aparte y con gusto lo
-            armamos:
+        <div class="prosa">
+          <span class="overline">Alcance</span>
+          <h2 id="aparte-titulo">Qué se cotiza aparte</h2>
+          <p>
+            El soporte cubre lo que ya existe. Cuando se trata de algo nuevo, se cotiza aparte y con gusto
+            lo armamos:
           </p>
-          <ul class="v-mini" style="margin-top:1.8rem;max-width:54em">
+          <ul class="lista-check" style="margin-top:1.2rem">
             {aparte.map((i) => <li>{i}</li>)}
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- Cierre -->
-    <section class="seccion">
+    <section class="cta" aria-labelledby="cierre-plantillas">
       <div class="contenedor">
-        <div class="v-cta revelar">
-          <h2>¿Cuál plantilla se parece a tu negocio?</h2>
-          <p class="destacado" style="color:inherit;margin-inline:auto">
-            Dinos a qué te dedicas y en qué zona de Guadalajara o Zapopan atiendes. Te decimos qué plantilla
-            conviene, qué habría que modificar y cómo quedaría el soporte. Sin compromiso y sin tecnicismos.
-          </p>
-          <div class="v-cta__acciones">
-            <a class="boton boton--claro" href={whatsappPlantillaConviene} target="_blank" rel="noopener">
-              Escríbenos por WhatsApp
-            </a>
-            <a class="boton boton--contorno-claro" href={`${raiz}portafolio/`}>Ver el portafolio</a>
+        <div class="cta__caja">
+          <div class="cta__grid">
+            <div>
+              <h2 id="cierre-plantillas">¿Cuál plantilla se parece a tu negocio?</h2>
+              <p>
+                Dinos a qué te dedicas y en qué zona de Guadalajara o Zapopan atiendes. Te decimos qué
+                plantilla conviene, qué habría que modificar y cómo quedaría el soporte. Sin compromiso y
+                sin tecnicismos.
+              </p>
+            </div>
+            <div class="cta__acciones">
+              <a class="btn btn--claro" href={whatsappPlantillaConviene} target="_blank" rel="noopener">
+                Escríbenos por WhatsApp
+              </a>
+              <a class="btn btn--contorno-claro" href={ruta("portafolio/")}>Ver el portafolio</a>
+            </div>
           </div>
         </div>
       </div>
     </section>
   </main>
-  <Footer raiz={raiz} />
+  <Footer />
 </Base>
