@@ -1,0 +1,41 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import ServiciosGrid from "../../components/ServiciosGrid.astro";
+import BannerCTA from "../../components/BannerCTA.astro";
+---
+
+<Base
+  titulo="Servicios | VEIA"
+  descripcion="Sitio web, tienda en línea, diseño, publicidad, equipo de cómputo, CRM, ERP y desarrollo a medida. Ocho líneas de trabajo para negocios locales, profesionistas y pymes."
+>
+  <Header activo="servicios" />
+  <main id="contenido">
+    <Breadcrumb actual="Servicios" />
+
+    <section class="hero-compacto">
+      <div class="contenedor">
+        <span class="overline">Servicios</span>
+        <h1>Ocho líneas de trabajo, [un solo responsable] delante.</h1>
+        <p class="lead">
+          Cubrimos lo que un negocio necesita para funcionar y venderse: desde el sitio y la tienda
+          hasta el equipo de cómputo, el CRM o un desarrollo a medida. Cada proyecto se cotiza según
+          lo que ya tienes y lo que falta; no vendemos paquetes cerrados.
+        </p>
+      </div>
+    </section>
+
+    <ServiciosGrid />
+
+    <BannerCTA
+      h2="¿No sabes por dónde empezar?"
+      texto="Cuéntanos cómo consigues clientes hoy y qué te está costando más trabajo. Con eso te decimos qué línea resuelve el problema y cuál puede esperar."
+      boton="Escríbenos"
+      destino="whatsapp"
+      mensaje="Hola VEIA, no sé bien qué servicio necesito y quiero orientación."
+    />
+  </main>
+  <Footer />
+</Base>

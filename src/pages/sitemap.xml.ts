@@ -3,6 +3,7 @@ import { servicios } from "../data/servicios";
 
 const estaticas = [
   "",
+  "servicios/",
   "contacto/",
   "aviso-de-privacidad/",
   "portafolio/",
