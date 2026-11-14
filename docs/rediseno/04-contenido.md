@@ -75,7 +75,7 @@ Nota para Nia: los campos van con la clave exacta entre backticks; el texto entr
 - `casos_overline:` Casos
 - `casos_h2:` Trabajos reales, contados sin adornos.
 - `casos_intro:` Qué necesitaba cada negocio, qué hicimos y cómo se ve hoy. Los sitios están en línea: puedes abrirlos y juzgar por ti mismo.
-- Caso 1 — **SANHER Bienes Raíces** · Bienes raíces · Guadalajara. Reto: sus propiedades se movían por portales y recomendación; no tenían un sitio propio donde concentrar inventario y contacto. Qué hicimos: landing con propiedades destacadas, información de la inmobiliaria, formulario y WhatsApp directo, más SEO básico y presencia en Google. Hoy: el sitio está en línea en su propio dominio, con las propiedades, el formulario y el WhatsApp a la mano. Enlace: sanherbienesraices.com
+- Caso 1 — **SANHER Bienes Raíces** · Bienes raíces · Guadalajara. Reto: sus propiedades se movían por portales y recomendación; no tenían un sitio propio donde concentrar inventario y contacto. Qué hicimos: landing con propiedades destacadas, información de la inmobiliaria, formulario y WhatsApp directo, más SEO y presencia en Google. Hoy: el sitio está en línea en su propio dominio, con las propiedades, el formulario y el WhatsApp a la mano. Enlace: sanherbienesraices.com
 - Caso 2 — **Tocomadera** · Diseño de muebles y espacios. Reto: su portafolio visual vivía disperso y era difícil mostrarlo a clientes residenciales, comerciales y corporativos. Qué hicimos: sitio con portafolio organizado por tipo de proyecto, galería de piezas y contacto directo para cotizar. Hoy: el portafolio vive en tocomadera.mx, ordenado y con contacto directo. Enlace: tocomadera.mx
 - Caso 3 — **Uditore** · Despacho contable y fiscal. Reto: muchos servicios y paquetes sin un lugar claro donde el cliente entendiera el alcance. Qué hicimos: sitio con servicios explicados, paquetes por tipo de contribuyente, testimonios y canales de contacto visibles. Hoy: los servicios y paquetes se explican por tipo de contribuyente, con contacto siempre visible. Enlace: uditore.mx
 
@@ -116,7 +116,7 @@ Nota para Nia: los campos van con la clave exacta entre backticks; el texto entr
 - `breadcrumb:` Inicio / Servicios / Sitio web
 - `eyebrow:` Presencia · Sitio web
 - `h1:` Que te encuentren y lleguen [convencidos].
-- `lead:` Diseñamos y desarrollamos el sitio con tu dominio, tus textos y un objetivo claro: que quien te busque entienda qué haces y te escriba. Incluye ficha de Google y medición básica.
+- `lead:` Diseñamos y desarrollamos el sitio con tu dominio, tus textos y un objetivo claro: que quien te busque entienda qué haces y te escriba. Incluye ficha de Google y medición de contactos.
 - `cta_primario:` Cotiza tu sitio (WhatsApp)
 - `cta_secundario:` Ver cómo trabajamos (ancla `#proceso`)
 - `aside_titulo:` Ideal si…
@@ -133,7 +133,7 @@ Nota para Nia: los campos van con la clave exacta entre backticks; el texto entr
   3. **Textos base** — Redactamos el contenido con lo que nos cuentes del negocio.
   4. **Desarrollo responsivo** — Se ve y funciona igual en celular, tableta y computadora.
   5. **Dominio y ficha de Google** — Configuramos DNS, HTTPS y tu perfil de Google Business.
-  6. **Medición básica** — Search Console y eventos de contacto para saber qué pasa.
+  6. **Medición de contactos** — Search Console y eventos de contacto para saber qué pasa.
 - `proceso_h2:` Cómo se hace
   1. **Descubrimiento** — Una sesión para definir a quién le hablas y qué quieres que haga el visitante.
   2. **Contenido y diseño** — Mapa del sitio, textos y propuesta visual; apruebas antes de programar.
@@ -224,7 +224,7 @@ Nota para Nia: los campos van con la clave exacta entre backticks; el texto entr
 - `incluye_h2:` Qué incluye
   1. **Logotipo y versiones** — Principal, horizontal, monocromo y usos mínimos.
   2. **Paleta y tipografías** — Colores con códigos y fuentes con licencia definida.
-  3. **Papelería básica** — Tarjeta, firma de correo y hoja membretada.
+  3. **Papelería** — Tarjeta, firma de correo y hoja membretada.
   4. **Plantillas para redes** — Publicaciones y portadas editables por tu equipo.
   5. **Menú, catálogo o brochure** — La pieza que usas a diario, con jerarquía clara.
   6. **Guía breve de uso** — Qué se puede hacer y qué no, en pocas páginas.
@@ -320,7 +320,7 @@ Nota para Nia: los campos van con la clave exacta entre backticks; el texto entr
   2. **Suministro con garantía** — Equipo nuevo o reacondicionado declarado, nunca sin aviso.
   3. **Configuración e instalación** — Usuario, correo, software, impresoras y red.
   4. **Respaldo y antivirus** — Copia automática y restauración probada, no solo configurada.
-  5. **Red básica** — Router, switch y Wi-Fi con red de invitados separada.
+  5. **Red y Wi-Fi** — Router, switch y Wi-Fi con red de invitados separada.
   6. **Mantenimiento y soporte** — Preventivo programado y correctivo con tiempo acordado.
 - `proceso_h2:` Cómo se hace
   1. **Levantamiento** — Cuántos equipos y usuarios, y qué software es indispensable.

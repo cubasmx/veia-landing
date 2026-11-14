@@ -91,7 +91,7 @@ Ocho líneas, ocho páginas. Ruta: `/servicios/<slug>`. Nombre comercial primero
 **Subtítulo:** Un sitio con tu dominio, tu contenido y un objetivo comercial claro.
 **Problema:** no existes para quien te busca, o existes en una página que no explica qué haces ni cómo contactarte.
 **Para quién:** profesionistas, negocios locales, desarrollos inmobiliarios.
-**Entregables:** arquitectura de contenido y textos base · diseño a medida sobre la identidad del negocio · desarrollo responsivo · dominio y hosting del cliente · ficha de Google Business Profile · medición básica (Search Console + eventos de contacto).
+**Entregables:** arquitectura de contenido y textos base · diseño a medida sobre la identidad del negocio · desarrollo responsivo · dominio y hosting del cliente · ficha de Google Business Profile · medición de contactos (Search Console + eventos).
 **Cuándo NO:** si el negocio no tiene claro a quién le vende ni qué quiere que haga el visitante; primero se resuelve eso. Tampoco si solo busca la opción más barata del mercado.
 **CTA:** "Cotiza tu sitio" (WhatsApp).
 
@@ -107,7 +107,7 @@ Ocho líneas, ocho páginas. Ruta: `/servicios/<slug>`. Nombre comercial primero
 **Subtítulo:** Identidad y material para que todo lo que sale se vea del mismo negocio.
 **Problema:** logo de hace diez años, tipografías distintas en cada post y menús que se ven de tres negocios diferentes.
 **Para quién:** negocios que ya venden y quieren dejar de parecer improvisados; marcas nuevas que arrancan en serio.
-**Entregables:** logotipo y versiones · paleta y tipografías · aplicaciones básicas (tarjeta, firma, hoja membretada) · plantillas para redes · menú, catálogo o brochure · guía breve de uso.
+**Entregables:** logotipo y versiones · paleta y tipografías · papelería (tarjeta, firma, hoja membretada) · plantillas para redes · menú, catálogo o brochure · guía breve de uso.
 **Cuándo NO:** si el negocio va a cambiar de nombre o giro en menos de un año; se tira el trabajo.
 **CTA:** "Pide tu identidad" (WhatsApp).
 

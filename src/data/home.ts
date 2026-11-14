@@ -95,7 +95,7 @@ export const home = {
         logo: "images/logo-sanher.svg",
         url: "https://sanherbienesraices.com/",
         reto: "Sus propiedades se movían por portales y recomendación; no tenían un sitio propio donde concentrar inventario y contacto.",
-        hizo: "Landing con propiedades destacadas, información de la inmobiliaria, formulario y WhatsApp directo, más SEO básico y presencia en Google.",
+        hizo: "Landing con propiedades destacadas, información de la inmobiliaria, formulario y WhatsApp directo, más SEO y presencia en Google.",
         hoy: "El sitio está en línea en su propio dominio, con las propiedades, el formulario y el WhatsApp a la mano.",
         servicio: "sitio-web",
         enlace: "Ver sitio web",

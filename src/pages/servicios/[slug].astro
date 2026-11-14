@@ -151,6 +151,34 @@ const jsonLd = [
       </div>
     </section>
 
+    {s.soporte && (
+      <section class="seccion" aria-labelledby="soporte-servicio">
+        <div class="contenedor">
+          <div class="seccion__cab">
+            <span class="overline">Opcional</span>
+            <h2 id="soporte-servicio">{s.soporte.h2}</h2>
+            <p>{s.soporte.intro}</p>
+          </div>
+          {s.soporte.precio && <p class="soporte__precio">{s.soporte.precio}</p>}
+          <div class="rejilla">
+            <article class="tarjeta">
+              <h3>Qué incluye</h3>
+              <ul class="lista-check">
+                {s.soporte.incluye.map((item) => <li>{item}</li>)}
+              </ul>
+            </article>
+            <article class="tarjeta">
+              <h3>Qué se cotiza aparte</h3>
+              <ul class="lista-check">
+                {s.soporte.fuera.map((item) => <li>{item}</li>)}
+              </ul>
+            </article>
+          </div>
+          <p class="prosa" style="margin-top:2rem">{s.soporte.nota}</p>
+        </div>
+      </section>
+    )}
+
     {s.caso && (
       <section class="seccion seccion--alterna" aria-labelledby="caso-titulo">
         <div class="contenedor">

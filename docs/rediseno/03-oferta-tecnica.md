@@ -46,7 +46,7 @@ primer año.
 
 ### 2.1 Sitio web
 
-- **Entregamos:** sitio informativo/landing/catálogo, diseño a partir de identidad existente, formularios, SEO técnico básico (sitemap, metadatos, datos estructurados), analítica y despliegue con HTTPS.
+- **Entregamos:** sitio informativo/landing/catálogo, diseño a partir de identidad existente, formularios, SEO técnico (sitemap, metadatos, datos estructurados), analítica y despliegue con HTTPS.
 - **Stack:** **Astro 5** (estático, rápido, el que ya usamos en veia.com.mx) + Tailwind; CMS Git-based (Sveltia/Decap) para contenido. **Alternativa:** WordPress + tema ligero + hosting administrado cuando el cliente publica mucho o ya tiene WP; Webflow si el cliente quiere editar todo sin apoyo técnico y acepta costo mensual.
 - **Fases:** (1) descubrimiento y arquitectura de contenido → sitemap + wireframes; (2) diseño → Figma aprobado; (3) build → staging navegable; (4) QA + SEO técnico + analítica; (5) publicación y capacitación.
 - **Requisitos del cliente:** textos finales, logos en vector, fotos (mín. 10 buenas), dominio, accesos de DNS/hosting, decisión de correo, quién aprueba.
@@ -68,7 +68,7 @@ primer año.
 
 ### 2.3 CRM
 
-- **Entregamos:** embudo de ventas, contactos/empresas, actividades y recordatorios, plantillas de correo/WhatsApp, formularios y webhooks al CRM, reportes básicos y capacitación del equipo comercial.
+- **Entregamos:** embudo de ventas, contactos/empresas, actividades y recordatorios, plantillas de correo/WhatsApp, formularios y webhooks al CRM, reportes y capacitación del equipo comercial.
 - **Stack:** **HubSpot** (Starter/Pro) para B2B con proceso simple y presupuesto; **Zoho CRM/Bigin** para pymes sensibles a costo; **Odoo CRM** cuando ya se planea ERP o se necesita cotización→factura en un solo sistema. **No** Holded en México: no resuelve CFDI.
 - **Fases:** (1) mapeo del proceso comercial y campos → documento; (2) configuración de pipeline y permisos; (3) integración de formularios/WhatsApp/correo; (4) migración de contactos; (5) capacitación y adopción (2 sesiones).
 - **Requisitos:** proceso de venta escrito (aunque sea en pizarrón), lista actual de clientes/prospectos en Excel/CSV, números de WhatsApp Business, definición de roles y permisos.
@@ -101,7 +101,7 @@ primer año.
 
 ### 2.6 Equipo de cómputo (suministro + soporte)
 
-- **Entregamos:** laptops/desktops, periféricos, red básica (router, switch, Wi-Fi), configuración inicial, cuentas, respaldo, antivirus y soporte.
+- **Entregamos:** laptops/desktops, periféricos, red y Wi-Fi (router, switch, puntos de acceso), configuración inicial, cuentas, respaldo, antivirus y soporte.
 - **Equipo:** **Dell Latitude/OptiPlex** o **Lenovo ThinkPad** con Windows 11 Pro y garantía **3 años ProSupport**; periféricos Logitech; red **Ubiquiti UniFi** o **TP-Link Omada** para pymes. No armamos clones ni equipo reacondicionado sin aviso.
 - **Fases:** (1) levantamiento de necesidades y presupuesto; (2) cotización y compra (el cliente paga directo al proveedor cuando sea posible); (3) configuración y entrega; (4) inventario y documentación; (5) soporte continuo.
 - **Requisitos:** número de usuarios y sedes, software indispensable, presupuesto por equipo, quién autoriza compras, dónde se guardan los respaldos.
@@ -212,7 +212,7 @@ El cliente debe cubrir y saber desde el día 1: **licencias** (Odoo por usuario,
 
 ## 6. Equipo de cómputo
 
-**Se suministra:** laptops/desktops con Windows 11 Pro y garantía 3 años, monitores, teclado/ratón, docks, impresoras básicas, router/switch/access points para red básica y UPS para equipos críticos. El cliente compra a proveedor establecido (Dell, Lenovo, HP) cuando sea posible; VEIA cobra configuración y soporte, no especula con hardware.
+**Se suministra:** laptops/desktops con Windows 11 Pro y garantía 3 años, monitores, teclado/ratón, docks, impresoras, router/switch/access points para la red y UPS para equipos críticos. El cliente compra a proveedor establecido (Dell, Lenovo, HP) cuando sea posible; VEIA cobra configuración y soporte, no especula con hardware.
 
 **Configuración:** alta de usuario, cuenta Microsoft/Google, correo, navegador, antivirus, respaldo (OneDrive/Google Drive o NAS), impresoras, Wi-Fi con red de invitados, etiquetado de inventario.
 

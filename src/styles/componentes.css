@@ -1760,3 +1760,15 @@ a.tarjeta:hover {
     gap: var(--e-16);
   }
 }
+
+/* Bloque de soporte opcional en las fichas de servicio */
+.soporte__precio {
+  display: inline-block;
+  margin: 0 0 var(--e-4);
+  padding: 0.45rem 0.95rem;
+  border: var(--borde);
+  border-radius: 999px;
+  background: var(--neutro-100);
+  font-weight: 600;
+  font-size: 0.9375rem;
+}

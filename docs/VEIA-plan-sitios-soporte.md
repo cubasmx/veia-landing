@@ -159,7 +159,7 @@ Stripe será la referencia de cobros y el CRM la referencia de atención.
 | Próximo fin del plan | Ofrecer continuidad |
 | Próximo vencimiento de servicios | Enviar aviso según fechas registradas |
 
-Empezar con cobro, registro y seguimiento básico. Agregar el resto conforme avance la prueba. Separar comunicaciones de servicio de promociones y respetar las preferencias de contacto.
+Empezar con cobro, registro y seguimiento. Agregar el resto conforme avance la prueba. Separar comunicaciones de servicio de promociones y respetar las preferencias de contacto.
 
 ## 8. Implementación por etapas
 

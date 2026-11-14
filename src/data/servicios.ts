@@ -37,6 +37,19 @@ export type Servicio = {
   cierre: { h2: string; texto: string; boton: string };
   whatsapp: string;
   relacionados: string[];
+  /**
+   * Soporte mensual opcional. Solo lo llevan las líneas donde el cliente se queda
+   * con algo que hay que mantener (sitio, tienda). Sin `precio`, el bloque se
+   * publica sin cifra y remite a cotización.
+   */
+  soporte?: {
+    h2: string;
+    intro: string;
+    incluye: string[];
+    fuera: string[];
+    nota: string;
+    precio?: string;
+  };
 };
 
 export const servicios: Servicio[] = [
@@ -56,7 +69,7 @@ export const servicios: Servicio[] = [
     },
     hero: {
       h1: "Que te encuentren y lleguen [convencidos].",
-      lead: "Diseñamos y desarrollamos el sitio con tu dominio, tus textos y un objetivo claro: que quien te busque entienda qué haces y te escriba. Incluye ficha de Google y medición básica.",
+      lead: "Diseñamos y desarrollamos el sitio con tu dominio, tus textos y un objetivo claro: que quien te busque entienda qué haces y te escriba. Incluye ficha de Google y medición de contactos.",
       primario: { texto: "Cotiza tu sitio", destino: "whatsapp" },
       secundario: { texto: "Ver cómo trabajamos", destino: "ancla", valor: "#proceso" },
     },
@@ -84,7 +97,7 @@ export const servicios: Servicio[] = [
         { titulo: "Textos base", texto: "Redactamos el contenido con lo que nos cuentes del negocio." },
         { titulo: "Desarrollo responsivo", texto: "Se ve y funciona igual en celular, tableta y computadora." },
         { titulo: "Dominio y ficha de Google", texto: "Configuramos DNS, HTTPS y tu perfil de Google Business." },
-        { titulo: "Medición básica", texto: "Search Console y eventos de contacto para saber qué pasa." },
+        { titulo: "Medición de contactos", texto: "Search Console y eventos de contacto para saber qué pasa." },
       ],
     },
     proceso: {
@@ -106,13 +119,34 @@ export const servicios: Servicio[] = [
         "Sesión de capacitación grabada y guía breve para editar.",
       ],
     },
+    soporte: {
+      h2: "Soporte mensual, si lo quieres",
+      intro:
+        "Al entregar, el sitio queda a tu nombre y puedes operarlo tú. Si prefieres no estar cambiando textos ni pendiente de respaldos, hay un plan de soporte mensual opcional: una bolsa de cambios de contenido, revisión técnica y respaldo, con respuesta en horario hábil. Arranca con tres meses y después sigue mes a mes; si no lo quieres, el sitio se queda documentado y sin mensualidad.",
+      incluye: [
+        "Cambios de contenido en lo que ya existe: textos, precios, horarios, datos de contacto, fotos y banners que tú entregues.",
+        "Publicar y retirar promociones o avisos en los espacios que el sitio ya tiene.",
+        "Altas y cambios de servicios o productos usando los componentes ya construidos.",
+        "Revisión de formularios, botones, enlaces y accesos, más mantenimiento técnico menor.",
+        "Actualizaciones de seguridad y respaldo del sitio, con prueba de que la copia restaura.",
+        "Resumen mensual de lo que se hizo, para ver en qué se usó la bolsa.",
+      ],
+      fuera: [
+        "Páginas, secciones o funciones nuevas.",
+        "Rediseños y cambios de estructura o de navegación.",
+        "Integraciones con otros sistemas (pagos, CRM, ERP, facturación).",
+        "Campañas, contenido para redes, sesiones de foto o video.",
+      ],
+      precio: "$1,200 MXN al mes",
+      nota: "Lunes a viernes, 9:00–18:00 (hora CDMX), con respuesta de hasta 4 horas hábiles; los cambios sencillos se publican en dos días hábiles desde que tenemos el material completo. La bolsa no se acumula de un mes a otro y lo que se salga se cotiza antes de hacerlo. Los errores de nuestra entrega no consumen bolsa.",
+    },
     caso: {
       cliente: "SANHER Bienes Raíces",
       giro: "Bienes raíces · Guadalajara",
       logo: "images/logo-sanher.svg",
       url: "https://sanherbienesraices.com/",
       reto: "Sus propiedades se movían por portales y recomendación; no tenían un sitio propio donde concentrar inventario y contacto.",
-      hizo: "Landing con propiedades destacadas, información de la inmobiliaria, formulario y WhatsApp directo, más SEO básico y presencia en Google.",
+      hizo: "Landing con propiedades destacadas, información de la inmobiliaria, formulario y WhatsApp directo, más SEO y presencia en Google.",
       hoy: "El sitio está en línea en su propio dominio, con las propiedades, el formulario y el WhatsApp a la mano.",
     },
     faq: {
@@ -198,6 +232,27 @@ export const servicios: Servicio[] = [
         "Capacitación de operación: altas, pedidos, devoluciones y reportes.",
       ],
     },
+    soporte: {
+      h2: "Soporte mensual, si lo quieres",
+      intro:
+        "La tienda queda a tu nombre y la puedes operar tú. El soporte mensual opcional es para cuando prefieres que alguien más cargue productos, ajuste precios y revise que el cobro siga funcionando: una bolsa de cambios, revisión técnica y respaldo, con respuesta en horario hábil. Arranca con tres meses y después sigue mes a mes; sin soporte, la tienda se entrega documentada y sin mensualidad.",
+      incluye: [
+        "Altas y cambios de productos: precio, fotos, variantes, existencias y categorías.",
+        "Publicar y retirar promociones, cupones y avisos en los espacios que ya existen.",
+        "Revisión de la compra de punta a punta: carrito, pasarela, correos de pedido y facturación.",
+        "Corrección de errores en el catálogo o en los enlaces de pago.",
+        "Actualizaciones de seguridad y respaldo de tienda y base de datos, con prueba de restauración.",
+        "Resumen mensual de lo que se hizo y de los pedidos que fallaron.",
+      ],
+      fuera: [
+        "Funciones nuevas (apartado, mayoreo, suscripciones, multi-tienda).",
+        "Integraciones nuevas con paqueterías, ERP o puntos de venta.",
+        "Carga masiva de catálogos y migraciones.",
+        "Rediseños, fotografía de producto y campañas.",
+      ],
+      precio: "$1,200 MXN al mes",
+      nota: "Lunes a viernes, 9:00–18:00 (hora CDMX), con respuesta de hasta 4 horas hábiles. La bolsa no se acumula de un mes a otro y lo que se salga se cotiza antes de hacerlo. Una caída de la tienda por nuestra configuración se atiende fuera de la bolsa, sin costo.",
+    },
     caso: null,
     faq: {
       h2: "Dudas frecuentes",
@@ -257,7 +312,7 @@ export const servicios: Servicio[] = [
       items: [
         { titulo: "Logotipo y versiones", texto: "Principal, horizontal, monocromo y usos mínimos." },
         { titulo: "Paleta y tipografías", texto: "Colores con códigos y fuentes con licencia definida." },
-        { titulo: "Papelería básica", texto: "Tarjeta, firma de correo y hoja membretada." },
+        { titulo: "Papelería", texto: "Tarjeta, firma de correo y hoja membretada." },
         { titulo: "Plantillas para redes", texto: "Publicaciones y portadas editables por tu equipo." },
         { titulo: "Menú, catálogo o brochure", texto: "La pieza que usas a diario, con jerarquía clara." },
         { titulo: "Guía breve de uso", texto: "Qué se puede hacer y qué no, en pocas páginas." },
@@ -426,7 +481,7 @@ export const servicios: Servicio[] = [
         { titulo: "Suministro con garantía", texto: "Equipo nuevo o reacondicionado declarado, nunca sin aviso." },
         { titulo: "Configuración e instalación", texto: "Usuario, correo, software, impresoras y red." },
         { titulo: "Respaldo y antivirus", texto: "Copia automática y restauración probada, no solo configurada." },
-        { titulo: "Red básica", texto: "Router, switch y Wi-Fi con red de invitados separada." },
+        { titulo: "Red y Wi-Fi", texto: "Router, switch y Wi-Fi con red de invitados separada." },
         { titulo: "Mantenimiento y soporte", texto: "Preventivo programado y correctivo con tiempo acordado." },
       ],
     },
