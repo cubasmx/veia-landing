@@ -6,7 +6,10 @@ import { ruta, whatsapp } from "../utils/ruta";
 
 const cab = home.servicios;
 const aside = cab.aside;
+const extras = cab.extras;
 const agenda = whatsapp(aside.mensaje);
+const cotizar = (nombre: string) =>
+  whatsapp(`Hola, quiero información sobre ${nombre}.`);
 ---
 
 <section class="seccion" id="servicios">
@@ -45,5 +48,19 @@ const agenda = whatsapp(aside.mensaje);
         )}
       </div>
     ))}
+
+    <div class="extras revelar">
+      <p class="extras__rot">{extras.rotulo}</p>
+      <ul class="extras__lista">
+        {extras.lista.map((e) => (
+          <li>
+            <a href={cotizar(e.nombre)} target="_blank" rel="noopener">
+              <Icono nombre={e.icono} tamano={18} />
+              <span>{e.nombre}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   </div>
 </section>

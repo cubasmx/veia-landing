@@ -7,22 +7,25 @@
 
 :root {
   /* Marca */
-  --morado: #570080;
-  --morado-hover: #6b009e;
+  --morado: #7c1aa3;
+  --morado-hover: #9522c4;
   --magenta: #f2006d;
-  --magenta-texto: #c4005a;
+  --magenta-texto: #ff5fa6;
   --amarillo: #fbdd41;
 
-  /* Neutros cálidos con tinte violeta */
-  --tinta: #14111a;
-  --tinta-2: #2b2533;
-  --neutro-600: #565063;
-  --neutro-500: #6e6879;
-  --neutro-300: #c9c4d2;
-  --neutro-200: #e3dfea;
-  --neutro-100: #f2f0f5;
-  --papel: #fdfcfe;
+  /* Neutros con tinte violeta — tema oscuro */
+  --tinta: #f6f4fa;
+  --tinta-2: #dcd6e6;
+  --neutro-600: #b4adc0;
+  --neutro-500: #9c93a9;
+  --neutro-300: #4d4559;
+  --neutro-200: #2a2434;
+  --neutro-100: #1a1622;
+  --papel: #0e0c13;
   --blanco: #ffffff;
+  --superficie: #16121e;
+  --superficie-alta: #1e1829;
+  --negro: #0a0810;
 
   /* Degradado: solo banner CTA y borde del header */
   --degradado: linear-gradient(135deg, #570080 0%, #7a0a63 62%, #a4006a 100%);
@@ -48,8 +51,8 @@
   --radio-b: 10px;
   --radio-t: 16px;
   --radio-p: 20px;
-  --sombra-1: 0 1px 2px rgb(20 17 26 / 0.05);
-  --sombra-2: 0 18px 44px rgb(20 17 26 / 0.1);
+  --sombra-1: 0 1px 2px rgb(0 0 0 / 0.35);
+  --sombra-2: 0 20px 48px rgb(0 0 0 / 0.45);
   --borde: 1px solid var(--neutro-200);
 
   /* Medidas */
@@ -338,7 +341,7 @@ p {
 
 .btn--secundario:hover {
   background: var(--tinta);
-  color: var(--blanco);
+  color: var(--negro);
 }
 
 .btn--claro {
@@ -369,7 +372,7 @@ p {
   min-height: 44px;
   font-size: 0.8125rem;
   font-weight: 700;
-  color: var(--morado);
+  color: var(--tinta);
   border-bottom: 1px solid var(--neutro-300);
   transition:
     color 160ms ease-out,
@@ -415,7 +418,7 @@ p {
   width: 100%;
   min-height: 48px;
   padding: 0.7rem 0.85rem;
-  background: var(--blanco);
+  background: var(--superficie);
   border: 1.5px solid var(--neutro-300);
   border-radius: var(--radio-input);
   color: var(--tinta);
@@ -472,7 +475,7 @@ p {
   height: 20px;
   min-height: 20px;
   margin-top: 2px;
-  accent-color: var(--morado);
+  accent-color: var(--morado-hover);
   flex: none;
 }
 
@@ -502,8 +505,8 @@ p {
   top: -100px;
   z-index: 100;
   padding: 0.8rem 1.2rem;
-  background: var(--tinta);
-  color: var(--blanco);
+  background: var(--amarillo);
+  color: var(--negro);
   font-weight: 700;
   border-radius: var(--radio-input);
   transition: top 160ms ease-out;

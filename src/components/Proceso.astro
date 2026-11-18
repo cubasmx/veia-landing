@@ -1,8 +1,9 @@
 ---
+import { ruta } from "../utils/ruta";
+
 interface Paso {
   titulo: string;
   texto: string;
-  tiempo?: string;
 }
 interface Props {
   overline?: string;
@@ -11,30 +12,45 @@ interface Props {
   pasos: Paso[];
   nota?: string;
   id?: string;
-  alterna?: boolean;
 }
-const { overline, h2, intro, pasos, nota, id = "proceso", alterna = false } = Astro.props;
+const { overline, h2, intro, pasos, nota, id = "proceso" } = Astro.props;
+const poster = ruta("video/proceso-poster.webp");
 ---
 
-<section class:list={["seccion", alterna && "seccion--alterna"]} id={id}>
-  <div class="contenedor">
-    <div class="seccion__cab seccion__cab--dos">
+<section class="proceso" id={id} aria-labelledby={`${id}-titulo`}>
+  <div class="proceso__fondo" aria-hidden="true" style={`background-image:url(${poster})`}>
+    <video
+      class="proceso__video"
+      data-video-fondo
+      data-fuente={ruta("video/proceso-veia.mp4")}
+      muted
+      loop
+      playsinline
+      preload="none"
+      poster={poster}
+      tabindex="-1"
+    ></video>
+  </div>
+
+  <div class="contenedor proceso__in">
+    <div class="seccion__cab seccion__cab--dos revelar">
       <div>
         {overline && <span class="overline">{overline}</span>}
-        <h2>{h2}</h2>
+        <h2 id={`${id}-titulo`}>{h2}</h2>
       </div>
       {intro && <p>{intro}</p>}
     </div>
-    <ol class="pasos">
+
+    <ol class="pasos revelar">
       {pasos.map((p, i) => (
         <li class="paso">
           <span class="paso__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
           <h3>{p.titulo}</h3>
           <p>{p.texto}</p>
-          {p.tiempo && <span class="paso__tiempo">{p.tiempo.replace(/^\d+\s*·\s*/, "")}</span>}
         </li>
       ))}
     </ol>
+
     {nota && <p class="pasos__nota">{nota}</p>}
   </div>
 </section>

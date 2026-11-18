@@ -5,7 +5,7 @@ import { ruta, whatsapp } from "../utils/ruta";
 
 interface Props {
   home?: boolean;
-  activo?: "servicios" | "casos" | "proceso" | "dudas" | "contacto" | "";
+  activo?: "servicios" | "equipo" | "proceso" | "dudas" | "contacto" | "";
 }
 
 const { home = false, activo = "" } = Astro.props;
@@ -18,7 +18,7 @@ const ir = (ancla: string) => {
 };
 
 const enlaces = [
-  { texto: "Casos", ancla: "#casos", clave: "casos" },
+  { texto: "Equipo", ancla: "#equipo", clave: "equipo" },
   { texto: "Cómo trabajamos", ancla: "#proceso", clave: "proceso" },
   { texto: "Dudas", ancla: "#faq", clave: "dudas" },
   { texto: "Contacto", ancla: "#contacto", clave: "contacto" },
@@ -28,7 +28,7 @@ const enlaces = [
 <header class="header" id="header" data-header>
   <div class="contenedor header__in">
     <a class="marca" href={ir("#inicio")} aria-label="VEIA, inicio">
-      <img src={ruta("img/logo-veia.png")} alt="VEIA" width="77" height="28" />
+      <img src={ruta("img/veia-logo-blanco.png")} alt="VEIA" width="77" height="28" />
     </a>
 
     <nav class="nav" aria-label="Principal">

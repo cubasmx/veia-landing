@@ -190,6 +190,83 @@ const imagen = new URL("/img/logo-veia.png", sitio).href;
         revelar.forEach((el) => observador.observe(el));
       }
 
+      // Videos de fondo (hero y proceso): se descargan solo en pantallas
+      // grandes, sin ahorro de datos y con movimiento permitido. Además, cada
+      // video carga únicamente cuando se acerca a la pantalla. En móvil queda
+      // el póster, que pesa una fracción.
+      const fondos = Array.from(document.querySelectorAll("[data-video-fondo]")) as HTMLVideoElement[];
+      if (fondos.length) {
+        const menosMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const pantallaGrande = window.matchMedia("(min-width: 769px)");
+        const ahorraDatos = (navigator as any).connection?.saveData === true;
+        let activo = false;
+
+        const cerca = (video: HTMLVideoElement) => {
+          const caja = video.getBoundingClientRect();
+          return caja.bottom > -200 && caja.top < window.innerHeight + 400;
+        };
+
+        const cargar = (video: HTMLVideoElement) => {
+          const fuente = video.dataset.fuente;
+          if (fuente && video.getAttribute("src") !== fuente) {
+            video.src = fuente;
+            video.load();
+          }
+        };
+
+        const observador = new IntersectionObserver(
+          (entradas) => {
+            for (const entrada of entradas) {
+              const video = entrada.target as HTMLVideoElement;
+              if (activo && entrada.isIntersecting && !document.hidden) {
+                cargar(video);
+                video.play().catch(() => {});
+              } else {
+                video.pause();
+              }
+            }
+          },
+          { rootMargin: "200px 0px", threshold: 0.1 }
+        );
+
+        const decidir = () => {
+          activo = pantallaGrande.matches && !menosMovimiento.matches && !ahorraDatos;
+          for (const video of fondos) {
+            observador.observe(video);
+            if (activo && cerca(video) && !document.hidden) {
+              cargar(video);
+              video.play().catch(() => {});
+            } else {
+              video.pause();
+            }
+          }
+        };
+
+        // Respaldo del IntersectionObserver: al hacer scroll, carga y reproduce
+        // el video que ya está cerca (algunos navegadores retrasan el callback).
+        window.addEventListener(
+          "scroll",
+          () => {
+            if (!activo || document.hidden) return;
+            for (const video of fondos) {
+              if (cerca(video)) {
+                cargar(video);
+                if (video.paused) video.play().catch(() => {});
+              }
+            }
+          },
+          { passive: true }
+        );
+
+        decidir();
+        menosMovimiento.addEventListener("change", decidir);
+        pantallaGrande.addEventListener("change", decidir);
+        document.addEventListener("visibilitychange", () => {
+          if (document.hidden) fondos.forEach((v) => v.pause());
+          else decidir();
+        });
+      }
+
       // Año del pie.
       document.querySelectorAll("[data-anio]").forEach((el) => {
         el.textContent = String(new Date().getFullYear());

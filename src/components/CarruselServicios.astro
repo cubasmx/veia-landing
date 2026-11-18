@@ -8,6 +8,9 @@ const total = c.servicios.length;
 const mensajes = c.servicios.map((s) =>
   whatsapp(`Hola, quiero información sobre ${s.nombre}.`)
 );
+const foto = (slug: string, ancho: 640 | 1200) =>
+  ruta(`images/banners/${slug}-${ancho}.webp`);
+const srcset = (slug: string) => `${foto(slug, 640)} 640w, ${foto(slug, 1200)} 1200w`;
 ---
 
 <aside class="carrusel" aria-label="Servicios que ofrecemos" data-carrusel data-mensajes={JSON.stringify(mensajes)}>
@@ -25,8 +28,24 @@ const mensajes = c.servicios.map((s) =>
         data-slide
         aria-hidden={i === 0 ? "false" : "true"}
       >
-        <Icono nombre={s.icono} tamano={44} clase="carrusel__ico" />
-        <h3>{s.nombre}</h3>
+        <img
+          class="carrusel__foto"
+          alt=""
+          width="1200"
+          height="760"
+          decoding="async"
+          loading={i === 0 ? "eager" : "lazy"}
+          src={i === 0 ? foto(s.imagen, 1200) : undefined}
+          srcset={i === 0 ? srcset(s.imagen) : undefined}
+          sizes="(max-width: 600px) 88vw, 420px"
+          data-src={foto(s.imagen, 1200)}
+          data-srcset={srcset(s.imagen)}
+        />
+        <div class="carrusel__velo"></div>
+        <div class="carrusel__texto">
+          <Icono nombre={s.icono} tamano={32} clase="carrusel__ico" />
+          <h3>{s.nombre}</h3>
+        </div>
       </div>
     ))}
   </div>
@@ -70,6 +89,14 @@ const mensajes = c.servicios.map((s) =>
     let actual = 0;
     let temporizador: number | undefined;
 
+    // Carga la foto solo cuando su banner va a verse (clave en móvil).
+    const cargarFoto = (indice: number) => {
+      const img = slides[(indice + total) % total]?.querySelector<HTMLImageElement>("img");
+      if (!img || img.srcset) return;
+      if (img.dataset.srcset) img.srcset = img.dataset.srcset;
+      if (img.dataset.src) img.src = img.dataset.src;
+    };
+
     const pintarBarra = () => {
       if (!barra) return;
       barra.style.transition = "none";
@@ -89,6 +116,8 @@ const mensajes = c.servicios.map((s) =>
       });
       if (cuenta) cuenta.textContent = String(actual + 1).padStart(2, "0");
       if (cta && mensajes[actual]) cta.href = mensajes[actual];
+      cargarFoto(actual);
+      cargarFoto(actual + 1); // deja lista la siguiente
       pintarBarra();
     };
 
@@ -113,7 +142,6 @@ const mensajes = c.servicios.map((s) =>
       arrancar();
     });
 
-    // Pausa al pasar el cursor, al enfocar un control o si la pestaña no se ve.
     raiz.addEventListener("mouseenter", detener);
     raiz.addEventListener("mouseleave", arrancar);
     raiz.addEventListener("focusin", detener);
@@ -136,6 +164,8 @@ const mensajes = c.servicios.map((s) =>
       }
     });
 
+    cargarFoto(0);
+    cargarFoto(1);
     pintarBarra();
     arrancar();
   }

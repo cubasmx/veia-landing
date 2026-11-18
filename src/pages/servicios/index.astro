@@ -5,11 +5,12 @@ import Footer from "../../components/Footer.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import ServiciosGrid from "../../components/ServiciosGrid.astro";
 import BannerCTA from "../../components/BannerCTA.astro";
+import { resaltar } from "../../utils/ruta";
 ---
 
 <Base
   titulo="Servicios | VEIA"
-  descripcion="Sitio web, tienda en línea, diseño, publicidad, equipo de cómputo, CRM, ERP y desarrollo a medida. Ocho líneas de trabajo para negocios locales, profesionistas y pymes."
+  descripcion="Sitios web, tiendas en línea, branding, publicidad, equipo de cómputo, CRM, ERP, APIs y desarrollo a medida para negocios locales, profesionistas y pymes."
 >
   <Header activo="servicios" />
   <main id="contenido">
@@ -18,11 +19,11 @@ import BannerCTA from "../../components/BannerCTA.astro";
     <section class="hero-compacto">
       <div class="contenedor">
         <span class="overline">Servicios</span>
-        <h1>Ocho líneas de trabajo, [un solo responsable] delante.</h1>
+        <h1 set:html={resaltar("Del sitio web al sistema, [un solo responsable] delante.")} />
         <p class="lead">
-          Cubrimos lo que un negocio necesita para funcionar y venderse: desde el sitio y la tienda
-          hasta el equipo de cómputo, el CRM o un desarrollo a medida. Cada proyecto se cotiza según
-          lo que ya tienes y lo que falta; no vendemos paquetes cerrados.
+          Cubrimos lo que un negocio necesita para funcionar y venderse: sitio, tienda, branding,
+          redes, equipo de cómputo y servidores, cámaras, CRM, ERP, APIs o un desarrollo a medida.
+          Cada proyecto se cotiza según lo que ya tienes y lo que falta; no vendemos paquetes cerrados.
         </p>
       </div>
     </section>

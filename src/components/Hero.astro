@@ -13,17 +13,15 @@ const poster = ruta("video/hero-veia-poster.webp");
   <div class="hero__fondo" aria-hidden="true" style={`background-image:url(${poster})`}>
     <video
       class="hero__video"
-      data-hero-video
-      autoplay
+      data-video-fondo
+      data-fuente={ruta("video/hero-veia.mp4")}
       muted
       loop
       playsinline
-      preload="metadata"
+      preload="none"
       poster={poster}
       tabindex="-1"
-    >
-      <source src={ruta("video/hero-veia.mp4")} type="video/mp4" />
-    </video>
+    ></video>
   </div>
 
   <div class="contenedor hero__grid">
@@ -46,21 +44,3 @@ const poster = ruta("video/hero-veia-poster.webp");
     <CarruselServicios />
   </div>
 </section>
-
-<script>
-  // Con `prefers-reduced-motion` el video de fondo no se reproduce: queda el póster.
-  const video = document.querySelector<HTMLVideoElement>("[data-hero-video]");
-  if (video) {
-    const reducido = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const aplicar = () => {
-      if (reducido.matches) {
-        video.pause();
-        video.removeAttribute("autoplay");
-      } else if (video.paused) {
-        void video.play().catch(() => {});
-      }
-    };
-    aplicar();
-    reducido.addEventListener("change", aplicar);
-  }
-</script>

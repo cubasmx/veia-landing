@@ -8,12 +8,9 @@ const e = home.equipo;
 
 <section class="seccion seccion--equipo" id="equipo" aria-labelledby="equipo-titulo">
   <div class="contenedor">
-    <div class="seccion__cab seccion__cab--dos revelar">
-      <div>
-        <span class="overline">{e.overline}</span>
-        <h2 id="equipo-titulo">{e.h2}</h2>
-      </div>
-      <p>{e.intro}</p>
+    <div class="seccion__cab revelar">
+      <span class="overline">{e.overline}</span>
+      <h2 id="equipo-titulo">{e.h2}</h2>
     </div>
 
     <div class="equipo revelar">
@@ -32,7 +29,6 @@ const e = home.equipo;
           <div class="persona__cuerpo">
             <h3>{p.nombre}</h3>
             <p class="persona__rol">{p.rol}</p>
-            <p class="persona__linea">{p.linea}</p>
             <a class="enlace" href={p.portafolio} target="_blank" rel="noopener">
               {e.enlace} <Icono nombre="flecha" tamano={16} />
             </a>

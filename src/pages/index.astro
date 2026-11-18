@@ -5,9 +5,7 @@ import Hero from "../components/Hero.astro";
 import Clientes from "../components/Clientes.astro";
 import ServiciosGrid from "../components/ServiciosGrid.astro";
 import Proceso from "../components/Proceso.astro";
-import Casos from "../components/Casos.astro";
 import Equipo from "../components/Equipo.astro";
-import Diferenciadores from "../components/Diferenciadores.astro";
 import FAQ from "../components/FAQ.astro";
 import BannerCTA from "../components/BannerCTA.astro";
 import Footer from "../components/Footer.astro";
@@ -71,9 +69,7 @@ const jsonLd = {
     <Clientes />
     <ServiciosGrid />
     <Proceso overline={home.proceso.overline} h2={home.proceso.h2} intro={home.proceso.intro} pasos={home.proceso.pasos} nota={home.proceso.nota} />
-    <Casos />
     <Equipo />
-    <Diferenciadores />
     <FAQ overline={home.faq.overline} h2={home.faq.h2} preguntas={home.faq.preguntas} />
     <BannerCTA
       h2={home.cierre.h2}
