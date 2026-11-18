@@ -617,7 +617,7 @@ body.menu-abierto {
   flex: none;
   min-height: 44px;
   padding: 0.4rem 0.85rem;
-  background: rgb(255 255 255 / 0.94);
+  background: #fff;
   border-radius: 8px;
   scroll-snap-align: start;
 }
@@ -626,7 +626,7 @@ body.menu-abierto {
   width: auto;
   height: 26px;
   object-fit: contain;
-  opacity: 0.82;
+  opacity: 1;
   transition:
     filter 200ms ease-out,
     opacity 200ms ease-out;
@@ -637,8 +637,8 @@ body.menu-abierto {
 }
 
 .clientes img.clara {
-  filter: grayscale(1) invert(1);
-  opacity: 0.72;
+  filter: invert(1);
+  opacity: 0.9;
 }
 
 .clientes img.alto {
