@@ -1,0 +1,142 @@
+---
+import Icono from "./Icono.astro";
+import { home } from "../data/home";
+import { ruta, whatsapp } from "../utils/ruta";
+
+const c = home.hero.carrusel;
+const total = c.servicios.length;
+const mensajes = c.servicios.map((s) =>
+  whatsapp(`Hola, quiero información sobre ${s.nombre}.`)
+);
+---
+
+<aside class="carrusel" aria-label="Servicios que ofrecemos" data-carrusel data-mensajes={JSON.stringify(mensajes)}>
+  <div class="carrusel__cab">
+    <span class="carrusel__rot">{c.rotulo}</span>
+    <span class="carrusel__cuenta" aria-hidden="true">
+      <span data-carrusel-actual>01</span><span class="carrusel__total">/ {total}</span>
+    </span>
+  </div>
+
+  <div class="carrusel__pista">
+    {c.servicios.map((s, i) => (
+      <div
+        class:list={["carrusel__slide", i === 0 && "activo"]}
+        data-slide
+        aria-hidden={i === 0 ? "false" : "true"}
+      >
+        <Icono nombre={s.icono} tamano={44} clase="carrusel__ico" />
+        <h3>{s.nombre}</h3>
+      </div>
+    ))}
+  </div>
+
+  <a
+    class="btn btn--claro carrusel__cta"
+    href={mensajes[0]}
+    target="_blank"
+    rel="noopener"
+    data-carrusel-cta
+  >
+    {c.cta} <Icono nombre="whatsapp" tamano={18} />
+  </a>
+
+  <div class="carrusel__controles">
+    <button class="carrusel__flecha" type="button" data-carrusel-prev aria-label="Servicio anterior">
+      <Icono nombre="flecha" tamano={18} clase="carrusel__flecha-ico carrusel__flecha-ico--atras" />
+    </button>
+    <div class="carrusel__barra" aria-hidden="true"><span data-carrusel-barra></span></div>
+    <button class="carrusel__flecha" type="button" data-carrusel-next aria-label="Servicio siguiente">
+      <Icono nombre="flecha" tamano={18} />
+    </button>
+  </div>
+</aside>
+
+<script>
+  const raiz = document.querySelector<HTMLElement>("[data-carrusel]");
+
+  if (raiz) {
+    const slides = Array.from(raiz.querySelectorAll<HTMLElement>("[data-slide]"));
+    const cta = raiz.querySelector<HTMLAnchorElement>("[data-carrusel-cta]");
+    const cuenta = raiz.querySelector<HTMLElement>("[data-carrusel-actual]");
+    const barra = raiz.querySelector<HTMLElement>("[data-carrusel-barra]");
+    const prev = raiz.querySelector<HTMLButtonElement>("[data-carrusel-prev]");
+    const next = raiz.querySelector<HTMLButtonElement>("[data-carrusel-next]");
+    const mensajes: string[] = JSON.parse(raiz.dataset.mensajes || "[]");
+    const total = slides.length;
+    const DURACION = 6000;
+    const sinMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let actual = 0;
+    let temporizador: number | undefined;
+
+    const pintarBarra = () => {
+      if (!barra) return;
+      barra.style.transition = "none";
+      barra.style.width = "0%";
+      void barra.offsetWidth;
+      if (sinMovimiento) return;
+      barra.style.transition = `width ${DURACION}ms linear`;
+      barra.style.width = "100%";
+    };
+
+    const mostrar = (indice: number) => {
+      actual = (indice + total) % total;
+      slides.forEach((slide, k) => {
+        const activo = k === actual;
+        slide.classList.toggle("activo", activo);
+        slide.setAttribute("aria-hidden", String(!activo));
+      });
+      if (cuenta) cuenta.textContent = String(actual + 1).padStart(2, "0");
+      if (cta && mensajes[actual]) cta.href = mensajes[actual];
+      pintarBarra();
+    };
+
+    const detener = () => {
+      if (temporizador) window.clearInterval(temporizador);
+      temporizador = undefined;
+    };
+
+    const arrancar = () => {
+      if (sinMovimiento || total < 2) return;
+      detener();
+      temporizador = window.setInterval(() => mostrar(actual + 1), DURACION);
+    };
+
+    next?.addEventListener("click", () => {
+      mostrar(actual + 1);
+      arrancar();
+    });
+
+    prev?.addEventListener("click", () => {
+      mostrar(actual - 1);
+      arrancar();
+    });
+
+    // Pausa al pasar el cursor, al enfocar un control o si la pestaña no se ve.
+    raiz.addEventListener("mouseenter", detener);
+    raiz.addEventListener("mouseleave", arrancar);
+    raiz.addEventListener("focusin", detener);
+    raiz.addEventListener("focusout", arrancar);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) detener();
+      else arrancar();
+    });
+
+    raiz.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        mostrar(actual + 1);
+        arrancar();
+      }
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        mostrar(actual - 1);
+        arrancar();
+      }
+    });
+
+    pintarBarra();
+    arrancar();
+  }
+</script>

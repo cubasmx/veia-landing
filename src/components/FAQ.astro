@@ -1,15 +1,12 @@
 ---
-import { ruta } from "../utils/ruta";
-
 interface Props {
   overline?: string;
   h2: string;
   preguntas: { q: string; a: string }[];
   id?: string;
   alterna?: boolean;
-  plantillas?: boolean;
 }
-const { overline, h2, preguntas, id = "faq", alterna = false, plantillas = false } = Astro.props;
+const { overline, h2, preguntas, id = "faq", alterna = false } = Astro.props;
 ---
 
 <section class:list={["seccion", alterna && "seccion--alterna"]} id={id}>
@@ -19,15 +16,10 @@ const { overline, h2, preguntas, id = "faq", alterna = false, plantillas = false
       <h2>{h2}</h2>
     </div>
     <div class="faq">
-      {preguntas.map((p, i) => (
+      {preguntas.map((p) => (
         <details>
           <summary>{p.q}</summary>
           <p>{p.a}</p>
-          {plantillas && i === 0 && (
-            <p class="faq__extra">
-              ¿Buscas un punto de partida? Revisa las <a href={ruta("plantillas/")}>plantillas por giro</a>.
-            </p>
-          )}
         </details>
       ))}
     </div>

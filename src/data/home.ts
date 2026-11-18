@@ -1,32 +1,48 @@
-// Copy del home, tomado de docs/rediseno/04-contenido.md.
+// Copy del home, tomado de docs/rediseno/04-contenido.md y ajustado con las
+// indicaciones de Julio (2026-11-17).
 export const home = {
   seo: {
-    titulo: "Soluciones tecnológicas para tu negocio | VEIA",
+    titulo: "Agencia de tecnología, branding y diseño | VEIA",
     descripcion:
-      "Sitio web, tienda, marca, sistemas y equipo de cómputo para profesionistas, negocios locales y pymes. Un solo proveedor, trato directo.",
+      "Somos la agencia para profesionistas, negocios locales y PyMEs: sitios web, tiendas en línea, branding, sistemas, equipo de cómputo, CRM, ERP, APIs y desarrollo a medida.",
   },
   hero: {
-    overline: "Consultoría tecnológica · Guadalajara",
-    h1: "Tecnología que tu negocio entiende y [usa].",
-    lead: "Sitio web, tienda en línea, marca, sistemas y el equipo de cómputo que los hace funcionar. Para profesionistas, negocios locales y pymes: ocho líneas y un solo equipo, el que diseña, implementa y responde cuando algo falla.",
-    primario: "Agendar diagnóstico",
-    secundario: "Ver las 8 líneas",
+    overline: "Consultoría · Tecnología · Branding · Diseño",
+    h1: "Tecnología que tu negocio entiende y [necesita].",
+    lead: "Somos la agencia para profesionistas, negocios locales y PyMEs.",
+    primario: "Cuéntanos qué necesitas",
     confianza: [
       "Trato directo con quien lo hace",
       "Soporte local en Guadalajara y Zapopan",
       "Alcance y precio por escrito",
       "Sin permanencia forzada",
     ],
-    panel: {
-      titulo: "Tu operación, en un solo lugar",
-      pill: "8 líneas",
-      filas: [
-        { icono: "sitio", nombre: "Sitio web", nota: "Presencia, catálogo y Google" },
-        { icono: "tienda", nombre: "Tienda en línea", nota: "Cobros, envíos e inventario" },
-        { icono: "crm", nombre: "CRM", nota: "Seguimiento de clientes y cotizaciones" },
-        { icono: "equipo", nombre: "Equipo de cómputo", nota: "Venta, configuración y soporte" },
+    // Cada entrada es un banner del carrusel del hero: icono, título y CTA a
+    // WhatsApp. Sin descripciones.
+    carrusel: {
+      rotulo: "Ofrecemos",
+      cta: "Cotizar por WhatsApp",
+      servicios: [
+        { nombre: "Sitios web", icono: "sitio" },
+        { nombre: "Automatización", icono: "automatizacion" },
+        { nombre: "Tienda en línea", icono: "tienda" },
+        { nombre: "Branding", icono: "capas" },
+        { nombre: "Logos", icono: "pluma" },
+        { nombre: "Diseño", icono: "diseno" },
+        { nombre: "Redes sociales", icono: "redes" },
+        { nombre: "Sistemas IT", icono: "servidores" },
+        { nombre: "Compra de equipo de cómputo", icono: "compra" },
+        { nombre: "Venta de equipo de cómputo", icono: "venta" },
+        { nombre: "Reparación de equipo de cómputo", icono: "reparacion" },
+        { nombre: "Actualización de equipos y servidores", icono: "actualizacion" },
+        { nombre: "Cámaras de vigilancia con servidor propio", icono: "camara" },
+        { nombre: "CRM", icono: "crm" },
+        { nombre: "ERP", icono: "erp" },
+        { nombre: "Estrategias publicitarias", icono: "publicidad" },
+        { nombre: "Desarrollo de APIs", icono: "desarrollo" },
+        { nombre: "Aplicaciones a medida", icono: "app" },
+        { nombre: "Formación y capacitación en tecnología", icono: "formacion" },
       ],
-      nota: "Guadalajara · Zapopan · atención remota en todo México",
     },
   },
   clientes: {
@@ -48,40 +64,43 @@ export const home = {
       pill: "Diagnóstico",
       titulo: "¿No sabes cuál te toca?",
       texto: "En 20 minutos revisamos tu operación y te decimos qué sí necesitas y qué no.",
-      enlace: "Agendar llamada",
+      enlace: "Cuéntanos qué necesitas",
       mensaje: "Hola, quiero agendar una llamada para saber qué servicio necesito.",
     },
   },
-  problema: {
-    overline: "El punto de partida",
-    h2: "Todo por WhatsApp, todo en Excel, todo en la cabeza del dueño.",
-    intro:
-      "No hace falta un diagnóstico profundo para reconocerlo. Si algo de esto te suena, el problema no es la herramienta: es que nadie definió cómo debe trabajar el negocio.",
-    puntos: [
-      {
-        titulo: "La información vive en tres lugares",
-        texto: "El catálogo en fotos de WhatsApp, las ventas en un cuaderno y los clientes en la libreta de alguien. Ninguno se habla con el otro.",
-      },
-      {
-        titulo: "Cada cambio depende de una persona",
-        texto: "Si se va el vendedor, se va el seguimiento. Si falta quien armó el Excel, nadie sabe qué fórmula tocó.",
-      },
-      {
-        titulo: "Se compra herramienta antes del proceso",
-        texto: "Se paga un sistema que nadie usa porque no correspondía a cómo trabaja el negocio. Primero se define, luego se compra.",
-      },
-    ],
-  },
   proceso: {
     overline: "Cómo trabajamos",
-    h2: "Cuatro pasos, sin sorpresas.",
-    intro: "Cada etapa termina con algo que puedes revisar: un documento, una propuesta o una entrega funcionando.",
+    h2: "¿Cómo trabajamos?",
+    intro:
+      "Cinco etapas. Cada una termina con algo que puedes revisar antes de pasar a la siguiente.",
     pasos: [
-      { titulo: "Diagnóstico", texto: "Vemos cómo trabajas hoy: qué usas, quién decide y dónde se pierde el tiempo. De aquí sale qué necesitas y qué no.", tiempo: "01 · 1 sesión de 20 a 60 min" },
-      { titulo: "Propuesta y alcance", texto: "Por escrito: qué incluye, qué no, cuánto cuesta y en qué orden. Sin letras chiquitas ni «todo incluido».", tiempo: "02 · 2 a 5 días hábiles" },
-      { titulo: "Ejecución por entregas", texto: "Avanzas viendo resultados parciales, no una caja negra. Cada entrega se revisa antes de seguir.", tiempo: "03 · según alcance" },
-      { titulo: "Entrega y soporte", texto: "Recibes accesos, documentación y una sesión de uso. El soporte es opcional y va por escrito.", tiempo: "04 · al cierre" },
+      {
+        titulo: "Análisis",
+        texto:
+          "Tenemos una primera reunión para conocer las necesidades de tu empresa o negocio.",
+      },
+      {
+        titulo: "Planeación",
+        texto:
+          "Tras evaluar los resultados del análisis se propone un plan a medida.",
+      },
+      {
+        titulo: "Fase de pruebas",
+        texto:
+          "Tras la aprobación del plan, se deja todo listo para el siguiente paso.",
+      },
+      {
+        titulo: "Producción",
+        texto:
+          "Terminada la fase de pruebas, se entrega el producto completado.",
+      },
+      {
+        titulo: "Retroalimentación y ajustes",
+        texto:
+          "Normalmente se espera que existan ajustes* y que estos se lleven a cabo en la misma línea de trabajo.",
+      },
     ],
+    nota: "* Los ajustes se hacen dentro de la misma línea de trabajo acordada.",
   },
   casos: {
     overline: "Casos",
@@ -124,6 +143,31 @@ export const home = {
       },
     ],
   },
+  equipo: {
+    overline: "Sobre nosotros",
+    h2: "Dos personas, no un call center.",
+    intro:
+      "VEIA es un equipo de dos personas en Guadalajara. Quien te contesta por WhatsApp es quien diseña, programa e implementa: sin ejecutivos de cuenta ni intermediarios.",
+    personas: [
+      {
+        nombre: "Julio Cubas",
+        rol: "Dirección, desarrollo y sistemas",
+        linea:
+          "Lleva la relación con cada negocio, arma el sitio y resuelve la parte técnica: sistemas, servidores y equipo de cómputo.",
+        foto: "images/equipo/julio.webp",
+        portafolio: "https://cubasmx.github.io/julio-cubas/",
+      },
+      {
+        nombre: "Ana Paula",
+        rol: "Diseño, marca y contenido",
+        linea:
+          "Cuida cómo se ve tu proyecto y que el texto diga lo que tu negocio quiere decir, sin relleno ni copiar y pegar.",
+        foto: "images/equipo/ana-paula.webp",
+        portafolio: "https://celaya51.github.io/portafolio-ana-paula/",
+      },
+    ],
+    enlace: "Ver portafolio",
+  },
   diferenciadores: {
     overline: "Por qué nosotros",
     h2: "Tres cosas que puedes comprobar.",
@@ -150,36 +194,25 @@ export const home = {
     h2: "Lo que preguntan antes de contratar.",
     preguntas: [
       {
-        q: "¿Por qué no publican precios?",
-        a: "Porque una página de un servicio y una tienda con inventario no cuestan lo mismo. Te damos alcance y precio por escrito antes de empezar.",
+        q: "¿Soy dueño del producto?",
+        a: "Sí, eres dueño del producto final hecho a medida.",
       },
       {
-        q: "¿El sitio queda a mi nombre?",
-        a: "Dominio, hosting, cuentas de anuncios y repositorio se registran a tu nombre desde el inicio. Si por operación los abrimos nosotros, se transfieren al cierre con inventario de accesos.",
+        q: "¿Ofrecen soporte?",
+        a: "El soporte es opcional y tiene costo extra.",
       },
       {
-        q: "¿En cuánto tiempo está listo?",
-        a: "Tiempo estimado: sitios simples, desde 5 días hábiles; tienda en línea o identidad de marca, de 3 a 6 semanas; sistemas, por módulos y en fases.",
-      },
-      {
-        q: "¿Qué pasa si algo falla después?",
-        a: "Hay soporte mensual opcional, de lunes a viernes, 9:00–18:00 (hora CDMX), con tiempos de respuesta acordados por escrito. No prometemos 24/7.",
-      },
-      {
-        q: "¿Qué hacen con mis datos?",
-        a: "Se usan solo para responder y ejecutar el proyecto. No los vendemos. Para operar usamos hosting y correo, y si nos escribes por WhatsApp, Meta. El detalle está en el aviso de privacidad.",
-      },
-      {
-        q: "¿Trabajan fuera de Guadalajara?",
-        a: "Sí, a distancia en todo México. Reuniones por videollamada y entrega digital; el soporte presencial de equipo de cómputo es en Guadalajara y Zapopan.",
+        q: "¿Cuánto cuesta?",
+        a: "Los precios varían según el proyecto.",
       },
     ],
   },
   cierre: {
-    h2: "Empecemos por una llamada.",
-    texto: "Cuéntanos qué necesitas y qué tienes hoy. Te decimos si podemos resolverlo, cómo y en cuánto tiempo. Respondemos en horario hábil.",
+    h2: "Cuéntanos sobre tu negocio o proyecto.",
+    texto: "Queremos ver hasta dónde podemos llegar.",
     primario: "Escribir por WhatsApp",
-    secundario: "Llenar el formulario",
+    secundario: "Llamar por teléfono",
+    telefono: "525659898908",
   },
   otrasLineas: {
     overline: "Otras líneas",

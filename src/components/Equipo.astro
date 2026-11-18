@@ -1,54 +1,41 @@
 ---
-// Sección "Quiénes somos / El equipo".
-//
-// TODO(fotos reales): cuando Julio y Ana Paula manden sus fotos (4:5, ver
-// el README de `public/images/equipo/`), se vuelve a incluir el bloque
-// `<img class="v-persona__foto" ...>` dentro de cada tarjeta. Mientras no
-// existan, la sección va sin fotos: mejor sin imagen que con un placeholder
-// "FOTO PENDIENTE" a la vista del cliente.
-//
-// TODO(confirmar): roles y líneas redactadas a partir del contexto del
-// equipo; que Julio y Ana Paula las validen o corrijan.
-const base = import.meta.env.BASE_URL;
+import Icono from "./Icono.astro";
+import { home } from "../data/home";
+import { ruta } from "../utils/ruta";
 
-const equipo = [
-  {
-    nombre: "Julio",
-    rol: "Dirección y trato con clientes",
-    linea:
-      "Julio lleva la relación con cada negocio y arma el sitio. Es camarógrafo y editor, así que además produce las fotos y el video que tu página necesita para no verse genérica.",
-  },
-  {
-    nombre: "Ana Paula",
-    rol: "Diseño y contenido",
-    linea:
-      "Ana Paula cuida cómo se ve tu sitio y que el texto diga lo que tu negocio quiere decir, sin relleno ni copiar y pegar.",
-  },
-];
-
-// `base` se usará de nuevo al reactivar las fotos.
-void base;
+const e = home.equipo;
 ---
 
-<section class="seccion" id="equipo">
+<section class="seccion seccion--equipo" id="equipo" aria-labelledby="equipo-titulo">
   <div class="contenedor">
-    <div class="revelar">
-      <span class="antetitulo">Quiénes somos</span>
-      <h2>Detrás de VEIA hay dos personas, no un call center</h2>
-      <p class="destacado" style="margin-top:0.8rem">
-        Somos un equipo pequeño de Guadalajara. La misma gente que te contesta
-        por WhatsApp es la que arma tu sitio: sin intermediarios, sin cuentas
-        que no sabes con quién caen.
-      </p>
+    <div class="seccion__cab seccion__cab--dos revelar">
+      <div>
+        <span class="overline">{e.overline}</span>
+        <h2 id="equipo-titulo">{e.h2}</h2>
+      </div>
+      <p>{e.intro}</p>
     </div>
 
-    <div class="v-equipo v-equipo--texto revelar">
-      {equipo.map((p) => (
-        <article class="v-persona v-persona--texto">
-          <div class="v-persona__cuerpo">
+    <div class="equipo revelar">
+      {e.personas.map((p) => (
+        <article class="persona">
+          <div class="persona__foto">
+            <img
+              src={ruta(p.foto)}
+              alt={`${p.nombre}, ${p.rol} en VEIA`}
+              width="800"
+              height="1000"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="persona__cuerpo">
             <h3>{p.nombre}</h3>
-            <p class="v-persona__rol">{p.rol}</p>
-            <p>{p.linea}</p>
+            <p class="persona__rol">{p.rol}</p>
+            <p class="persona__linea">{p.linea}</p>
+            <a class="enlace" href={p.portafolio} target="_blank" rel="noopener">
+              {e.enlace} <Icono nombre="flecha" tamano={16} />
+            </a>
           </div>
         </article>
       ))}

@@ -1,23 +1,40 @@
 ---
 import Icono from "./Icono.astro";
+import CarruselServicios from "./CarruselServicios.astro";
 import { home } from "../data/home";
-import { resaltar, whatsapp } from "../utils/ruta";
+import { resaltar, ruta, whatsapp } from "../utils/ruta";
 
 const h = home.hero;
-const cta = whatsapp("Hola, quiero agendar un diagnóstico con VEIA.");
+const cta = whatsapp("Hola, quiero contarles de mi negocio y lo que necesito.");
+const poster = ruta("video/hero-veia-poster.webp");
 ---
 
 <section class="hero" id="inicio">
+  <div class="hero__fondo" aria-hidden="true" style={`background-image:url(${poster})`}>
+    <video
+      class="hero__video"
+      data-hero-video
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      poster={poster}
+      tabindex="-1"
+    >
+      <source src={ruta("video/hero-veia.mp4")} type="video/mp4" />
+    </video>
+  </div>
+
   <div class="contenedor hero__grid">
-    <div class="revelar">
+    <div class="hero__texto revelar">
       <span class="overline">{h.overline}</span>
       <h1 class="display" set:html={resaltar(h.h1)} />
       <p class="lead">{h.lead}</p>
       <div class="hero__acciones">
-        <a class="btn btn--primario" href={cta} target="_blank" rel="noopener">
+        <a class="btn btn--claro" href={cta} target="_blank" rel="noopener">
           {h.primario} <Icono nombre="flecha" tamano={18} />
         </a>
-        <a class="btn btn--secundario" href="#servicios">{h.secundario}</a>
       </div>
       <ul class="confianza" aria-label="Cómo trabajamos">
         {h.confianza.map((c) => (
@@ -26,23 +43,24 @@ const cta = whatsapp("Hola, quiero agendar un diagnóstico con VEIA.");
       </ul>
     </div>
 
-    <aside class="panel revelar" aria-label="Lo que resolvemos">
-      <div class="panel__cab">
-        <h2>{h.panel.titulo}</h2>
-        <span class="pill">{h.panel.pill}</span>
-      </div>
-      <ul>
-        {h.panel.filas.map((f) => (
-          <li>
-            <Icono nombre={f.icono} tamano={24} />
-            <span>{f.nombre} <small>{f.nota}</small></span>
-          </li>
-        ))}
-      </ul>
-      <p class="panel__pie">
-        <Icono nombre="ubicacion" tamano={16} />
-        {h.panel.nota}
-      </p>
-    </aside>
+    <CarruselServicios />
   </div>
 </section>
+
+<script>
+  // Con `prefers-reduced-motion` el video de fondo no se reproduce: queda el póster.
+  const video = document.querySelector<HTMLVideoElement>("[data-hero-video]");
+  if (video) {
+    const reducido = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const aplicar = () => {
+      if (reducido.matches) {
+        video.pause();
+        video.removeAttribute("autoplay");
+      } else if (video.paused) {
+        void video.play().catch(() => {});
+      }
+    };
+    aplicar();
+    reducido.addEventListener("change", aplicar);
+  }
+</script>

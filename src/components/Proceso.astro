@@ -9,10 +9,11 @@ interface Props {
   h2: string;
   intro?: string;
   pasos: Paso[];
+  nota?: string;
   id?: string;
   alterna?: boolean;
 }
-const { overline, h2, intro, pasos, id = "proceso", alterna = false } = Astro.props;
+const { overline, h2, intro, pasos, nota, id = "proceso", alterna = false } = Astro.props;
 ---
 
 <section class:list={["seccion", alterna && "seccion--alterna"]} id={id}>
@@ -34,5 +35,6 @@ const { overline, h2, intro, pasos, id = "proceso", alterna = false } = Astro.pr
         </li>
       ))}
     </ol>
+    {nota && <p class="pasos__nota">{nota}</p>}
   </div>
 </section>

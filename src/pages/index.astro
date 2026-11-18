@@ -4,15 +4,14 @@ import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
 import Clientes from "../components/Clientes.astro";
 import ServiciosGrid from "../components/ServiciosGrid.astro";
-import Problema from "../components/Problema.astro";
 import Proceso from "../components/Proceso.astro";
 import Casos from "../components/Casos.astro";
+import Equipo from "../components/Equipo.astro";
 import Diferenciadores from "../components/Diferenciadores.astro";
 import FAQ from "../components/FAQ.astro";
 import BannerCTA from "../components/BannerCTA.astro";
 import Footer from "../components/Footer.astro";
 import { home } from "../data/home";
-import { ruta } from "../utils/ruta";
 
 const organizacion = {
   "@type": "ProfessionalService",
@@ -22,7 +21,7 @@ const organizacion = {
   telephone: "+525659898908",
   email: "contacto@veia.com.mx",
   description:
-    "Soluciones tecnológicas para profesionistas, negocios locales y pymes: sitio web, tienda en línea, marca, publicidad, equipo de cómputo, CRM, ERP y desarrollo a medida.",
+    "Agencia para profesionistas, negocios locales y PyMEs: sitios web, automatización, tienda en línea, branding, diseño, redes sociales, sistemas IT, equipo de cómputo, servidores, cámaras de vigilancia, CRM, ERP, publicidad, APIs y desarrollo a medida.",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Guadalajara",
@@ -32,13 +31,20 @@ const organizacion = {
   areaServed: ["Guadalajara", "Zapopan", "Jalisco", "México"],
   knowsAbout: [
     "Diseño de páginas web",
+    "Automatización",
     "Tiendas en línea",
-    "Identidad visual",
-    "Publicidad digital",
-    "Equipo de cómputo y soporte",
+    "Branding y logos",
+    "Diseño gráfico",
+    "Redes sociales",
+    "Sistemas IT",
+    "Equipo de cómputo y servidores",
+    "Cámaras de vigilancia",
     "CRM",
     "ERP",
+    "Publicidad digital",
+    "Desarrollo de APIs",
     "Desarrollo de software a medida",
+    "Capacitación tecnológica",
   ],
 };
 
@@ -64,33 +70,22 @@ const jsonLd = {
     <Hero />
     <Clientes />
     <ServiciosGrid />
-    <Problema />
-    <Proceso overline={home.proceso.overline} h2={home.proceso.h2} intro={home.proceso.intro} pasos={home.proceso.pasos} />
+    <Proceso overline={home.proceso.overline} h2={home.proceso.h2} intro={home.proceso.intro} pasos={home.proceso.pasos} nota={home.proceso.nota} />
     <Casos />
-    <section class="seccion seccion--equipo" aria-labelledby="equipo-titulo">
-      <div class="contenedor equipo-home">
-        <div>
-          <span class="overline">Quiénes somos</span>
-          <h2 id="equipo-titulo">Dos personas, no un call center.</h2>
-        </div>
-        <div class="equipo-home__texto">
-          <p>
-            VEIA es un equipo de dos personas en Guadalajara. Quien te contesta por WhatsApp es
-            quien diseña, programa e implementa: sin ejecutivos de cuenta ni intermediarios.
-          </p>
-          <p class="equipo-home__firma"><strong>Julio</strong> y <strong>Ana Paula</strong> · Guadalajara, Jalisco</p>
-        </div>
-      </div>
-    </section>
+    <Equipo />
     <Diferenciadores />
-    <FAQ overline={home.faq.overline} h2={home.faq.h2} preguntas={home.faq.preguntas} plantillas />
+    <FAQ overline={home.faq.overline} h2={home.faq.h2} preguntas={home.faq.preguntas} />
     <BannerCTA
       h2={home.cierre.h2}
       texto={home.cierre.texto}
       boton={home.cierre.primario}
       destino="whatsapp"
-      mensaje="Hola, quiero hablar con VEIA sobre mi proyecto."
-      secundario={{ texto: home.cierre.secundario, href: ruta("contacto/") }}
+      mensaje="Hola, quiero contarles sobre mi negocio o proyecto."
+      secundario={{
+        texto: home.cierre.secundario,
+        href: `tel:+${home.cierre.telefono}`,
+        icono: "telefono",
+      }}
     />
   </main>
   <Footer home />

@@ -7,7 +7,6 @@ const estaticas = [
   "contacto/",
   "aviso-de-privacidad/",
   "portafolio/",
-  "plantillas/",
 ];
 
 export const GET: APIRoute = ({ site }) => {

@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { home = false, activo = "" } = Astro.props;
-const cta = whatsapp("Hola, quiero agendar un diagnóstico con VEIA.");
+const cta = whatsapp("Hola, quiero contarles de mi negocio y lo que necesito.");
 
 const ir = (ancla: string) => {
   if (ancla === "#inicio") return home ? "#inicio" : ruta("");
@@ -75,7 +75,7 @@ const enlaces = [
 
     <div class="header__acc">
       <a class="btn btn--primario" href={cta} target="_blank" rel="noopener">
-        Agendar diagnóstico
+        Cuéntanos qué necesitas
       </a>
       <button
         class="hamb"
@@ -114,7 +114,7 @@ const enlaces = [
     </a>
   ))}
   <a class="btn btn--primario" href={cta} target="_blank" rel="noopener">
-    Agendar diagnóstico
+    Cuéntanos qué necesitas
   </a>
   <p class="menu-movil__nota">
     Guadalajara · Zapopan · WhatsApp 56 5989 8908

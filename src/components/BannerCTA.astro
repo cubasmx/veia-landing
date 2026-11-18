@@ -8,7 +8,7 @@ interface Props {
   boton: string;
   destino?: "whatsapp" | "contacto";
   mensaje?: string;
-  secundario?: { texto: string; href: string };
+  secundario?: { texto: string; href: string; icono?: string };
   id?: string;
 }
 const {
@@ -38,7 +38,10 @@ const externo = destino === "whatsapp";
             {boton} <Icono nombre={destino === "whatsapp" ? "whatsapp" : "flecha"} tamano={18} />
           </a>
           {secundario && (
-            <a class="btn btn--contorno-claro" href={secundario.href}>{secundario.texto}</a>
+            <a class="btn btn--contorno-claro" href={secundario.href}>
+              {secundario.icono && <Icono nombre={secundario.icono} tamano={18} />}
+              {secundario.texto}
+            </a>
           )}
         </div>
       </div>
