@@ -574,7 +574,8 @@ body.menu-abierto {
 
 /* El póster sustituye al video cuando se pide menos movimiento. */
 @media (prefers-reduced-motion: reduce) {
-  .hero__video {
+  .hero__video,
+  .proceso__video {
     display: none;
   }
 }

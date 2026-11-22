@@ -190,15 +190,15 @@ const imagen = new URL("/img/logo-veia.png", sitio).href;
         revelar.forEach((el) => observador.observe(el));
       }
 
-      // Videos de fondo (hero y proceso): se descargan solo en pantallas
-      // grandes, sin ahorro de datos y con movimiento permitido. Además, cada
-      // video carga únicamente cuando se acerca a la pantalla. En móvil queda
-      // el póster, que pesa una fracción.
+      // Videos de fondo (hero y proceso): se reproducen también en móvil.
+      // Solo se omiten con movimiento reducido, ahorro de datos activo o red
+      // 2G; en ese caso queda el póster. Cada video carga únicamente cuando se
+      // acerca a la pantalla, así que la carga inicial en móvil sigue siendo
+      // el póster (26 KB en el hero).
       const fondos = Array.from(document.querySelectorAll("[data-video-fondo]")) as HTMLVideoElement[];
       if (fondos.length) {
         const menosMovimiento = window.matchMedia("(prefers-reduced-motion: reduce)");
-        const pantallaGrande = window.matchMedia("(min-width: 769px)");
-        const ahorraDatos = (navigator as any).connection?.saveData === true;
+        const conexion = (navigator as any).connection;
         let activo = false;
 
         const cerca = (video: HTMLVideoElement) => {
@@ -214,13 +214,38 @@ const imagen = new URL("/img/logo-veia.png", sitio).href;
           }
         };
 
+        // iOS rechaza a veces play() justo después de load(): reintenta cuando
+        // ya hay datos, si no el video se queda congelado en el primer cuadro.
+        const reproducir = (video: HTMLVideoElement) => {
+          const intento = video.play();
+          if (intento) {
+            intento.catch(() => {
+              video.addEventListener(
+                "canplay",
+                () => video.play().catch(() => {}),
+                { once: true }
+              );
+            });
+          }
+        };
+
+        // Al desactivar (ahorro de datos, movimiento reducido) se suelta el
+        // archivo para que vuelva a verse el póster y no quede un cuadro fijo.
+        const soltar = (video: HTMLVideoElement) => {
+          video.pause();
+          if (video.hasAttribute("src")) {
+            video.removeAttribute("src");
+            video.load();
+          }
+        };
+
         const observador = new IntersectionObserver(
           (entradas) => {
             for (const entrada of entradas) {
               const video = entrada.target as HTMLVideoElement;
               if (activo && entrada.isIntersecting && !document.hidden) {
                 cargar(video);
-                video.play().catch(() => {});
+                reproducir(video);
               } else {
                 video.pause();
               }
@@ -230,14 +255,16 @@ const imagen = new URL("/img/logo-veia.png", sitio).href;
         );
 
         const decidir = () => {
-          activo = pantallaGrande.matches && !menosMovimiento.matches && !ahorraDatos;
+          const ahorraDatos = conexion?.saveData === true;
+          const redLenta = /^(slow-)?2g$/.test(conexion?.effectiveType ?? "");
+          activo = !menosMovimiento.matches && !ahorraDatos && !redLenta;
           for (const video of fondos) {
             observador.observe(video);
             if (activo && cerca(video) && !document.hidden) {
               cargar(video);
-              video.play().catch(() => {});
+              reproducir(video);
             } else {
-              video.pause();
+              soltar(video);
             }
           }
         };
@@ -251,7 +278,7 @@ const imagen = new URL("/img/logo-veia.png", sitio).href;
             for (const video of fondos) {
               if (cerca(video)) {
                 cargar(video);
-                if (video.paused) video.play().catch(() => {});
+                if (video.paused) reproducir(video);
               }
             }
           },
@@ -260,7 +287,7 @@ const imagen = new URL("/img/logo-veia.png", sitio).href;
 
         decidir();
         menosMovimiento.addEventListener("change", decidir);
-        pantallaGrande.addEventListener("change", decidir);
+        conexion?.addEventListener?.("change", decidir);
         document.addEventListener("visibilitychange", () => {
           if (document.hidden) fondos.forEach((v) => v.pause());
           else decidir();
